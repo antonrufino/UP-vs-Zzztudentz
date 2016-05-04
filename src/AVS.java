@@ -1,7 +1,7 @@
 package avs;
 
 import avs.models.*;
-import avs.ui.GameFrame;
+import avs.ui.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
