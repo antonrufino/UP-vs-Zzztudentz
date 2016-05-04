@@ -1,15 +1,16 @@
 package avs;
 
 import avs.models.*;
+import avs.ui.GameFrame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class AVS extends JFrame {
+public class AVS {
     public static void main(String[] args) {
         // Demo goes here
-        new AVS();
+        new MainFrame();
 
         Energy energy = new Energy(0, 0);
         Zombie zombie = new Zombie(0, 0, 10);
@@ -18,14 +19,5 @@ public class AVS extends JFrame {
 
         energyThread.start();
         zombiethread.start();
-    }
-
-    public AVS() {
-        super("Acads vs. Students");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setPreferredSize(new Dimension(800, 600));
-        this.pack();
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
     }
 }
