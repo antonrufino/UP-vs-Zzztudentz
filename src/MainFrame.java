@@ -18,7 +18,6 @@ public class MainFrame extends JFrame {
         JButton gameButton = new JButton("Start Game");
         JButton settingsButton = new JButton("Settings");
 
-
         JPanel buttonPanel = new JPanel(new FlowLayout());
 
         buttonPanel.add(menuButton);
@@ -28,7 +27,7 @@ public class MainFrame extends JFrame {
         JPanel cardPanel = new JPanel(cardLayout);
 
         cardPanel.add("menu", new MainMenuPanel());
-        cardPanel.add("game", new GamePanel());
+        cardPanel.add("game", new StartGamePanel());
         cardPanel.add("settings", new SettingsPanel());
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

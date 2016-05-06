@@ -8,7 +8,11 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 public class GamePanel extends JPanel {
+    private BufferedImage bg;
+
     public GamePanel() {
+        this.bg = bg;
+
         this.setLayout(new BorderLayout());
         this.setOpaque(false);
 
@@ -54,15 +58,17 @@ public class GamePanel extends JPanel {
         return canvasPanel;
     }
 
+    public void setBackgroundImage(BufferedImage bg) {
+        this.bg = bg;
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         super.paintComponent(g);
 
         try {
-            BufferedImage bg = ImageIO.read(
-                new File("assets/img/background.png"));
-            g.drawImage(bg, 0, 0, null);
+            g.drawImage(this.bg, 0, 0, null);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
