@@ -61,7 +61,7 @@ public class GamePanel extends JPanel {
 
         try {
             BufferedImage bg = ImageIO.read(
-                new File("assets/background.png"));
+                new File("assets/img/background.png"));
             g.drawImage(bg, 0, 0, null);
         } catch (Exception e) {
             System.out.println(e.getMessage());
