@@ -8,6 +8,9 @@ public class MainFrame extends JFrame {
     private CardLayout cardLayout;
     private Container container;
 
+    public final static int WIDTH = 1280;
+    public final static int HEIGHT = 720;
+
     public MainFrame() {
         super("Acads vs. Students");
 
@@ -32,7 +35,8 @@ public class MainFrame extends JFrame {
         cardPanel.add("settings", new SettingsPanel());
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setPreferredSize(new Dimension(1280, 720));
+        container.setPreferredSize(
+            new Dimension(MainFrame.WIDTH, MainFrame.HEIGHT));
         this.pack();
         this.setLocationRelativeTo(null);
 

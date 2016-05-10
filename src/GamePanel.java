@@ -5,9 +5,12 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class GamePanel extends JPanel {
+    private static BufferedImage bg;
+
     public GamePanel() {
         this.setLayout(new BorderLayout());
         this.setOpaque(false);
@@ -60,12 +63,24 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
 
         try {
-            BufferedImage bg = ImageIO.read(
-                new File("assets/img/background.png"));
-            g.drawImage(bg, 0, 0, null);
+            g.drawImage(GamePanel.bg, 0, 0,
+                MainFrame.WIDTH, MainFrame.HEIGHT, null);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    public static class AssetLoader implements Runnable {
+        public void run() {
+            try {
+                GamePanel.bg = ImageIO.read(
+                    new File("../assets/img/background.png"));
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+                System.exit(1);
+            }
         }
     }
 }
