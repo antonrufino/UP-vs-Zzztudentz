@@ -17,17 +17,6 @@ public class MainFrame extends JFrame {
         cardLayout = new CardLayout();
         container = this.getContentPane();
 
-        JButton menuButton = new JButton("Main Menu");
-        JButton gameButton = new JButton("Start Game");
-        JButton settingsButton = new JButton("Settings");
-
-
-        JPanel buttonPanel = new JPanel(new FlowLayout());
-
-        buttonPanel.add(menuButton);
-        buttonPanel.add(gameButton);
-        buttonPanel.add(settingsButton);
-
         JPanel cardPanel = new JPanel(cardLayout);
 
         cardPanel.add("menu", new MainMenuPanel());
@@ -40,15 +29,7 @@ public class MainFrame extends JFrame {
         this.pack();
         this.setLocationRelativeTo(null);
 
-        this.container.setLayout(new BorderLayout());
-        this.container.add(buttonPanel, BorderLayout.NORTH);
-        this.container.add(cardPanel, BorderLayout.CENTER);
-
-        menuButton.addActionListener(new SwitchPanelAction(cardPanel, "menu"));
-        gameButton.addActionListener(new SwitchPanelAction(cardPanel, "game"));
-        settingsButton.addActionListener(
-            new SwitchPanelAction(cardPanel, "settings")
-        );
+        this.container.add(cardPanel);
 
         this.setVisible(true);
     }
