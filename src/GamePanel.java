@@ -64,7 +64,7 @@ public class GamePanel extends JPanel {
 
         try {
             g.drawImage(GamePanel.bg, 0, 0,
-                MainFrame.WIDTH, MainFrame.HEIGHT, null);
+                this.getWidth(), this.getHeight(), null);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
