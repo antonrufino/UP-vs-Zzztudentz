@@ -5,11 +5,16 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class MainFrame extends JFrame {
-    private CardLayout cardLayout;
+    private static CardLayout cardLayout;
+    private static JPanel cardPanel;
     private Container container;
 
     public final static int WIDTH = 1280;
     public final static int HEIGHT = 720;
+
+    public final static String MENU = "menu";
+    public final static String GAME = "game";
+    public final static String CREDITS = "credits";
 
     public MainFrame() {
         super("Acads vs. Students");
@@ -17,11 +22,11 @@ public class MainFrame extends JFrame {
         cardLayout = new CardLayout();
         container = this.getContentPane();
 
-        JPanel cardPanel = new JPanel(cardLayout);
+        cardPanel = new JPanel(cardLayout);
 
-        cardPanel.add("menu", new MainMenuPanel());
-        cardPanel.add("game", new GamePanel());
-        cardPanel.add("settings", new SettingsPanel());
+        cardPanel.add(MENU, new MainMenuPanel());
+        cardPanel.add(GAME, new GamePanel());
+        cardPanel.add(CREDITS, new CreditsPanel());
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         container.setPreferredSize(
@@ -34,17 +39,15 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
     }
 
-    private class SwitchPanelAction implements ActionListener {
-        private Container parent;
+    public static class SwitchPanelAction implements ActionListener {
         private String tag;
 
-        public SwitchPanelAction(Container parent, String tag) {
-            this.parent = parent;
+        public SwitchPanelAction(String tag) {
             this.tag = tag;
         }
 
         public void actionPerformed(ActionEvent e) {
-            cardLayout.show(parent, tag);
+            cardLayout.show(cardPanel, tag);
         }
     }
 }

@@ -40,11 +40,15 @@ public class GamePanel extends JPanel {
 
     private JPanel createProgressPanel() {
         JPanel progressPanel = new JPanel();
+        JButton menuBtn = new JButton("Menu");
+
+        menuBtn.addActionListener(
+            new MainFrame.SwitchPanelAction(MainFrame.MENU));
 
         progressPanel.setOpaque(false);
 
         progressPanel.add(new JLabel("Progress"));
-        progressPanel.add(new JButton("Menu"));
+        progressPanel.add(menuBtn);
 
         return progressPanel;
     }
