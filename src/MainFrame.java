@@ -37,6 +37,7 @@ public class MainFrame extends JFrame {
         this.container.add(cardPanel);
 
         this.setVisible(true);
+        this.setResizable(false);
     }
 
     public static class SwitchPanelAction implements ActionListener {

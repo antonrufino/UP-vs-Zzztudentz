@@ -25,16 +25,7 @@ public class GamePanel extends JPanel {
     }
 
     private JPanel createPlantsPanel() {
-        JPanel plantsPanel = new JPanel();
-
-        plantsPanel.setOpaque(false);
-
-        plantsPanel.add(new JLabel("Energy: 150"));
-        plantsPanel.add(new JButton("Kopiko"));
-        plantsPanel.add(new JButton("Kwek Kwek"));
-        plantsPanel.add(new JButton("Banga"));
-        plantsPanel.add(new JButton("TC7"));
-
+        PlantPickerPanel plantsPanel = new PlantPickerPanel();
         return plantsPanel;
     }
 
