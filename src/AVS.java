@@ -1,8 +1,7 @@
 package avs;
 
 import avs.models.*;
-import avs.ui.MainFrame;
-import avs.ui.GamePanel;
+import avs.ui.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +13,12 @@ public class AVS {
         try {
             Thread bgThread = new Thread(new GamePanel.AssetLoader());
             bgThread.start();
+
+            Thread progressBarThread = new Thread(new ProgressBarPanel.AssetLoader());
+            progressBarThread.start();
+
             bgThread.join();
+            progressBarThread.join();
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();

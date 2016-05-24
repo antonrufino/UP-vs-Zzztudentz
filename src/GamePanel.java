@@ -18,7 +18,7 @@ public class GamePanel extends JPanel {
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setOpaque(false);
         topPanel.add(createPlantsPanel(), BorderLayout.WEST);
-        topPanel.add(createProgressPanel(), BorderLayout.EAST);
+        topPanel.add(new ProgressBarPanel(), BorderLayout.EAST);
 
         this.add(topPanel, BorderLayout.NORTH);
         this.add(createCanvasPanel(), BorderLayout.CENTER);
@@ -45,7 +45,7 @@ public class GamePanel extends JPanel {
         menuBtn.addActionListener(
             new MainFrame.SwitchPanelAction(MainFrame.MENU));
 
-        progressPanel.setOpaque(false);
+        //progressPanel.setOpaque(false);
 
         progressPanel.add(new JLabel("Progress"));
         progressPanel.add(menuBtn);
@@ -76,6 +76,7 @@ public class GamePanel extends JPanel {
     }
 
     public static class AssetLoader implements Runnable {
+        @Override
         public void run() {
             try {
                 GamePanel.bg = ImageIO.read(
