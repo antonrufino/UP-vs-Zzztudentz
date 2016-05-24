@@ -24,10 +24,10 @@ public class ProgressBarPanel extends JPanel {
         super.paintComponent(g);
 
         try {
-            g.drawImage(ProgressBarPanel.progressBar, 0, 0,
-                255, this.getHeight(), null);
-            g.drawImage(ProgressBarPanel.zombieHead, 225, 0,
-                this.getHeight(), this.getHeight(), null);
+            g.drawImage(ProgressBarPanel.progressBar, 0, 10,
+                280, 46, null);
+            g.drawImage(ProgressBarPanel.zombieHead, 215, 0,
+                60, 60, null);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
