@@ -16,14 +16,24 @@ public class GamePanel extends JPanel {
         this.setOpaque(false);
 
         JPanel topPanel = new JPanel(new BorderLayout());
+        JPanel westPanel = new JPanel(new BorderLayout());
+
+        westPanel.setOpaque(false);
+        westPanel.add(createEnergyBar(), BorderLayout.WEST);
+        westPanel.add(createPlantsPanel(), BorderLayout.EAST);
+
         topPanel.setOpaque(false);
-        topPanel.add(createPlantsPanel(), BorderLayout.WEST);
+        topPanel.add(westPanel, BorderLayout.WEST);
         topPanel.add(new ProgressBarPanel(), BorderLayout.EAST);
 
         this.add(topPanel, BorderLayout.NORTH);
         this.add(createCanvasPanel(), BorderLayout.CENTER);
     }
 
+    private JPanel createEnergyBar(){
+        EnergyBar energyBar = new EnergyBar();
+        return energyBar;
+    }
     private JPanel createPlantsPanel() {
         PlantPickerPanel plantsPanel = new PlantPickerPanel();
         return plantsPanel;
@@ -55,6 +65,7 @@ public class GamePanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         super.paintComponent(g);
 
         try {
