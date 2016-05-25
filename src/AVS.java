@@ -17,6 +17,9 @@ public class AVS {
             Thread progressBarThread = new Thread(new ProgressBarPanel.AssetLoader());
             progressBarThread.start();
 
+            Thread energyBarThread = new Thread(new EnergyBar.AssetLoader());
+            energyBarThread.start();
+
             bgThread.join();
             progressBarThread.join();
         } catch (InterruptedException e) {

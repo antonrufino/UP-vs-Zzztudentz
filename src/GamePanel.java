@@ -10,17 +10,21 @@ import javax.imageio.ImageIO;
 
 public class GamePanel extends JPanel {
     private static BufferedImage bg;
-    private ProgressBarPanel progressBarPanel;
 
     public GamePanel() {
         this.setLayout(new BorderLayout());
         this.setOpaque(false);
 
         JPanel topPanel = new JPanel(new BorderLayout());
-        progressBarPanel = new ProgressBarPanel();
+        JPanel westPanel = new JPanel(new BorderLayout());
+        final ProgressBarPanel progressBarPanel = new ProgressBarPanel();
+
+        westPanel.setOpaque(false);
+        westPanel.add(createEnergyBar(), BorderLayout.WEST);
+        westPanel.add(createPlantsPanel(), BorderLayout.EAST);
 
         topPanel.setOpaque(false);
-        topPanel.add(createPlantsPanel(), BorderLayout.WEST);
+        topPanel.add(westPanel, BorderLayout.WEST);
         topPanel.add(progressBarPanel, BorderLayout.EAST);
 
         this.add(topPanel, BorderLayout.NORTH);
@@ -39,6 +43,10 @@ public class GamePanel extends JPanel {
         }).start();
     }
 
+    private JPanel createEnergyBar(){
+        EnergyBar energyBar = new EnergyBar();
+        return energyBar;
+    }
     private JPanel createPlantsPanel() {
         PlantPickerPanel plantsPanel = new PlantPickerPanel();
         return plantsPanel;
@@ -70,6 +78,7 @@ public class GamePanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         super.paintComponent(g);
 
         try {
