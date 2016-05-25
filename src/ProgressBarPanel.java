@@ -15,7 +15,7 @@ public class ProgressBarPanel extends JPanel {
 
     public ProgressBarPanel() {
         //this.setOpaque(false);
-        this.setPreferredSize(new Dimension(265, 45));
+        this.setPreferredSize(new Dimension(290, 45));
         this.setBackground(new Color(0,0,0,0));
     }
 
