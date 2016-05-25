@@ -5,10 +5,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class GamePanel extends JPanel {
-    private BufferedImage bg;
+    private static BufferedImage bg;
 
     public GamePanel() {
         this.bg = bg;
@@ -17,35 +18,54 @@ public class GamePanel extends JPanel {
         this.setOpaque(false);
 
         JPanel topPanel = new JPanel(new BorderLayout());
+        JPanel westPanel = new JPanel(new BorderLayout());
+        final ProgressBarPanel progressBarPanel = new ProgressBarPanel();
+
+        westPanel.setOpaque(false);
+        westPanel.add(createEnergyBar(), BorderLayout.WEST);
+        westPanel.add(createPlantsPanel(), BorderLayout.EAST);
+
         topPanel.setOpaque(false);
-        topPanel.add(createPlantsPanel(), BorderLayout.WEST);
-        topPanel.add(createProgressPanel(), BorderLayout.EAST);
+        topPanel.add(westPanel, BorderLayout.WEST);
+        topPanel.add(progressBarPanel, BorderLayout.EAST);
 
         this.add(topPanel, BorderLayout.NORTH);
         this.add(createCanvasPanel(), BorderLayout.CENTER);
+
+        new Thread(new Runnable() {
+            public void run() {
+                while (!progressBarPanel.isDone()) {
+                    try {
+                        progressBarPanel.update();
+                        repaint();
+                        progressBarPanel.repaint();
+                        Thread.sleep(100);
+                    } catch(Exception e) { }
+                }
+            }
+        }).start();
     }
 
+    private JPanel createEnergyBar(){
+        EnergyBar energyBar = new EnergyBar();
+        return energyBar;
+    }
     private JPanel createPlantsPanel() {
-        JPanel plantsPanel = new JPanel();
-
-        plantsPanel.setOpaque(false);
-
-        plantsPanel.add(new JLabel("Energy: 150"));
-        plantsPanel.add(new JButton("Kopiko"));
-        plantsPanel.add(new JButton("Kwek Kwek"));
-        plantsPanel.add(new JButton("Banga"));
-        plantsPanel.add(new JButton("TC7"));
-
+        PlantPickerPanel plantsPanel = new PlantPickerPanel();
         return plantsPanel;
     }
 
     private JPanel createProgressPanel() {
         JPanel progressPanel = new JPanel();
+        JButton menuBtn = new JButton("Menu");
 
-        progressPanel.setOpaque(false);
+        menuBtn.addActionListener(
+            new MainFrame.SwitchPanelAction(MainFrame.MENU));
+
+        //progressPanel.setOpaque(false);
 
         progressPanel.add(new JLabel("Progress"));
-        progressPanel.add(new JButton("Menu"));
+        progressPanel.add(menuBtn);
 
         return progressPanel;
     }
@@ -65,13 +85,29 @@ public class GamePanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         super.paintComponent(g);
 
         try {
-            g.drawImage(this.bg, 0, 0, null);
+            g.drawImage(GamePanel.bg, 0, 0,
+                this.getWidth(), this.getHeight(), null);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    public static class AssetLoader implements Runnable {
+        @Override
+        public void run() {
+            try {
+                GamePanel.bg = ImageIO.read(
+                    new File("../assets/img/background.png"));
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+                System.exit(1);
+            }
         }
     }
 }
