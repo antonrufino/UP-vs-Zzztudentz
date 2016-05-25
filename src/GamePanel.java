@@ -17,6 +17,7 @@ public class GamePanel extends JPanel {
 
         JPanel topPanel = new JPanel(new BorderLayout());
         JPanel westPanel = new JPanel(new BorderLayout());
+        final ProgressBarPanel progressBarPanel = new ProgressBarPanel();
 
         westPanel.setOpaque(false);
         westPanel.add(createEnergyBar(), BorderLayout.WEST);
@@ -24,10 +25,22 @@ public class GamePanel extends JPanel {
 
         topPanel.setOpaque(false);
         topPanel.add(westPanel, BorderLayout.WEST);
-        topPanel.add(new ProgressBarPanel(), BorderLayout.EAST);
+        topPanel.add(progressBarPanel, BorderLayout.EAST);
 
         this.add(topPanel, BorderLayout.NORTH);
         this.add(createCanvasPanel(), BorderLayout.CENTER);
+
+        new Thread(new Runnable() {
+            public void run() {
+                while (!progressBarPanel.isDone()) {
+                    try {
+                        progressBarPanel.update();
+                        progressBarPanel.repaint();
+                        Thread.sleep(100);
+                    } catch(Exception e) { }
+                }
+            }
+        }).start();
     }
 
     private JPanel createEnergyBar(){

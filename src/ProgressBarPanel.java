@@ -11,11 +11,20 @@ import javax.imageio.ImageIO;
 public class ProgressBarPanel extends JPanel {
     private static BufferedImage progressBar;
     private static BufferedImage zombieHead;
+    private int progress;
 
     public ProgressBarPanel() {
         //this.setOpaque(false);
         this.setPreferredSize(new Dimension(265, 45));
         this.setBackground(new Color(0,0,0,0));
+    }
+
+    public void update() {
+        this.progress += 215/100;
+    }
+
+    public boolean isDone() {
+        return this.progress >= 215;
     }
 
     @Override
@@ -26,7 +35,7 @@ public class ProgressBarPanel extends JPanel {
         try {
             g.drawImage(ProgressBarPanel.progressBar, 0, 10,
                 280, 46, null);
-            g.drawImage(ProgressBarPanel.zombieHead, 215, 0,
+            g.drawImage(ProgressBarPanel.zombieHead, 215 - progress, 0,
                 60, 60, null);
         } catch (Exception e) {
             System.out.println(e.getMessage());
