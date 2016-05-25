@@ -10,18 +10,33 @@ import javax.imageio.ImageIO;
 
 public class GamePanel extends JPanel {
     private static BufferedImage bg;
+    private ProgressBarPanel progressBarPanel;
 
     public GamePanel() {
         this.setLayout(new BorderLayout());
         this.setOpaque(false);
 
         JPanel topPanel = new JPanel(new BorderLayout());
+        progressBarPanel = new ProgressBarPanel();
+
         topPanel.setOpaque(false);
         topPanel.add(createPlantsPanel(), BorderLayout.WEST);
-        topPanel.add(new ProgressBarPanel(), BorderLayout.EAST);
+        topPanel.add(progressBarPanel, BorderLayout.EAST);
 
         this.add(topPanel, BorderLayout.NORTH);
         this.add(createCanvasPanel(), BorderLayout.CENTER);
+
+        new Thread(new Runnable() {
+            public void run() {
+                while (!progressBarPanel.isDone()) {
+                    try {
+                        progressBarPanel.update();
+                        progressBarPanel.repaint();
+                        Thread.sleep(100);
+                    } catch(Exception e) { }
+                }
+            }
+        }).start();
     }
 
     private JPanel createPlantsPanel() {
