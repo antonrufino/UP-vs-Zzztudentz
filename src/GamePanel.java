@@ -12,8 +12,6 @@ public class GamePanel extends JPanel {
     private static BufferedImage bg;
 
     public GamePanel() {
-        this.bg = bg;
-
         this.setLayout(new BorderLayout());
         this.setOpaque(false);
 
@@ -55,31 +53,12 @@ public class GamePanel extends JPanel {
         return plantsPanel;
     }
 
-    private JPanel createProgressPanel() {
-        JPanel progressPanel = new JPanel();
-        JButton menuBtn = new JButton("Menu");
-
-        menuBtn.addActionListener(
-            new MainFrame.SwitchPanelAction(MainFrame.MENU));
-
-        //progressPanel.setOpaque(false);
-
-        progressPanel.add(new JLabel("Progress"));
-        progressPanel.add(menuBtn);
-
-        return progressPanel;
-    }
-
     private JPanel createCanvasPanel() {
         JPanel canvasPanel = new JPanel();
         canvasPanel.setBackground(null);
         canvasPanel.setOpaque(false);
-        canvasPanel.add(new JLabel("Kunwari may shits dito."));
+        
         return canvasPanel;
-    }
-
-    public void setBackgroundImage(BufferedImage bg) {
-        this.bg = bg;
     }
 
     @Override
