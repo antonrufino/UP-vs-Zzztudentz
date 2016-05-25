@@ -35,6 +35,7 @@ public class GamePanel extends JPanel {
                 while (!progressBarPanel.isDone()) {
                     try {
                         progressBarPanel.update();
+                        repaint();
                         progressBarPanel.repaint();
                         Thread.sleep(100);
                     } catch(Exception e) { }
