@@ -1,17 +1,17 @@
 package avs.ui;
 
 import avs.models.Grid;
-
-import javax.swing.*;
 import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.Rectangle;
+import javax.swing.*;
 
 public class GamePanel extends JPanel {
     private static BufferedImage bg;
@@ -25,15 +25,21 @@ public class GamePanel extends JPanel {
 
         JPanel topPanel = new JPanel(new BorderLayout());
         JPanel westPanel = new JPanel(new BorderLayout());
+        JPanel eastPanel = new JPanel(new BorderLayout());
         final ProgressBarPanel progressBarPanel = new ProgressBarPanel();
 
         westPanel.setOpaque(false);
         westPanel.add(createEnergyBar(), BorderLayout.WEST);
         westPanel.add(createPlantsPanel(), BorderLayout.EAST);
 
+        eastPanel.setOpaque(false);
+        eastPanel.add(progressBarPanel, BorderLayout.WEST);
+        eastPanel.add(createInGameMenuPanel(), BorderLayout.EAST);
+        eastPanel.setPreferredSize(new Dimension(350, 45));
+
         topPanel.setOpaque(false);
         topPanel.add(westPanel, BorderLayout.WEST);
-        topPanel.add(progressBarPanel, BorderLayout.EAST);
+        topPanel.add(eastPanel, BorderLayout.EAST);
 
         this.add(topPanel, BorderLayout.NORTH);
         this.add(createCanvasPanel(), BorderLayout.CENTER);
@@ -70,6 +76,11 @@ public class GamePanel extends JPanel {
         canvasPanel.setOpaque(false);
 
         return canvasPanel;
+    }
+
+    private JPanel createInGameMenuPanel(){
+        InGameMenuPanel menuPanel = new InGameMenuPanel();
+        return menuPanel;
     }
 
     @Override
