@@ -58,7 +58,6 @@ public class GamePanel extends JPanel implements Runnable {
             public void mousePressed(MouseEvent me){}
             public void mouseClicked(MouseEvent me){
                 if (!game.getSelectedPlant()) return;
-                System.out.println("hello");
 
                 for (int i = 0; i < Grid.ROWS; ++i) {
                     for (int j = 0; j < Grid.COLS; ++j) {
@@ -66,9 +65,8 @@ public class GamePanel extends JPanel implements Runnable {
                         if (rect.contains(me.getPoint())) {
                             if (!game.getGrid().hasPlant(i, j)) {
                                 game.getGrid().setPlant(i, j, true);
+                                game.selectPlant(false);
                             }
-
-                            game.selectPlant(false);
                             return;
                         }
                     }
