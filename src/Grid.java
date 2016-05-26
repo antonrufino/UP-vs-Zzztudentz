@@ -19,11 +19,20 @@ public class Grid {
                 int x = BUS_OFFSET + j * TILE_WIDTH;
                 int y = SIDEWALK_OFFSET + i * TILE_HEIGHT;
                 tiles[i][j] = new Rectangle(x, y, TILE_WIDTH, TILE_HEIGHT);
+                plants[i][j] = null;
             }
         }
     }
 
     public Rectangle getRectangle(int row, int col) {
         return tiles[row][col];
+    }
+
+    public boolean hasPlant(int row, int col) {
+        return plants[row][col] != null;
+    }
+
+    public void setPlant(int row, int col, Plant plant) {
+        plants[row][col] = plant;
     }
 }
