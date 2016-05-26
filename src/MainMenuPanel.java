@@ -21,7 +21,7 @@ public class MainMenuPanel extends JPanel {
         startBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
         startBtn.setPreferredSize(new Dimension(197, 50));
         creditsBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-        creditsBtn.setPreferredSize(new Dimension(197, 35));
+        creditsBtn.setPreferredSize(new Dimension(197, 40));
 
         startBtn.addActionListener(
             new MainFrame.SwitchPanelAction(MainFrame.GAME));
@@ -29,7 +29,7 @@ public class MainMenuPanel extends JPanel {
         creditsBtn.addActionListener(
             new MainFrame.SwitchPanelAction(MainFrame.CREDITS));
 
-        this.setBorder(BorderFactory.createEmptyBorder(250,893,300,190));
+        this.setBorder(BorderFactory.createEmptyBorder(250,893,370,190));
 
         buttons.setOpaque(false);
         buttons.add(startBtn);
