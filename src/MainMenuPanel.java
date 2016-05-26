@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class MainMenuPanel extends JPanel {
-    public MainMenuPanel() {
+    public MainMenuPanel(final GamePanel gamePanel) {
         JButton startBtn = new JButton("Start Game");
         JButton creditsBtn = new JButton("Credits");
 
@@ -18,6 +18,13 @@ public class MainMenuPanel extends JPanel {
 
         startBtn.addActionListener(
             new MainFrame.SwitchPanelAction(MainFrame.GAME));
+
+        startBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gamePanel.start();
+            }
+        });
 
         creditsBtn.addActionListener(
             new MainFrame.SwitchPanelAction(MainFrame.CREDITS));

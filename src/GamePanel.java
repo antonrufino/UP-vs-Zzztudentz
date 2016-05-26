@@ -13,12 +13,16 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements Runnable {
     private static BufferedImage bg;
-    Grid grid;
+    private Grid grid;
+    private boolean running;
+    private Thread thread;
+    private final ProgressBarPanel progressBarPanel;
 
     public GamePanel() {
         grid = new Grid();
+        running = false;
 
         this.setLayout(new BorderLayout());
         this.setOpaque(false);
@@ -26,7 +30,7 @@ public class GamePanel extends JPanel {
         JPanel topPanel = new JPanel(new BorderLayout());
         JPanel westPanel = new JPanel(new BorderLayout());
         JPanel eastPanel = new JPanel(new BorderLayout());
-        final ProgressBarPanel progressBarPanel = new ProgressBarPanel();
+        progressBarPanel = new ProgressBarPanel();
 
         westPanel.setOpaque(false);
         westPanel.add(createEnergyBar(), BorderLayout.WEST);
@@ -43,22 +47,34 @@ public class GamePanel extends JPanel {
 
         this.add(topPanel, BorderLayout.NORTH);
         this.add(createCanvasPanel(), BorderLayout.CENTER);
+    }
 
-        new Thread(new Runnable() {
-            public void run() {
-                while (true) {
-                    try {
-                        if (!progressBarPanel.isDone()) {
-                            progressBarPanel.update();
-                        }
-
-                        repaint();
-                        progressBarPanel.repaint();
-                        Thread.sleep(100);
-                    } catch(Exception e) { }
+    public void run() {
+        while (running) {
+            try {
+                if (!progressBarPanel.isDone()) {
+                    progressBarPanel.update();
                 }
-            }
-        }).start();
+
+                repaint();
+                progressBarPanel.repaint();
+                Thread.sleep(100);
+            } catch(Exception e) { }
+        }
+    }
+
+    public synchronized void start() {
+        if (running) return;
+
+        running = true;
+        thread = new Thread(this);
+        thread.start();
+    }
+
+    public synchronized void stop() {
+        if (!running) return;
+
+        running = false;
     }
 
     private JPanel createEnergyBar(){
