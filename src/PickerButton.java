@@ -1,5 +1,7 @@
 package avs.ui;
 
+import avs.models.Game;
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
@@ -43,6 +45,7 @@ class PickerButton extends JButton implements Runnable {
         this.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (isClickable) {
+                    Game.getInstance().selectPlant(true);
                     new Thread(self).start();
                 }
             }

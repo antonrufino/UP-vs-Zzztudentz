@@ -1,6 +1,8 @@
 package avs.ui;
 
 import avs.models.Grid;
+import avs.models.Game;
+
 import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.MouseInfo;
@@ -15,13 +17,14 @@ import javax.swing.*;
 
 public class GamePanel extends JPanel implements Runnable {
     private static BufferedImage bg;
-    private Grid grid;
+    private Game game;
     private boolean running;
     private Thread thread;
     private final ProgressBarPanel progressBarPanel;
 
     public GamePanel() {
-        grid = new Grid();
+        game = Game.getInstance();
+
         running = false;
 
         this.setLayout(new BorderLayout());
@@ -47,6 +50,29 @@ public class GamePanel extends JPanel implements Runnable {
 
         this.add(topPanel, BorderLayout.NORTH);
         this.add(createCanvasPanel(), BorderLayout.CENTER);
+
+        this.addMouseListener(new MouseListener() {
+            public void mouseEntered(MouseEvent me){}
+            public void mouseExited(MouseEvent me){}
+            public void mouseReleased(MouseEvent me){}
+            public void mousePressed(MouseEvent me){}
+            public void mouseClicked(MouseEvent me){
+                if (!game.getSelectedPlant()) return;
+
+                for (int i = 0; i < Grid.ROWS; ++i) {
+                    for (int j = 0; j < Grid.COLS; ++j) {
+                        Rectangle rect = game.getGrid().getRectangle(i, j);
+                        if (rect.contains(me.getPoint())) {
+                            if (!game.getGrid().hasPlant(i, j)) {
+                                game.getGrid().setPlant(i, j, true);
+                                game.selectPlant(false);
+                            }
+                            return;
+                        }
+                    }
+                }
+            }
+        });
     }
 
     public void run() {
@@ -68,7 +94,10 @@ public class GamePanel extends JPanel implements Runnable {
 
         running = true;
         thread = new Thread(this);
+
+        game.init();
         thread.start();
+
     }
 
     public synchronized void stop() {
@@ -113,9 +142,11 @@ public class GamePanel extends JPanel implements Runnable {
             g2d.setColor(new Color(1, 68, 33));
 
             Point p = this.getMousePosition();
-            if (p != null) {
+            if (p != null && game.getSelectedPlant()) {
                 createHiglightThread(p, g2d).start();
             }
+
+            createPrintPlantThread(g2d).start();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -127,10 +158,25 @@ public class GamePanel extends JPanel implements Runnable {
             public void run() {
                 for (int i = 0; i < Grid.ROWS; ++i) {
                     for (int j = 0; j < Grid.COLS; ++j) {
-                        Rectangle rect = grid.getRectangle(i, j);
+                        Rectangle rect = game.getGrid().getRectangle(i, j);
                         if (rect.contains(p)) {
                             g2d.draw(rect);
                         };
+                    }
+                }
+            }
+        };
+    }
+
+    private Thread createPrintPlantThread(final Graphics2D g2d) {
+        return new Thread() {
+            public void run() {
+                for (int i = 0; i < Grid.ROWS; ++i) {
+                    for (int j = 0; j < Grid.COLS; ++j) {
+                        Rectangle rect = game.getGrid().getRectangle(i, j);
+                        if (game.getGrid().hasPlant(i, j)) {
+                            g2d.fill(rect);
+                        }
                     }
                 }
             }
