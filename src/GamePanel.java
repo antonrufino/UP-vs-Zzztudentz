@@ -1,58 +1,80 @@
 package avs.ui;
 
 import avs.models.Grid;
-
-import javax.swing.*;
 import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.Rectangle;
+import javax.swing.*;
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements Runnable {
     private static BufferedImage bg;
-    Grid grid;
+    private Grid grid;
+    private boolean running;
+    private Thread thread;
+    private final ProgressBarPanel progressBarPanel;
 
     public GamePanel() {
         grid = new Grid();
+        running = false;
 
         this.setLayout(new BorderLayout());
         this.setOpaque(false);
 
         JPanel topPanel = new JPanel(new BorderLayout());
         JPanel westPanel = new JPanel(new BorderLayout());
-        final ProgressBarPanel progressBarPanel = new ProgressBarPanel();
+        JPanel eastPanel = new JPanel(new BorderLayout());
+        progressBarPanel = new ProgressBarPanel();
 
         westPanel.setOpaque(false);
         westPanel.add(createEnergyBar(), BorderLayout.WEST);
         westPanel.add(createPlantsPanel(), BorderLayout.EAST);
 
+        eastPanel.setOpaque(false);
+        eastPanel.add(progressBarPanel, BorderLayout.WEST);
+        eastPanel.add(createInGameMenuPanel(), BorderLayout.EAST);
+        eastPanel.setPreferredSize(new Dimension(350, 45));
+
         topPanel.setOpaque(false);
         topPanel.add(westPanel, BorderLayout.WEST);
-        topPanel.add(progressBarPanel, BorderLayout.EAST);
+        topPanel.add(eastPanel, BorderLayout.EAST);
 
         this.add(topPanel, BorderLayout.NORTH);
         this.add(createCanvasPanel(), BorderLayout.CENTER);
+    }
 
-        new Thread(new Runnable() {
-            public void run() {
-                while (true) {
-                    try {
-                        if (!progressBarPanel.isDone()) {
-                            progressBarPanel.update();
-                        }
-
-                        repaint();
-                        progressBarPanel.repaint();
-                        Thread.sleep(100);
-                    } catch(Exception e) { }
+    public void run() {
+        while (running) {
+            try {
+                if (!progressBarPanel.isDone()) {
+                    progressBarPanel.update();
                 }
-            }
-        }).start();
+
+                repaint();
+                progressBarPanel.repaint();
+                Thread.sleep(100);
+            } catch(Exception e) { }
+        }
+    }
+
+    public synchronized void start() {
+        if (running) return;
+
+        running = true;
+        thread = new Thread(this);
+        thread.start();
+    }
+
+    public synchronized void stop() {
+        if (!running) return;
+
+        running = false;
     }
 
     private JPanel createEnergyBar(){
@@ -70,6 +92,11 @@ public class GamePanel extends JPanel {
         canvasPanel.setOpaque(false);
 
         return canvasPanel;
+    }
+
+    private JPanel createInGameMenuPanel(){
+        InGameMenuPanel menuPanel = new InGameMenuPanel();
+        return menuPanel;
     }
 
     @Override

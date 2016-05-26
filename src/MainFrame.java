@@ -24,8 +24,10 @@ public class MainFrame extends JFrame {
 
         cardPanel = new JPanel(cardLayout);
 
-        cardPanel.add(MENU, new MainMenuPanel());
-        cardPanel.add(GAME, new GamePanel());
+        GamePanel gamePanel = new GamePanel();
+
+        cardPanel.add(MENU, new MainMenuPanel(gamePanel));
+        cardPanel.add(GAME, gamePanel);
         cardPanel.add(CREDITS, new CreditsPanel());
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
