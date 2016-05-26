@@ -41,7 +41,6 @@ public class PlantPickerPanel extends JPanel{
         final ImageIcon hoverIcon) {
         final JButton btn = new JButton(defaultIcon);
 
-        btn.setPreferredSize(new Dimension(100,60));
         btn.setBorder(null);
         btn.setContentAreaFilled(false);
         btn.setOpaque(false);
