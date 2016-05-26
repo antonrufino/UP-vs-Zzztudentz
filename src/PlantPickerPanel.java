@@ -1,4 +1,8 @@
 package avs.ui;
+
+import avs.models.Plant;
+import avs.models.Game;
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
@@ -7,7 +11,8 @@ import java.awt.image.*;
 import java.io.*;
 
 public class PlantPickerPanel extends JPanel{
-    public PlantPickerPanel(){
+
+    public PlantPickerPanel() {
         super();
         this.setOpaque(false);
 
@@ -57,6 +62,12 @@ public class PlantPickerPanel extends JPanel{
             public void mouseReleased(MouseEvent me){}
             public void mousePressed(MouseEvent me){}
             public void mouseClicked(MouseEvent me){}
+        });
+
+        btn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Game.getInstance().selectPlant(true);
+            }
         });
 
         this.add(btn);

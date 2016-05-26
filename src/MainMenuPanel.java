@@ -1,5 +1,7 @@
 package avs.ui;
 
+import avs.models.Game;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -23,6 +25,7 @@ public class MainMenuPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 gamePanel.start();
+                Game.getInstance().init();
             }
         });
 

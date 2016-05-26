@@ -11,7 +11,7 @@ public class Grid {
     private final int SIDEWALK_OFFSET = 157;
 
     private Rectangle[][] tiles = new Rectangle[ROWS][COLS];
-    private Plant[][] plants = new Plant[ROWS][COLS];
+    private boolean[][] plants = new boolean[ROWS][COLS]; //temporary
 
     public Grid() {
         for (int i = 0; i < ROWS; ++i) {
@@ -19,7 +19,7 @@ public class Grid {
                 int x = BUS_OFFSET + j * TILE_WIDTH;
                 int y = SIDEWALK_OFFSET + i * TILE_HEIGHT;
                 tiles[i][j] = new Rectangle(x, y, TILE_WIDTH, TILE_HEIGHT);
-                plants[i][j] = null;
+                plants[i][j] = false; //temporary
             }
         }
     }
@@ -29,10 +29,10 @@ public class Grid {
     }
 
     public boolean hasPlant(int row, int col) {
-        return plants[row][col] != null;
+        return plants[row][col];
     }
 
-    public void setPlant(int row, int col, Plant plant) {
+    public void setPlant(int row, int col, boolean plant) {
         plants[row][col] = plant;
     }
 }

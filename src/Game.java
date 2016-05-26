@@ -1,17 +1,32 @@
 package avs.models;
 
 public class Game {
+    private static Game instance = new Game();
     private int energy;
     private Grid grid;
-    private String currSelectedPlant;
+    private boolean selectedPlant; //temporary
 
-    public Game() {
-        this.energy = 0;
-        this.grid = new Grid();
-        this.currSelectedPlant = null;
+    private Game() { }
+
+    public static Game getInstance() {
+        return Game.instance;
     }
 
-    public selectPlant(Plant plant) {
-        this.currSelectedPlant = plant;
+    public void init() {
+        this.energy = 0;
+        this.grid = new Grid();
+        this.selectedPlant = false;
+    }
+
+    public Grid getGrid() {
+        return this.grid;
+    }
+
+    public void selectPlant(boolean plant) {
+        this.selectedPlant = plant;
+    }
+
+    public boolean getSelectedPlant() {
+        return this.selectedPlant;
     }
 }
