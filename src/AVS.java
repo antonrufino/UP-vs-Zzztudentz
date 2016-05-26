@@ -11,8 +11,11 @@ public class AVS {
     public static void main(String[] args) {
         // Demo goes here
         try {
-            Thread bgThread = new Thread(new GamePanel.AssetLoader());
-            bgThread.start();
+            Thread bgThread2 = new Thread(new MainMenuPanel.AssetLoader());
+            bgThread2.start();
+
+            Thread bgThread1 = new Thread(new GamePanel.AssetLoader());
+            bgThread1.start();
 
             Thread progressBarThread = new Thread(new ProgressBarPanel.AssetLoader());
             progressBarThread.start();
@@ -20,7 +23,7 @@ public class AVS {
             Thread energyBarThread = new Thread(new EnergyBar.AssetLoader());
             energyBarThread.start();
 
-            bgThread.join();
+            bgThread1.join();
             progressBarThread.join();
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
