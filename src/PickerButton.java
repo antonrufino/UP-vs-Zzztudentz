@@ -16,9 +16,15 @@ public class PickerButton extends JButton implements Runnable {
     private final int cost; //temporary
     private static final int SPEED = 100;
 
+    private final ImageIcon defaultIcon;
+    private final ImageIcon hoverIcon;
+
     public PickerButton(final ImageIcon defaultIcon,
         final ImageIcon hoverIcon, int coolDown, int cost) {
         super(defaultIcon);
+
+        this.defaultIcon = defaultIcon;
+        this.hoverIcon = hoverIcon;
 
         this.isClickable = true;
         this.coolDown = coolDown * PickerButton.SPEED;
@@ -30,20 +36,21 @@ public class PickerButton extends JButton implements Runnable {
         this.setOpaque(false);
         this.setBorderPainted(false);
         this.setPreferredSize(new Dimension(100,60));
+    }
 
+    public void addListeners() {
         this.addMouseListener(new MouseListener(){
             public void mouseEntered(MouseEvent me){
-                if (isClickable) setIcon(hoverIcon);
+                if (isClickable) setIcon(this.hoverIcon);
             }
             public void mouseExited(MouseEvent me){
-                setIcon(defaultIcon);
+                setIcon(this.defaultIcon);
             }
             public void mouseReleased(MouseEvent me){}
             public void mousePressed(MouseEvent me){}
             public void mouseClicked(MouseEvent me){}
         });
 
-        final PickerButton self = this;
         this.addActionListener(new PickPlantAction(this));
     }
 
@@ -56,6 +63,7 @@ public class PickerButton extends JButton implements Runnable {
                 Thread.sleep(PickerButton.SPEED);
             }
             this.isClickable = true;
+            this.setIcon(this.defaultIcon);
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -97,6 +105,8 @@ public class PickerButton extends JButton implements Runnable {
         public void actionPerformed(ActionEvent e) {
             Game game = Game.getInstance();
             if (button.isClickable && game.getEnergy() >= button.cost) {
+                button.setIcon(button.hoverIcon);
+
                 game.selectPlant(true);
                 game.setPendingCost(button.cost);
                 game.setPendingButton(button);
