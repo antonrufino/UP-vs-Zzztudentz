@@ -1,16 +1,17 @@
 package avs.ui;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import javax.imageio.*;
 import java.awt.image.*;
 
-
 public class EnergyBar extends JPanel{
     private JLabel value;
     private ImageIcon icon;
     private static BufferedImage bg;
     private Font font;
+
     public EnergyBar(){
         super();
         icon = new ImageIcon("../assets/energy_counter/energy_counter_notext.png");
@@ -40,6 +41,13 @@ public class EnergyBar extends JPanel{
         }
     }
 
+    public void setValue(int value) {
+        this.value.setText(Integer.toString(value));
+    }
+
+    public int getValue() {
+        return Integer.parseInt(this.value.getText());
+    }
 
     @Override
     public void paintComponent(Graphics g) {

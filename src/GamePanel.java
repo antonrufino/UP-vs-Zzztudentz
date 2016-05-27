@@ -21,6 +21,7 @@ public class GamePanel extends JPanel implements Runnable {
     private boolean running;
     private Thread thread;
     private final ProgressBarPanel progressBarPanel;
+    private final EnergyBar energyBar;
 
     public GamePanel() {
         game = Game.getInstance();
@@ -34,9 +35,10 @@ public class GamePanel extends JPanel implements Runnable {
         JPanel westPanel = new JPanel(new BorderLayout());
         JPanel eastPanel = new JPanel(new BorderLayout());
         progressBarPanel = new ProgressBarPanel();
+        energyBar = new EnergyBar();
 
         westPanel.setOpaque(false);
-        westPanel.add(createEnergyBar(), BorderLayout.WEST);
+        westPanel.add(energyBar, BorderLayout.WEST);
         westPanel.add(createPlantsPanel(), BorderLayout.EAST);
 
         eastPanel.setOpaque(false);
@@ -65,6 +67,8 @@ public class GamePanel extends JPanel implements Runnable {
                         if (rect.contains(me.getPoint())) {
                             if (!game.getGrid().hasPlant(i, j)) {
                                 game.getGrid().setPlant(i, j, true);
+                                game.reduceEnergy();
+                                game.startButtonCoolDown();
                                 game.selectPlant(false);
                             }
                             return;
@@ -84,6 +88,7 @@ public class GamePanel extends JPanel implements Runnable {
 
                 repaint();
                 progressBarPanel.repaint();
+                energyBar.setValue(game.getEnergy());
                 Thread.sleep(100);
             } catch(Exception e) { }
         }
@@ -107,9 +112,9 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     private JPanel createEnergyBar(){
-        EnergyBar energyBar = new EnergyBar();
         return energyBar;
     }
+
     private JPanel createPlantsPanel() {
         PlantPickerPanel plantsPanel = new PlantPickerPanel();
         return plantsPanel;

@@ -9,19 +9,21 @@ import javax.imageio.*;
 import java.awt.image.*;
 import java.io.*;
 
-class PickerButton extends JButton implements Runnable {
+public class PickerButton extends JButton implements Runnable {
     private boolean isClickable;
     private int coolDown;
     private int progress;
+    private final int cost; //temporary
     private static final int SPEED = 100;
 
     public PickerButton(final ImageIcon defaultIcon,
-        final ImageIcon hoverIcon, int coolDown) {
+        final ImageIcon hoverIcon, int coolDown, int cost) {
         super(defaultIcon);
 
         this.isClickable = true;
         this.coolDown = coolDown * PickerButton.SPEED;
         this.progress = 0;
+        this.cost = cost;
 
         this.setBorder(null);
         this.setContentAreaFilled(false);
@@ -42,20 +44,12 @@ class PickerButton extends JButton implements Runnable {
         });
 
         final PickerButton self = this;
-        this.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (isClickable) {
-                    Game.getInstance().selectPlant(true);
-                    new Thread(self).start();
-                }
-            }
-        });
+        this.addActionListener(new PickPlantAction(this));
     }
 
     public void run() {
         this.progress = 0;
         try {
-            this.isClickable = false;
             while (this.progress < this.coolDown) {
                 this.progress += PickerButton.SPEED;
                 this.repaint();
@@ -66,6 +60,11 @@ class PickerButton extends JButton implements Runnable {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public void startCoolDown() {
+        this.isClickable = false;
+        new Thread(this).start();
     }
 
     @Override
@@ -85,6 +84,23 @@ class PickerButton extends JButton implements Runnable {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    private class PickPlantAction implements ActionListener {
+        private PickerButton button;
+
+        public PickPlantAction(PickerButton button) {
+            this.button = button;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            Game game = Game.getInstance();
+            if (button.isClickable && game.getEnergy() >= button.cost) {
+                game.selectPlant(true);
+                game.setPendingCost(button.cost);
+                game.setPendingButton(button);
+            }
         }
     }
 }
