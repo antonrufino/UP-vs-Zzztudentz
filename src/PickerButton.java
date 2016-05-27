@@ -15,6 +15,7 @@ public class PickerButton extends JButton implements Runnable {
     private int progress;
     private final int cost; //temporary
     private static final int SPEED = 100;
+    private boolean isPending;
 
     private final ImageIcon defaultIcon;
     private final ImageIcon hoverIcon;
@@ -30,21 +31,24 @@ public class PickerButton extends JButton implements Runnable {
         this.coolDown = coolDown * PickerButton.SPEED;
         this.progress = 0;
         this.cost = cost;
+        this.isPending = false;
 
         this.setBorder(null);
         this.setContentAreaFilled(false);
         this.setOpaque(false);
         this.setBorderPainted(false);
         this.setPreferredSize(new Dimension(100,60));
+
+        addListeners();
     }
 
     public void addListeners() {
         this.addMouseListener(new MouseListener(){
             public void mouseEntered(MouseEvent me){
-                if (isClickable) setIcon(this.hoverIcon);
+                if (isClickable && !isPending) setIcon(hoverIcon);
             }
             public void mouseExited(MouseEvent me){
-                setIcon(this.defaultIcon);
+                if (!isPending) setIcon(defaultIcon);
             }
             public void mouseReleased(MouseEvent me){}
             public void mousePressed(MouseEvent me){}
@@ -63,7 +67,7 @@ public class PickerButton extends JButton implements Runnable {
                 Thread.sleep(PickerButton.SPEED);
             }
             this.isClickable = true;
-            this.setIcon(this.defaultIcon);
+            this.stopPending();
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -93,6 +97,16 @@ public class PickerButton extends JButton implements Runnable {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public void startPending() {
+        this.isPending = true;
+        this.setIcon(this.hoverIcon);
+    }
+
+    public void stopPending() {
+        this.isPending = false;
+        this.setIcon(this.defaultIcon);
     }
 
     private class PickPlantAction implements ActionListener {

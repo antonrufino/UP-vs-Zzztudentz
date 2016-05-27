@@ -55,7 +55,13 @@ public class Game {
     }
 
     public void setPendingButton(PickerButton pickerButton) {
+        if (this.pendingButton != null) {
+            this.pendingButton.stopPending();
+        }
+
         this.pendingButton = pickerButton;
+
+        if (pendingButton != null) this.pendingButton.startPending();
     }
 
     public void startButtonCoolDown() {
