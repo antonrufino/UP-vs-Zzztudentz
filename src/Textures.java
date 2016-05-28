@@ -1,6 +1,6 @@
 package avs.utils;
 
-import avs.Game;
+import avs.ui.GamePanel;
 
 import java.awt.image.*;
 import java.awt.*;
@@ -39,7 +39,7 @@ public class Textures{
 
 	private SpriteSheet ss;
 
-	public Textures(Game game){
+	public Textures(GamePanel game){
 		ss = new SpriteSheet(game.getSpriteSheet());
 
 		this.zombieWalking = new BufferedImage[2];
