@@ -16,6 +16,7 @@ public class Tc7 extends AllyEntity{
 	public Tc7(double x, double y, Textures texx){
 		super(x,y,texx);
 		this.animation = texx.getTc7Array();
+        this.cost = 50;
 		anim = new Animator(5,animation);
 	}
 

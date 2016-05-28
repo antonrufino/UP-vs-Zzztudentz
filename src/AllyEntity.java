@@ -13,6 +13,7 @@ public abstract class AllyEntity{
 	private double y;
 	private boolean isAlive;
 	private Textures texx;
+    protected int cost;
 
 	public AllyEntity(double x, double y, Textures texx){
 		this.x = x;
@@ -47,4 +48,8 @@ public abstract class AllyEntity{
 	public void setY(double y){
 		this.y = y;
 	}
+
+    public int getCost() {
+        return this.cost;
+    }
 }

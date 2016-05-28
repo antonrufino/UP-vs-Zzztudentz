@@ -20,6 +20,7 @@ public class Tower extends AllyEntity{
 	public Tower(double x, double y, Textures texx){
 		super(x,y,texx);
 		animation = texx.getTowerArray();
+        cost = 100;
 
 		anim = new Animator(5,animation);
 

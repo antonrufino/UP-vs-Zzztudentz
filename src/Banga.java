@@ -16,6 +16,7 @@ public class Banga extends AllyEntity{
 	public Banga(double x, double y, Textures texx){
 		super(x,y,texx);
 		this.animation = texx.getBangaArray();
+        this.cost = 150;
 		anim = new Animator(5,animation);
 	}
 
