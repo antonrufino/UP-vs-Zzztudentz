@@ -2,6 +2,8 @@ package avs.ui;
 
 import avs.models.Grid;
 import avs.models.Game;
+import avs.utils.BufferedImageLoader;
+import avs.utils.Textures;
 
 import java.awt.*;
 import java.awt.BorderLayout;
@@ -16,18 +18,26 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class GamePanel extends JPanel implements Runnable {
-    private static BufferedImage bg;
     private Game game;
     private boolean running;
     private Thread thread;
-    private final ProgressBarPanel progressBarPanel;
-    private final EnergyBar energyBar;
+    private ProgressBarPanel progressBarPanel;
+    private EnergyBar energyBar;
+
+    private static BufferedImage bg;
+    private static BufferedImage spriteSheet;
+    private Textures tex;
 
     public GamePanel() {
-        game = Game.getInstance();
+        this.game = Game.getInstance();
+        this.tex = new Textures(this);
+        this.running = false;
 
-        running = false;
+        createPanelUI();
+        addListeners();
+    }
 
+    private void createPanelUI() {
         this.setLayout(new BorderLayout());
         this.setOpaque(false);
 
@@ -39,11 +49,11 @@ public class GamePanel extends JPanel implements Runnable {
 
         westPanel.setOpaque(false);
         westPanel.add(energyBar, BorderLayout.WEST);
-        westPanel.add(createPlantsPanel(), BorderLayout.EAST);
+        westPanel.add(new PlantPickerPanel(this.tex), BorderLayout.EAST);
 
         eastPanel.setOpaque(false);
         eastPanel.add(progressBarPanel, BorderLayout.WEST);
-        eastPanel.add(createInGameMenuPanel(), BorderLayout.EAST);
+        eastPanel.add(new InGameMenuPanel(), BorderLayout.EAST);
         eastPanel.setPreferredSize(new Dimension(350, 45));
 
         topPanel.setOpaque(false);
@@ -51,26 +61,27 @@ public class GamePanel extends JPanel implements Runnable {
         topPanel.add(eastPanel, BorderLayout.EAST);
 
         this.add(topPanel, BorderLayout.NORTH);
-        this.add(createCanvasPanel(), BorderLayout.CENTER);
+    }
 
+    private void addListeners() {
         this.addMouseListener(new MouseListener() {
             public void mouseEntered(MouseEvent me){}
             public void mouseExited(MouseEvent me){}
             public void mouseReleased(MouseEvent me){}
             public void mousePressed(MouseEvent me){}
             public void mouseClicked(MouseEvent me){
-                if (!game.getSelectedPlant()) return;
+                if (game.getSelectedPlant() == null) return;
 
                 for (int i = 0; i < Grid.ROWS; ++i) {
                     for (int j = 0; j < Grid.COLS; ++j) {
                         Rectangle rect = game.getGrid().getRectangle(i, j);
                         if (rect.contains(me.getPoint())) {
                             if (!game.getGrid().hasPlant(i, j)) {
-                                game.getGrid().setPlant(i, j, true);
+                                game.addPlant(i, j);
                                 game.reduceEnergy();
                                 game.startButtonCoolDown();
                                 game.setPendingButton(null);
-                                game.selectPlant(false);
+                                game.selectPlant(null);
                             }
                             return;
                         }
@@ -80,18 +91,37 @@ public class GamePanel extends JPanel implements Runnable {
         });
     }
 
-    public void run() {
-        while (running) {
-            try {
-                if (!progressBarPanel.isDone()) {
-                    progressBarPanel.update();
-                }
+    public void run(){
+		Long lastTime = System.nanoTime();
+		final double amountOfTicks = 60.0;
+		double ns = 1000000000 / amountOfTicks;
+		double delta = 0;
 
-                repaint();
-                progressBarPanel.repaint();
-                energyBar.setValue(game.getEnergy());
-                Thread.sleep(100);
-            } catch(Exception e) { }
+		while(running){
+			Long now = System.nanoTime();
+			delta += (now - lastTime) / ns;
+			lastTime = now;
+
+			if(delta >= 1){
+				tick();
+				delta--;
+			}
+            repaint();
+            progressBarPanel.repaint();
+            energyBar.setValue(game.getEnergy());
+		}
+		stop();
+	}
+
+    public void tick() {
+        if (!progressBarPanel.isDone()) {
+            progressBarPanel.update();
+        }
+
+        for (int i = 0; i < Grid.ROWS; ++i) {
+            for (int j = 0; j < Grid.COLS; ++j) {
+                if (game.getGrid().hasPlant(i, j)) game.getGrid().getPlant(i, j).tick();
+            }
         }
     }
 
@@ -112,28 +142,6 @@ public class GamePanel extends JPanel implements Runnable {
         running = false;
     }
 
-    private JPanel createEnergyBar(){
-        return energyBar;
-    }
-
-    private JPanel createPlantsPanel() {
-        PlantPickerPanel plantsPanel = new PlantPickerPanel();
-        return plantsPanel;
-    }
-
-    private JPanel createCanvasPanel() {
-        JPanel canvasPanel = new JPanel();
-        canvasPanel.setBackground(null);
-        canvasPanel.setOpaque(false);
-
-        return canvasPanel;
-    }
-
-    private JPanel createInGameMenuPanel(){
-        InGameMenuPanel menuPanel = new InGameMenuPanel();
-        return menuPanel;
-    }
-
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
@@ -148,11 +156,11 @@ public class GamePanel extends JPanel implements Runnable {
             g2d.setColor(new Color(1, 68, 33));
 
             Point p = this.getMousePosition();
-            if (p != null && game.getSelectedPlant()) {
+            if (p != null && game.getSelectedPlant() != null) {
                 createHiglightThread(p, g2d).start();
             }
 
-            createPrintPlantThread(g2d).start();
+            createPrintPlantThread(g).start();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -174,14 +182,20 @@ public class GamePanel extends JPanel implements Runnable {
         };
     }
 
-    private Thread createPrintPlantThread(final Graphics2D g2d) {
+    private Thread createPrintPlantThread(final Graphics g) {
         return new Thread() {
             public void run() {
                 for (int i = 0; i < Grid.ROWS; ++i) {
                     for (int j = 0; j < Grid.COLS; ++j) {
                         Rectangle rect = game.getGrid().getRectangle(i, j);
                         if (game.getGrid().hasPlant(i, j)) {
-                            g2d.fill(rect);
+                            final int row = i;
+                            final int col = j;
+                            new Thread() {
+                                public void run() {
+                                    game.getGrid().getPlant(row, col).render(g);
+                                }
+                            }.start();
                         }
                     }
                 }
@@ -189,12 +203,18 @@ public class GamePanel extends JPanel implements Runnable {
         };
     }
 
+    public static BufferedImage getSpriteSheet() {
+        return GamePanel.spriteSheet;
+    }
+
     public static class AssetLoader implements Runnable {
         @Override
         public void run() {
+            BufferedImageLoader loader = new BufferedImageLoader();
+
             try {
-                GamePanel.bg = ImageIO.read(
-                    new File("../assets/img/background.png"));
+                GamePanel.bg = loader.loadImage("../assets/img/background.png");
+                GamePanel.spriteSheet = loader.loadImage("../assets/img/spritesheets/spritesheet-fullres.png");
             } catch (IOException e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();

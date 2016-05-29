@@ -1,6 +1,8 @@
 package avs.ui;
 
 import avs.models.Game;
+import avs.models.AllyEntity;
+import avs.models.PlantFactory;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -12,8 +14,8 @@ import java.io.*;
 public class PickerButton extends JButton implements Runnable {
     private boolean isClickable;
     private int coolDown;
+    private PlantFactory factory;
     private int progress;
-    private final int cost; //temporary
     private static final int SPEED = 100;
     private boolean isPending;
 
@@ -21,16 +23,16 @@ public class PickerButton extends JButton implements Runnable {
     private final ImageIcon hoverIcon;
 
     public PickerButton(final ImageIcon defaultIcon,
-        final ImageIcon hoverIcon, int coolDown, int cost) {
+        final ImageIcon hoverIcon, PlantFactory factory, int coolDown) {
         super(defaultIcon);
 
         this.defaultIcon = defaultIcon;
         this.hoverIcon = hoverIcon;
+        this.factory = factory;
+        this.coolDown = coolDown * PickerButton.SPEED;
 
         this.isClickable = true;
-        this.coolDown = coolDown * PickerButton.SPEED;
         this.progress = 0;
-        this.cost = cost;
         this.isPending = false;
 
         this.setBorder(null);
@@ -118,11 +120,11 @@ public class PickerButton extends JButton implements Runnable {
 
         public void actionPerformed(ActionEvent e) {
             Game game = Game.getInstance();
-            if (button.isClickable && game.getEnergy() >= button.cost) {
+            AllyEntity plant = button.factory.makePlant();
+            if (button.isClickable && game.getEnergy() >= plant.getCost()) {
                 button.setIcon(button.hoverIcon);
 
-                game.selectPlant(true);
-                game.setPendingCost(button.cost);
+                game.selectPlant(plant);
                 game.setPendingButton(button);
             }
         }

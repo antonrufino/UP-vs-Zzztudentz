@@ -9,29 +9,25 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class Zombie{
-	private double x,y;
-	private Textures texx;
+public class Bus extends AllyEntity{
 	private BufferedImage[] animation;
 	private int speed;
 	Animator anim;
 
-	public Zombie(double x, double y, Textures texx){
-		this.x = x;
-		this.y = y;
-		this.texx = texx;
-		this.animation = texx.getZombieWalkingArray();
+	public Bus(double x, double y, Textures texx){
+		super(x,y,texx);
+		this.animation = texx.getBusArray();
 		this.speed = 1;
 		anim = new Animator(5,animation);
 	}
 
 	public void tick(){
-
-		this.x -= speed;
+		setX(getX()+speed);
 		anim.runAnimation();
 	}
 
 	public void render(Graphics g){
-		anim.drawAnimation(g,x,y,117,217,0);
+		//g.drawImage(busImage, (int)this.getX(), (int)this.getY(), null);
+		anim.drawAnimation(g,getX(),getY(),418,160,0);
 	}
 }
