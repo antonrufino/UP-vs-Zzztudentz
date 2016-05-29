@@ -70,18 +70,18 @@ public class GamePanel extends JPanel implements Runnable {
             public void mouseReleased(MouseEvent me){}
             public void mousePressed(MouseEvent me){}
             public void mouseClicked(MouseEvent me){
-                if (!game.getSelectedPlant()) return;
+                if (game.getSelectedPlant() == null) return;
 
                 for (int i = 0; i < Grid.ROWS; ++i) {
                     for (int j = 0; j < Grid.COLS; ++j) {
                         Rectangle rect = game.getGrid().getRectangle(i, j);
                         if (rect.contains(me.getPoint())) {
                             if (!game.getGrid().hasPlant(i, j)) {
-                                game.getGrid().setPlant(i, j, true);
+                                game.addPlant(i, j);
                                 game.reduceEnergy();
                                 game.startButtonCoolDown();
                                 game.setPendingButton(null);
-                                game.selectPlant(false);
+                                game.selectPlant(null);
                             }
                             return;
                         }
@@ -91,18 +91,37 @@ public class GamePanel extends JPanel implements Runnable {
         });
     }
 
-    public void run() {
-        while (running) {
-            try {
-                if (!progressBarPanel.isDone()) {
-                    progressBarPanel.update();
-                }
+    public void run(){
+		Long lastTime = System.nanoTime();
+		final double amountOfTicks = 60.0;
+		double ns = 1000000000 / amountOfTicks;
+		double delta = 0;
 
-                repaint();
-                progressBarPanel.repaint();
-                energyBar.setValue(game.getEnergy());
-                Thread.sleep(100);
-            } catch(Exception e) { }
+		while(running){
+			Long now = System.nanoTime();
+			delta += (now - lastTime) / ns;
+			lastTime = now;
+
+			if(delta >= 1){
+				tick();
+				delta--;
+			}
+            repaint();
+            progressBarPanel.repaint();
+            energyBar.setValue(game.getEnergy());
+		}
+		stop();
+	}
+
+    public void tick() {
+        if (!progressBarPanel.isDone()) {
+            progressBarPanel.update();
+        }
+
+        for (int i = 0; i < Grid.ROWS; ++i) {
+            for (int j = 0; j < Grid.COLS; ++j) {
+                if (game.getGrid().hasPlant(i, j)) game.getGrid().getPlant(i, j).tick();
+            }
         }
     }
 
@@ -137,11 +156,11 @@ public class GamePanel extends JPanel implements Runnable {
             g2d.setColor(new Color(1, 68, 33));
 
             Point p = this.getMousePosition();
-            if (p != null && game.getSelectedPlant()) {
+            if (p != null && game.getSelectedPlant() != null) {
                 createHiglightThread(p, g2d).start();
             }
 
-            createPrintPlantThread(g2d).start();
+            createPrintPlantThread(g).start();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -163,14 +182,20 @@ public class GamePanel extends JPanel implements Runnable {
         };
     }
 
-    private Thread createPrintPlantThread(final Graphics2D g2d) {
+    private Thread createPrintPlantThread(final Graphics g) {
         return new Thread() {
             public void run() {
                 for (int i = 0; i < Grid.ROWS; ++i) {
                     for (int j = 0; j < Grid.COLS; ++j) {
                         Rectangle rect = game.getGrid().getRectangle(i, j);
                         if (game.getGrid().hasPlant(i, j)) {
-                            g2d.fill(rect);
+                            final int row = i;
+                            final int col = j;
+                            new Thread() {
+                                public void run() {
+                                    game.getGrid().getPlant(row, col).render(g);
+                                }
+                            }.start();
                         }
                     }
                 }

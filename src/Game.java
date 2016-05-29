@@ -6,8 +6,7 @@ public class Game {
     private static Game instance = new Game();
     private int energy;
     private Grid grid;
-    private boolean selectedPlant; //temporary
-    private int pendingCost;
+    private AllyEntity pendingPlant;
     private PickerButton pendingButton;
 
     private Game() { }
@@ -19,20 +18,20 @@ public class Game {
     public void init() {
         this.energy = 999;
         this.grid = new Grid();
-        this.selectedPlant = false;
-        this.pendingCost = 0;
+        this.pendingPlant = null;
+        this.pendingButton = null;
     }
 
     public Grid getGrid() {
         return this.grid;
     }
 
-    public void selectPlant(boolean plant) {
-        this.selectedPlant = plant;
+    public void selectPlant(AllyEntity plant) {
+        this.pendingPlant = plant;
     }
 
-    public boolean getSelectedPlant() {
-        return this.selectedPlant;
+    public AllyEntity getSelectedPlant() {
+        return this.pendingPlant;
     }
 
     public synchronized void addEnergy(int amount) {
@@ -40,7 +39,7 @@ public class Game {
     }
 
     public synchronized void reduceEnergy() {
-        this.energy -= this.pendingCost;
+        this.energy -= this.pendingPlant.getCost();
         if (this.energy < 0) {
             this.energy = 0;
         }
@@ -48,10 +47,6 @@ public class Game {
 
     public int getEnergy() {
         return this.energy;
-    }
-
-    public void setPendingCost(int cost) {
-        this.pendingCost = cost;
     }
 
     public void setPendingButton(PickerButton pickerButton) {
@@ -70,5 +65,9 @@ public class Game {
 
     public boolean hasPendingButton() {
         return this.pendingButton != null;
+    }
+
+    public void addPlant(int row, int col) {
+        grid.setPlant(row, col, pendingPlant);
     }
 }

@@ -11,7 +11,7 @@ public class Grid {
     private final int SIDEWALK_OFFSET = 157;
 
     private Rectangle[][] tiles = new Rectangle[ROWS][COLS];
-    private boolean[][] plants = new boolean[ROWS][COLS]; //temporary
+    private AllyEntity[][] plants = new AllyEntity[ROWS][COLS]; //temporary
 
     public Grid() {
         for (int i = 0; i < ROWS; ++i) {
@@ -19,7 +19,7 @@ public class Grid {
                 int x = BUS_OFFSET + j * TILE_WIDTH;
                 int y = SIDEWALK_OFFSET + i * TILE_HEIGHT;
                 tiles[i][j] = new Rectangle(x, y, TILE_WIDTH, TILE_HEIGHT);
-                plants[i][j] = false; //temporary
+                plants[i][j] = null;
             }
         }
     }
@@ -29,10 +29,16 @@ public class Grid {
     }
 
     public boolean hasPlant(int row, int col) {
-        return plants[row][col];
+        return plants[row][col] != null;
     }
 
-    public void setPlant(int row, int col, boolean plant) {
+    public void setPlant(int row, int col, AllyEntity plant) {
+        plant.setX(BUS_OFFSET + col * TILE_WIDTH);
+        plant.setY(SIDEWALK_OFFSET + row * TILE_HEIGHT - 18);
         plants[row][col] = plant;
+    }
+
+    public AllyEntity getPlant(int row, int col) {
+        return plants[row][col];
     }
 }
