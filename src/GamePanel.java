@@ -49,11 +49,11 @@ public class GamePanel extends JPanel implements Runnable {
 
         westPanel.setOpaque(false);
         westPanel.add(energyBar, BorderLayout.WEST);
-        westPanel.add(createPlantsPanel(), BorderLayout.EAST);
+        westPanel.add(new PlantPickerPanel(this.tex), BorderLayout.EAST);
 
         eastPanel.setOpaque(false);
         eastPanel.add(progressBarPanel, BorderLayout.WEST);
-        eastPanel.add(createInGameMenuPanel(), BorderLayout.EAST);
+        eastPanel.add(new InGameMenuPanel(), BorderLayout.EAST);
         eastPanel.setPreferredSize(new Dimension(350, 45));
 
         topPanel.setOpaque(false);
@@ -61,7 +61,6 @@ public class GamePanel extends JPanel implements Runnable {
         topPanel.add(eastPanel, BorderLayout.EAST);
 
         this.add(topPanel, BorderLayout.NORTH);
-        this.add(createCanvasPanel(), BorderLayout.CENTER);
     }
 
     private void addListeners() {
@@ -124,28 +123,6 @@ public class GamePanel extends JPanel implements Runnable {
         running = false;
     }
 
-    private JPanel createEnergyBar(){
-        return energyBar;
-    }
-
-    private JPanel createPlantsPanel() {
-        PlantPickerPanel plantsPanel = new PlantPickerPanel();
-        return plantsPanel;
-    }
-
-    private JPanel createCanvasPanel() {
-        JPanel canvasPanel = new JPanel();
-        canvasPanel.setBackground(null);
-        canvasPanel.setOpaque(false);
-
-        return canvasPanel;
-    }
-
-    private JPanel createInGameMenuPanel(){
-        InGameMenuPanel menuPanel = new InGameMenuPanel();
-        return menuPanel;
-    }
-
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
@@ -201,8 +178,8 @@ public class GamePanel extends JPanel implements Runnable {
         };
     }
 
-    public BufferedImage getSpriteSheet() {
-        return this.spriteSheet;
+    public static BufferedImage getSpriteSheet() {
+        return GamePanel.spriteSheet;
     }
 
     public static class AssetLoader implements Runnable {
