@@ -79,7 +79,17 @@ public class MainMenuBtnPanel extends JPanel{
                 scaleImageIcon(new ImageIcon("../assets/img/buttons/main_menu_btns/quit-hover.png"), width-OPTIONAL_OFFSET, height),
                 width-OPTIONAL_OFFSET, height
             );
-
+            button.addMouseListener(new MouseListener(){
+                public void mouseEntered(MouseEvent me){
+                }
+                public void mouseExited(MouseEvent me){
+                }
+                public void mouseReleased(MouseEvent me){}
+                public void mousePressed(MouseEvent me){
+                    System.exit(0);
+                }
+                public void mouseClicked(MouseEvent me){}
+            });
             panel.add(button, BorderLayout.EAST);
         }
 
