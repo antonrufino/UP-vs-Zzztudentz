@@ -18,6 +18,8 @@ public class Bus extends AllyEntity{
 		super(x,y,texx);
 		this.animation = texx.getBusArray();
 		this.speed = 1;
+        this.width = 418;
+        this.height = 160;
 		anim = new Animator(5,animation);
 	}
 
@@ -28,6 +30,6 @@ public class Bus extends AllyEntity{
 
 	public void render(Graphics g){
 		//g.drawImage(busImage, (int)this.getX(), (int)this.getY(), null);
-		anim.drawAnimation(g,getX(),getY(),418,160,0);
+		anim.drawAnimation(g,getX(),getY(),width,height,0);
 	}
 }

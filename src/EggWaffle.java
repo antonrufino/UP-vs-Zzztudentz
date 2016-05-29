@@ -12,6 +12,8 @@ public class EggWaffle extends AllyEntity{
 
 	public EggWaffle(double x, double y, Textures texx){
 		super(x,y,texx);
+        this.width = 69;
+        this.width = 150;
 		this.waffleImg = texx.getEggWaffle();
 	}
 
@@ -20,6 +22,6 @@ public class EggWaffle extends AllyEntity{
 	}
 
 	public void render(Graphics g){
-		g.drawImage(waffleImg, (int)this.getX(), (int)this.getY(), 69, 150, null);
+		g.drawImage(waffleImg, (int)this.getX(), (int)this.getY(), width, height, null);
 	}
 }

@@ -12,7 +12,8 @@ public class Energy extends AllyEntity{
 
 	public Energy(double x, double y, Textures texx){
 		super(x,y,texx);
-
+        this.width = 48;
+        this.height = 75;
 		energyImg = texx.getEnergy();
 	}
 
@@ -21,6 +22,6 @@ public class Energy extends AllyEntity{
 	}
 
 	public void render(Graphics g){
-		g.drawImage(energyImg, (int)this.getX(), (int)this.getY(), 48, 75,null);
+		g.drawImage(energyImg, (int)this.getX(), (int)this.getY(), width, height,null);
 	}
 }

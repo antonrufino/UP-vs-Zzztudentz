@@ -19,8 +19,10 @@ public class Tower extends AllyEntity{
 
     public Tower(Textures texx){
 		super(texx);
-		animation = texx.getTowerArray();
-        cost = 100;
+		this.animation = texx.getTowerArray();
+        this.cost = 100;
+        this.width = 69;
+        this.height = 150;
 
 		anim = new Animator(5,animation);
 
@@ -53,7 +55,7 @@ public class Tower extends AllyEntity{
 
 	public void render(Graphics g){
 
-		anim.drawAnimation(g,getX(),getY(),69,150,0);
+		anim.drawAnimation(g,getX(),getY(),width,height,0);
 
 		for(int i=0; i<waffles.size(); i++){
 			ew = waffles.get(i);
@@ -61,4 +63,10 @@ public class Tower extends AllyEntity{
 			ew.render(g);
 		}
 	}
+
+    //temporary
+    @Override
+    public void setY(double y) {
+        super.setY(y - 26);
+    }
 }

@@ -17,6 +17,8 @@ public class Banga extends AllyEntity{
 		super(texx);
 		this.animation = texx.getBangaArray();
         this.cost = 150;
+        this.width = 95;
+        this.height = 159;
 		anim = new Animator(5,animation);
 	}
 
@@ -33,6 +35,12 @@ public class Banga extends AllyEntity{
 
 	public void render(Graphics g){
 		//g.drawImage(busImage, (int)this.getX(), (int)this.getY(), null);
-		anim.drawAnimation(g,getX(),getY(),95,159,0);
+		anim.drawAnimation(g,getX(),getY(),width,height,0);
 	}
+
+    //temporary
+    @Override
+    public void setY(double y) {
+        super.setY(y - 26);
+    }
 }
