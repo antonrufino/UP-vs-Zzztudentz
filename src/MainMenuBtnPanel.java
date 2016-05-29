@@ -10,7 +10,7 @@ public class MainMenuBtnPanel extends JPanel{
     public MainMenuBtnPanel(final GamePanel gamePanel, int width, int height){
         super();
         this.setPreferredSize(new Dimension(width, height));
-        this.setLayout(new GridLayout(4,1,4,4));
+        this.setLayout(new GridLayout(4,1,1,4));
         this.setOpaque(false);
 
         this.add(createBtn(gamePanel, width, 45));
@@ -36,7 +36,7 @@ public class MainMenuBtnPanel extends JPanel{
             scaleImageIcon(new ImageIcon("../assets/img/buttons/main_menu_btns/play-hover.png"), width, height),
             width, 45
         );
-
+        
         button.addActionListener(new MainFrame.SwitchPanelAction(MainFrame.GAME));
         button.addActionListener(new ActionListener() {
             @Override
@@ -46,7 +46,7 @@ public class MainMenuBtnPanel extends JPanel{
             }
         });
 
-        panel.add(button);
+        panel.add(button, BorderLayout.EAST);
         return panel;
     }
 
