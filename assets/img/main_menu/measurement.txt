@@ -1,0 +1,33 @@
+L_OFFSET: 901px
+T_OFFSET: 202px
+B_OFFSET: 380px
+R_OFFSET: 206px
+
+
+PANEL
+W: 175px
+H: 140px
+
+PLAY
+W: 175px
+H: 45px
+
+HELP
+W: 175px
+H: 30px
+
+CREDITS
+w: 175px
+H: 29px
+
+QUIT
+W:175px
+H: 29px
+
+OPTIONAL_OFFSET: 43px
+BUTTON SPACING: 4px
+
+
+CREDITS
+W: 256px
+H: 720px

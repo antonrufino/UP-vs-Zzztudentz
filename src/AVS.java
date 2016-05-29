@@ -14,8 +14,13 @@ public class AVS {
             Thread bgThread2 = new Thread(new MainMenuPanel.AssetLoader());
             bgThread2.start();
 
+            Thread bgThread3 = new Thread(new CreditsPanel.AssetLoader());
+            bgThread3.start();
+
             Thread bgThread1 = new Thread(new GamePanel.AssetLoader());
             bgThread1.start();
+
+
 
             Thread progressBarThread = new Thread(new ProgressBarPanel.AssetLoader());
             progressBarThread.start();

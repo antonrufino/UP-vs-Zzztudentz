@@ -53,7 +53,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         eastPanel.setOpaque(false);
         eastPanel.add(progressBarPanel, BorderLayout.WEST);
-        eastPanel.add(new InGameMenuPanel(), BorderLayout.EAST);
+        eastPanel.add(new InGameMenuPanel(0), BorderLayout.EAST);
         eastPanel.setPreferredSize(new Dimension(350, 45));
 
         topPanel.setOpaque(false);
