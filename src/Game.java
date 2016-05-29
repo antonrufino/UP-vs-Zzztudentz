@@ -66,8 +66,4 @@ public class Game {
     public boolean hasPendingButton() {
         return this.pendingButton != null;
     }
-
-    public void addPlant(int row, int col) {
-        grid.setPlant(row, col, pendingPlant);
-    }
 }
