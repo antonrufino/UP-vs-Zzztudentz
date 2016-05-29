@@ -16,6 +16,18 @@ public class Kopiko extends AllyEntity{
 
 	Animator anim;
 
+    public Kopiko(Textures texx) {
+		super(texx);
+        cost = 50;
+		animation = texx.getKopikoArray();
+
+		anim = new Animator(5,animation);
+
+		for(int i=0; i<10; i++){
+			lightnings.add(new Energy(200, 200, texx));
+		}
+	}
+
 	public Kopiko(double x, double y, Textures texx){
 		super(x,y,texx);
         cost = 50;

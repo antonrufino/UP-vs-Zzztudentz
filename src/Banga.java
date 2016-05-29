@@ -13,6 +13,13 @@ public class Banga extends AllyEntity{
 	private BufferedImage[] animation;
 	Animator anim;
 
+    public Banga(Textures texx){
+		super(texx);
+		this.animation = texx.getBangaArray();
+        this.cost = 150;
+		anim = new Animator(5,animation);
+	}
+
 	public Banga(double x, double y, Textures texx){
 		super(x,y,texx);
 		this.animation = texx.getBangaArray();

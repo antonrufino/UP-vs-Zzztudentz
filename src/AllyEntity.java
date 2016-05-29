@@ -15,6 +15,11 @@ public abstract class AllyEntity{
 	private Textures texx;
     protected int cost;
 
+    public AllyEntity(Textures texx) {
+        this.texx = texx;
+        this.isAlive = true;
+    }
+
 	public AllyEntity(double x, double y, Textures texx){
 		this.x = x;
 		this.y = y;

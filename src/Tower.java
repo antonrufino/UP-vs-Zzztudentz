@@ -17,6 +17,18 @@ public class Tower extends AllyEntity{
 
 	private Animator anim;
 
+    public Tower(Textures texx){
+		super(texx);
+		animation = texx.getTowerArray();
+        cost = 100;
+
+		anim = new Animator(5,animation);
+
+		for(int i=0; i<10; i++){
+			waffles.add(new EggWaffle(100, 100, texx));
+		}
+	}
+
 	public Tower(double x, double y, Textures texx){
 		super(x,y,texx);
 		animation = texx.getTowerArray();
