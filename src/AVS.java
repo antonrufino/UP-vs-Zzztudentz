@@ -24,7 +24,9 @@ public class AVS {
             energyBarThread.start();
 
             bgThread1.join();
+            bgThread2.join();
             progressBarThread.join();
+            energyBarThread.join();
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();

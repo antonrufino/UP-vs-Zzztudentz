@@ -2,6 +2,8 @@ package avs.ui;
 
 import avs.models.Grid;
 import avs.models.Game;
+import avs.utils.BufferedImageLoader;
+import avs.utils.Textures;
 
 import java.awt.*;
 import java.awt.BorderLayout;
@@ -16,18 +18,26 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class GamePanel extends JPanel implements Runnable {
-    private static BufferedImage bg;
     private Game game;
     private boolean running;
     private Thread thread;
-    private final ProgressBarPanel progressBarPanel;
-    private final EnergyBar energyBar;
+    private ProgressBarPanel progressBarPanel;
+    private EnergyBar energyBar;
+
+    private static BufferedImage bg;
+    private static BufferedImage spriteSheet;
+    private Textures tex;
 
     public GamePanel() {
-        game = Game.getInstance();
+        this.game = Game.getInstance();
+        this.tex = new Textures(this);
+        this.running = false;
 
-        running = false;
+        createPanelUI();
+        addListeners();
+    }
 
+    private void createPanelUI() {
         this.setLayout(new BorderLayout());
         this.setOpaque(false);
 
@@ -52,7 +62,9 @@ public class GamePanel extends JPanel implements Runnable {
 
         this.add(topPanel, BorderLayout.NORTH);
         this.add(createCanvasPanel(), BorderLayout.CENTER);
+    }
 
+    private void addListeners() {
         this.addMouseListener(new MouseListener() {
             public void mouseEntered(MouseEvent me){}
             public void mouseExited(MouseEvent me){}
@@ -189,12 +201,18 @@ public class GamePanel extends JPanel implements Runnable {
         };
     }
 
+    public BufferedImage getSpriteSheet() {
+        return this.spriteSheet;
+    }
+
     public static class AssetLoader implements Runnable {
         @Override
         public void run() {
+            BufferedImageLoader loader = new BufferedImageLoader();
+
             try {
-                GamePanel.bg = ImageIO.read(
-                    new File("../assets/img/background.png"));
+                GamePanel.bg = loader.loadImage("../assets/img/background.png");
+                GamePanel.spriteSheet = loader.loadImage("../assets/img/spritesheets/spritesheet-fullres.png");
             } catch (IOException e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();
