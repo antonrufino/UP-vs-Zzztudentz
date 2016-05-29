@@ -20,7 +20,7 @@ public class MainMenuPanel extends JPanel {
 
     public MainMenuPanel(final GamePanel gamePanel) {
         super();
-        MainMenuBtnPanel btnPanel = new MainMenuBtnPanel(BTN_PANEL_WIDTH, BTN_PANEL_HEIGHT);
+        MainMenuBtnPanel btnPanel = new MainMenuBtnPanel(gamePanel, BTN_PANEL_WIDTH, BTN_PANEL_HEIGHT);
 
         this.setBackground(Color.GREEN);
         this.setOpaque(false);

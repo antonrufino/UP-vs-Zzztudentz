@@ -34,5 +34,6 @@ public class MainMenuBtn extends JButton {
             public void mousePressed(MouseEvent me){}
             public void mouseClicked(MouseEvent me){}
         });
+
     }
 }
