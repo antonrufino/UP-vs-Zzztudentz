@@ -187,7 +187,6 @@ public class GamePanel extends JPanel implements Runnable {
             public void run() {
                 for (int i = 0; i < Grid.ROWS; ++i) {
                     for (int j = 0; j < Grid.COLS; ++j) {
-                        Rectangle rect = game.getGrid().getRectangle(i, j);
                         if (game.getGrid().hasPlant(i, j)) {
                             final int row = i;
                             final int col = j;
