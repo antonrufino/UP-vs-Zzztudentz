@@ -1,6 +1,6 @@
 package avs.ui;
 
-import avs.models.Plant;
+import avs.models.AllyEntity;
 import avs.models.Game;
 
 import javax.swing.*;
