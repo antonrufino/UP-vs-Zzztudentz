@@ -70,7 +70,7 @@ public class MainMenuBtnPanel extends JPanel{
                 scaleImageIcon(new ImageIcon("../assets/img/buttons/main_menu_btns/credits-hover.png"), width-OPTIONAL_OFFSET, height),
                 width-OPTIONAL_OFFSET, height
             );
-
+            button.addActionListener(new MainFrame.SwitchPanelAction(MainFrame.CREDITS));
             panel.add(button, BorderLayout.EAST);
         }
         else if(type == 3){
