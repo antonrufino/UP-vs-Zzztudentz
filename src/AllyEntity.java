@@ -14,6 +14,8 @@ public abstract class AllyEntity{
 	private boolean isAlive;
 	private Textures texx;
     protected int cost;
+    protected int width;
+    protected int height;
 
     public AllyEntity(Textures texx) {
         this.texx = texx;
@@ -56,5 +58,13 @@ public abstract class AllyEntity{
 
     public int getCost() {
         return this.cost;
+    }
+
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getHeight() {
+        return this.height;
     }
 }

@@ -17,6 +17,8 @@ public class Tc7 extends AllyEntity{
 		super(texx);
 		this.animation = texx.getTc7Array();
         this.cost = 50;
+        this.width = 100;
+        this.height = 114;
 		anim = new Animator(5,animation);
 	}
 
@@ -33,6 +35,6 @@ public class Tc7 extends AllyEntity{
 
 	public void render(Graphics g){
 		//g.drawImage(busImage, (int)this.getX(), (int)this.getY(), null);
-		anim.drawAnimation(g,getX(),getY(),100,114,0);
+		anim.drawAnimation(g,getX(),getY(),width,height,0);
 	}
 }

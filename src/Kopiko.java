@@ -18,8 +18,10 @@ public class Kopiko extends AllyEntity{
 
     public Kopiko(Textures texx) {
 		super(texx);
-        cost = 50;
-		animation = texx.getKopikoArray();
+        this.cost = 50;
+        this.width = 41;
+        this.height = 102;
+        this.animation = texx.getKopikoArray();
 
 		anim = new Animator(5,animation);
 
@@ -51,7 +53,7 @@ public class Kopiko extends AllyEntity{
 	}
 
 	public void render (Graphics g){
-		anim.drawAnimation(g,getX(),getY(),41,102,0);
+		anim.drawAnimation(g,getX(),getY(),width,height,0);
 
 		for(int i=0; i<lightnings.size(); i++){
 			e = lightnings.get(i);
