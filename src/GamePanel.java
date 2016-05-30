@@ -32,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.game = Game.getInstance();
         this.tex = new Textures(this);
         this.running = false;
+        this.game.setTextures(tex);
 
         createPanelUI();
         addListeners();
@@ -156,6 +157,8 @@ public class GamePanel extends JPanel implements Runnable {
             }
 
             renderPlants(g);
+            renderZombies(g);
+            renderEnergies(g);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -180,6 +183,18 @@ public class GamePanel extends JPanel implements Runnable {
                     game.getGrid().getPlant(i, j).render(g);
                 }
             }
+        }
+    }
+
+    private void renderZombies(Graphics g) {
+        for(int i = 0; i< game.getZombieList().size();i++){
+              game.getZombieList().get(i).render(g);
+        }
+    }
+
+    private void renderEnergies(final Graphics g) {
+        for(int i = 0; i< game.getEnergyList().size();i++){
+              game.getEnergyList().get(i).render(g);
         }
     }
 
