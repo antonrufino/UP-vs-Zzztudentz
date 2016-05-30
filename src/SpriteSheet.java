@@ -22,17 +22,14 @@ public class SpriteSheet{
 				this.img = image.getSubimage((H_OFFSET*col)+(width*(col-1)), (V_OFFSET*2)+Textures.BUS_HEIGHT, width, height);
 			}
 			else if(col >= 10 && col < 13){
-				System.out.println(col);
 				this.img = image.getSubimage((123*col)+(Textures.BANGA_WIDTH*9)+(width*(col%10)), 1059, width, height);
 
 			}
 			else if(col >= 13 && col < 17){
-				System.out.println(col);
 				this.img = image.getSubimage((123*col)+(Textures.BANGA_WIDTH*9)+(Textures.TC7_WIDTH*3)+(width*(col%13)), (V_OFFSET*2)+Textures.BUS_HEIGHT, width, height);
 			}
 
 			else if(col == 17){
-				System.out.println((H_OFFSET*col)+(Textures.BANGA_WIDTH*9)+(Textures.TC7_WIDTH*3)+(Textures.TOWER_WIDTH*4));
 				this.img = image.getSubimage((H_OFFSET*col)+(Textures.BANGA_WIDTH*9)+(Textures.TC7_WIDTH*3)+(Textures.TOWER_WIDTH*4),(V_OFFSET*2)+Textures.BUS_HEIGHT, width, height);
 			}
 			else if(col >= 18 && col < 23){
