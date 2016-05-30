@@ -27,7 +27,7 @@ public class Game{
     }
 
     public void init() {
-        this.energy = 999;
+        this.energy = 0;
         this.grid = new Grid();
         this.pendingPlant = null;
         this.pendingButton = null;
