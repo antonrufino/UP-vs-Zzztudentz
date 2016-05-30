@@ -11,7 +11,7 @@ public class Grid {
     private final int SIDEWALK_OFFSET = 157;
 
     private Rectangle[][] tiles = new Rectangle[ROWS][COLS];
-    private AllyEntity[][] plants = new AllyEntity[ROWS][COLS]; //temporary
+    private Plant[][] plants = new Plant[ROWS][COLS]; //temporary
 
     public Grid() {
         for (int i = 0; i < ROWS; ++i) {
@@ -32,7 +32,7 @@ public class Grid {
         return plants[row][col] != null;
     }
 
-    public void setPlant(int row, int col, AllyEntity plant) {
+    public void setPlant(int row, int col, Plant plant) {
         int x = BUS_OFFSET + col * TILE_WIDTH;
         x += (TILE_WIDTH - plant.getWidth()) / 2;
 
@@ -46,7 +46,7 @@ public class Grid {
         plants[row][col] = plant;
     }
 
-    public AllyEntity getPlant(int row, int col) {
+    public Plant getPlant(int row, int col) {
         return plants[row][col];
     }
 }

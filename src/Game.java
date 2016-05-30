@@ -6,7 +6,7 @@ public class Game {
     private static Game instance = new Game();
     private int energy;
     private Grid grid;
-    private AllyEntity pendingPlant;
+    private Plant pendingPlant;
     private PickerButton pendingButton;
 
     private Game() { }
@@ -26,11 +26,11 @@ public class Game {
         return this.grid;
     }
 
-    public void selectPlant(AllyEntity plant) {
+    public void selectPlant(Plant plant) {
         this.pendingPlant = plant;
     }
 
-    public AllyEntity getSelectedPlant() {
+    public Plant getSelectedPlant() {
         return this.pendingPlant;
     }
 
