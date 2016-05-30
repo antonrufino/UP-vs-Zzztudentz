@@ -18,10 +18,6 @@ public class Kopiko extends Plant {
         this.animation = texx.getKopikoArray();
 
 		this.anim = new Animator(5,animation);
-
-		for(int i=0; i<10; i++){
-			lightnings.add(new Energy(200, 200, texx));
-		}
 	}
 
 	public Kopiko(double x, double y, Textures texx){
@@ -29,28 +25,14 @@ public class Kopiko extends Plant {
 		animation = texx.getKopikoArray();
 
 		this.anim = new Animator(5,animation);
-
-		for(int i=0; i<10; i++){
-			lightnings.add(new Energy(200, 200, texx));
-		}
 	}
 
 	public void tick(){
 
 		this.anim.runAnimation();
-		for(int i=0; i<lightnings.size(); i++){
-			e = lightnings.get(i);
-
-			e.tick();
-		}
 	}
 
 	public void render (Graphics g){
 		this.anim.drawAnimation(g,getX(),getY(),width,height,0);
-
-		for(int i=0; i<lightnings.size(); i++){
-			e = lightnings.get(i);
-			e.render(g);
-		}
 	}
 }

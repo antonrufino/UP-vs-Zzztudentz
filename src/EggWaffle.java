@@ -17,6 +17,8 @@ public class EggWaffle extends Entity{
 
 	public void tick(){
 		setX(getX()+5);
+
+		
 	}
 
 	public void render(Graphics g){

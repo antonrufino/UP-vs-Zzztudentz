@@ -55,4 +55,8 @@ public class Animator{
 	public int getCount(){
 		return this.count;
 	}
+
+	public void setImages(BufferedImage[] images){
+		this.images = images;
+	}
 }

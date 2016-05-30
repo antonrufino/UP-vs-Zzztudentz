@@ -23,9 +23,7 @@ public class Textures{
 	public static final int ZOMBIE_HEIGHT = 901;
 	public static final int TC7_WIDTH = 417;
 	public static final int TC7_HEIGHT = 476;
-	// public static final int EGG_WAFFLE_WIDTH = 90;
-	// public static final int EGG_WAFFLE_HEIGHT = 90;
-
+	
 	private BufferedImage[] zombieWalking;
 	private BufferedImage[] zombieEating;
 	private BufferedImage[] tc7;
