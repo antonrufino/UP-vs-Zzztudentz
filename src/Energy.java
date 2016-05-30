@@ -27,10 +27,6 @@ public class Energy extends Entity{
 		g.drawImage(energyImg, (int)this.getX(), (int)this.getY(), width, height,null);
 	}
 
-	public Rectangle getBounds(){
-		return new Rectangle((int) this.getX(), (int) this.getY(), Textures.ENERGY_WIDTH, Textures.ENERGY_HEIGHT);
-	}
-
     public int getAmount() {
         return this.amount;
     }

@@ -38,8 +38,4 @@ public class Banga extends Plant{
     public void setY(double y) {
         super.setY(y - 26);
     }
-
-    public Rectangle getBounds(){
-		return new Rectangle((int) this.getX(), (int) this.getY(), Textures.BANGA_WIDTH, Textures.BANGA_HEIGHT); 
-	}
 }
