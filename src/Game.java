@@ -66,4 +66,12 @@ public class Game {
     public boolean hasPendingButton() {
         return this.pendingButton != null;
     }
+
+    public void tick() {
+        for (int i = 0; i < Grid.ROWS; ++i) {
+            for (int j = 0; j < Grid.COLS; ++j) {
+                if (grid.hasPlant(i, j)) grid.getPlant(i, j).tick();
+            }
+        }
+    }
 }
