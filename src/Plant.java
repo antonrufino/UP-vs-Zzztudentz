@@ -13,7 +13,7 @@ public abstract class Plant extends Entity {
     protected int cost;
 
     public Plant(int w, int h, int cost, Textures texx) {
-        super(texx);
+        super(w,h,texx);
         this.cost = cost;
         this.isAlive = true;
     }

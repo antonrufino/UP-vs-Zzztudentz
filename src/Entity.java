@@ -1,6 +1,7 @@
 package avs.models;
 
 import avs.utils.Textures;
+import avs.utils.Animator;
 
 import java.awt.image.*;
 import java.awt.*;
@@ -9,8 +10,8 @@ import javax.swing.*;
 
 public abstract class Entity{
 
-	private double x;
-	private double y;
+	protected double x;
+	protected double y;
 	private Textures texx;
     protected int width;
     protected int height;
@@ -20,7 +21,6 @@ public abstract class Entity{
         this.width = w;
         this.height = h;
         this.texx = texx;
-        this.isAlive = true;
     }
 
 	public Entity(double x, double y, int w, int h, Textures texx){
@@ -29,7 +29,6 @@ public abstract class Entity{
         this.width = w;
         this.height = h;
 		this.texx = texx;
-		this.isAlive = true;
 	}
 
 	public abstract void tick();
@@ -50,10 +49,6 @@ public abstract class Entity{
 	public void setY(double y){
 		this.y = y;
 	}
-
-    public int getCost() {
-        return this.cost;
-    }
 
     public int getWidth() {
         return this.width;
