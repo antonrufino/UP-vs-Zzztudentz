@@ -7,13 +7,11 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class EggWaffle extends AllyEntity{
+public class EggWaffle extends Entity{
 	private BufferedImage waffleImg;
 
 	public EggWaffle(double x, double y, Textures texx){
-		super(x,y,texx);
-        this.width = 69;
-        this.width = 150;
+		super(x,y,69,150,texx);
 		this.waffleImg = texx.getEggWaffle();
 	}
 

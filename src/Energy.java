@@ -7,13 +7,11 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class Energy extends AllyEntity{
+public class Energy extends Entity{
 	private BufferedImage energyImg;
 
 	public Energy(double x, double y, Textures texx){
-		super(x,y,texx);
-        this.width = 48;
-        this.height = 75;
+		super(x,y,48,75,texx);
 		energyImg = texx.getEnergy();
 	}
 

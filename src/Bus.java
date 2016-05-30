@@ -9,17 +9,15 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class Bus extends AllyEntity{
+public class Bus extends Entity{
 	private BufferedImage[] animation;
 	private int speed;
 	Animator anim;
 
 	public Bus(double x, double y, Textures texx){
-		super(x,y,texx);
+		super(x,y,418,160,texx);
 		this.animation = texx.getBusArray();
 		this.speed = 1;
-        this.width = 418;
-        this.height = 160;
 		anim = new Animator(5,animation);
 	}
 

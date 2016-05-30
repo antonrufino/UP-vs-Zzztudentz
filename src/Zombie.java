@@ -9,17 +9,12 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class Zombie{
-	private double x,y;
-	private Textures texx;
+public class Zombie extends Entity{
 	private BufferedImage[] animation;
 	private int speed;
-	Animator anim;
 
 	public Zombie(double x, double y, Textures texx){
-		this.x = x;
-		this.y = y;
-		this.texx = texx;
+        super(x,y,117,217,texx);
 		this.animation = texx.getZombieWalkingArray();
 		this.speed = 1;
 		anim = new Animator(5,animation);
