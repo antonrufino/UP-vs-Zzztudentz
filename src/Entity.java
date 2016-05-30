@@ -11,34 +11,29 @@ public abstract class Entity{
 
 	private double x;
 	private double y;
-	private boolean isAlive;
 	private Textures texx;
-    protected int cost;
     protected int width;
     protected int height;
+    protected Animator anim;
 
-    public Entity(Textures texx) {
+    public Entity(int w, int h, Textures texx) {
+        this.width = w;
+        this.height = h;
         this.texx = texx;
         this.isAlive = true;
     }
 
-	public Entity(double x, double y, Textures texx){
+	public Entity(double x, double y, int w, int h, Textures texx){
 		this.x = x;
 		this.y = y;
+        this.width = w;
+        this.height = h;
 		this.texx = texx;
 		this.isAlive = true;
 	}
 
 	public abstract void tick();
 	public abstract void render(Graphics g);
-
-	public boolean isAlive(){
-		return this.isAlive;
-	}
-
-	public void setIsAlive(boolean isAlive){
-		this.isAlive = isAlive;
-	}
 
 	public double getX(){
 		return this.x;
