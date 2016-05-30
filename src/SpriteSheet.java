@@ -38,7 +38,7 @@ public class SpriteSheet{
 		}
 			else if(row == 3){
 			if(col != 7){
-				this.img = image.getSubimage((H_OFFSET*col)+(Textures.KOPIKO_WIDTH*(col-1)), (V_OFFSET*row)+Textures.BUS_HEIGHT+Textures.BANGA_HEIGHT, width, height);
+				this.img = image.getSubimage(((H_OFFSET)*col)+((Textures.KOPIKO_WIDTH-1)*(col-1)), (V_OFFSET*row)+Textures.BUS_HEIGHT+Textures.BANGA_HEIGHT, width, height);
 			}
 			else{
 				this.img = image.getSubimage((H_OFFSET*col)+(Textures.KOPIKO_WIDTH*(col-1)), (V_OFFSET*row) + Textures.BUS_HEIGHT + Textures.BANGA_HEIGHT + (Textures.KOPIKO_HEIGHT - Textures.ENERGY_HEIGHT), width, height);
