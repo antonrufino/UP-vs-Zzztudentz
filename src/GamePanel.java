@@ -152,49 +152,35 @@ public class GamePanel extends JPanel implements Runnable {
 
             Point p = this.getMousePosition();
             if (p != null && game.getSelectedPlant() != null) {
-                createHiglightThread(p, g2d).start();
+                highlightTile(p, g2d);
             }
 
-            createPrintPlantThread(g).start();
+            renderPlants(g);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
     }
 
-    private Thread createHiglightThread(final Point p, final Graphics2D g2d) {
-        return new Thread() {
-            public void run() {
-                for (int i = 0; i < Grid.ROWS; ++i) {
-                    for (int j = 0; j < Grid.COLS; ++j) {
-                        Rectangle rect = game.getGrid().getRectangle(i, j);
-                        if (rect.contains(p)) {
-                            g2d.draw(rect);
-                        };
-                    }
-                }
+    private void highlightTile(Point p, Graphics2D g2d) {
+        for (int i = 0; i < Grid.ROWS; ++i) {
+            for (int j = 0; j < Grid.COLS; ++j) {
+                Rectangle rect = game.getGrid().getRectangle(i, j);
+                if (rect.contains(p)) {
+                    g2d.draw(rect);
+                };
             }
-        };
+        }
     }
 
-    private Thread createPrintPlantThread(final Graphics g) {
-        return new Thread() {
-            public void run() {
-                for (int i = 0; i < Grid.ROWS; ++i) {
-                    for (int j = 0; j < Grid.COLS; ++j) {
-                        if (game.getGrid().hasPlant(i, j)) {
-                            final int row = i;
-                            final int col = j;
-                            new Thread() {
-                                public void run() {
-                                    game.getGrid().getPlant(row, col).render(g);
-                                }
-                            }.start();
-                        }
-                    }
+    private void renderPlants(Graphics g) {
+        for (int i = 0; i < Grid.ROWS; ++i) {
+            for (int j = 0; j < Grid.COLS; ++j) {
+                if (game.getGrid().hasPlant(i, j)) {
+                    game.getGrid().getPlant(i, j).render(g);
                 }
             }
-        };
+        }
     }
 
     public static BufferedImage getSpriteSheet() {
