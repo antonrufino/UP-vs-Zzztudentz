@@ -192,7 +192,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    private void renderEnergies(final Graphics g) {
+    private void renderEnergies(Graphics g) {
         for(int i = 0; i< game.getEnergyList().size();i++){
               game.getEnergyList().get(i).render(g);
         }

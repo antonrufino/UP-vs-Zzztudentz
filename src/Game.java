@@ -86,14 +86,14 @@ public class Game{
         return this.pendingButton != null;
     }
 
-   public void createZombie(int enemyCount, int spawnDelay){
+   public synchronized void createZombie(int enemyCount, int spawnDelay){
         for(int i = 0; i < enemyCount; i++){
             int y = rand.nextInt(5) * 109;
             addZombie(new Zombie(1280,y,tex));
         }
     }
 
-    public void createEnergy(){
+    public synchronized void createEnergy(){
         for(int i = 0; i < 5; i++){
             int x = rand.nextInt(5) * 109;
             addEnergy(new Energy(x,-1,tex));
