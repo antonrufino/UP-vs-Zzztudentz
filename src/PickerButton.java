@@ -120,7 +120,7 @@ public class PickerButton extends JButton implements Runnable {
 
         public void actionPerformed(ActionEvent e) {
             Game game = Game.getInstance();
-            AllyEntity plant = button.factory.makePlant();
+            Plant plant = button.factory.makePlant();
             if (button.isClickable && game.getEnergy() >= plant.getCost()) {
                 button.setIcon(button.hoverIcon);
 
