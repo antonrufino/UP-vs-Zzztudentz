@@ -9,7 +9,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class Tower extends AllyEntity{
+public class Tower extends Plant {
 	private BufferedImage[] animation;
 	private EggWaffle ew;
 	private Textures texx;
@@ -18,11 +18,8 @@ public class Tower extends AllyEntity{
 	private Animator anim;
 
     public Tower(Textures texx){
-		super(texx);
+		super(69,150,100,texx);
 		this.animation = texx.getTowerArray();
-        this.cost = 100;
-        this.width = 69;
-        this.height = 150;
 
 		anim = new Animator(5,animation);
 
@@ -32,9 +29,8 @@ public class Tower extends AllyEntity{
 	}
 
 	public Tower(double x, double y, Textures texx){
-		super(x,y,texx);
+		super(x,y,69,150,100,texx);
 		animation = texx.getTowerArray();
-        cost = 100;
 
 		anim = new Animator(5,animation);
 

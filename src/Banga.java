@@ -9,23 +9,18 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class Banga extends AllyEntity{
-	private BufferedImage[] animation;
+public class Banga extends Plant{
 	Animator anim;
 
     public Banga(Textures texx){
-		super(texx);
+		super(95 159, 150, texx);
 		this.animation = texx.getBangaArray();
-        this.cost = 150;
-        this.width = 95;
-        this.height = 159;
 		anim = new Animator(5,animation);
 	}
 
 	public Banga(double x, double y, Textures texx){
-		super(x,y,texx);
+		super(x,y,95,159,150,texx);
 		this.animation = texx.getBangaArray();
-        this.cost = 150;
 		anim = new Animator(5,animation);
 	}
 

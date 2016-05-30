@@ -9,23 +9,18 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class Tc7 extends AllyEntity{
-	private BufferedImage[] animation;
+public class Tc7 extends Plant {
 	Animator anim;
 
     public Tc7(Textures texx){
-		super(texx);
+		super(100, 114, 50, texx);
 		this.animation = texx.getTc7Array();
-        this.cost = 50;
-        this.width = 100;
-        this.height = 114;
 		anim = new Animator(5,animation);
 	}
 
 	public Tc7(double x, double y, Textures texx){
-		super(x,y,texx);
+		super(x,y,100,114,50,texx);
 		this.animation = texx.getTc7Array();
-        this.cost = 50;
 		anim = new Animator(5,animation);
 	}
 
