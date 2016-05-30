@@ -104,6 +104,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 			if(delta >= 1){
 				tick();
+                game.tick();
 				delta--;
 			}
             repaint();
@@ -116,12 +117,6 @@ public class GamePanel extends JPanel implements Runnable {
     public void tick() {
         if (!progressBarPanel.isDone()) {
             progressBarPanel.update();
-        }
-
-        for (int i = 0; i < Grid.ROWS; ++i) {
-            for (int j = 0; j < Grid.COLS; ++j) {
-                if (game.getGrid().hasPlant(i, j)) game.getGrid().getPlant(i, j).tick();
-            }
         }
     }
 
