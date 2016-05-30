@@ -16,8 +16,8 @@ public class PlantFactory {
         this.tex = tex;
     }
 
-    public AllyEntity makePlant() {
-        AllyEntity plant;
+    public Plant makePlant() {
+        Plant plant;
 
         switch (this.request) {
             case KOPIKO:
