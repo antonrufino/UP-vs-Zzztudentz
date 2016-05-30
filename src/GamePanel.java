@@ -32,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.game = Game.getInstance();
         this.tex = new Textures(this);
         this.running = false;
+        this.game.setTextures(tex);
 
         createPanelUI();
         addListeners();
@@ -156,6 +157,8 @@ public class GamePanel extends JPanel implements Runnable {
             }
 
             createPrintPlantThread(g).start();
+            createZombieThread(g).start();
+            createEnergyThread(g).start();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -193,6 +196,36 @@ public class GamePanel extends JPanel implements Runnable {
                         }
                     }
                 }
+            }
+        };
+    }
+
+    private Thread createZombieThread(final Graphics g) {
+        return new Thread() {
+            public void run() {
+                new Thread() {
+                    public void run() {
+                        for(int i = 0; i< game.getZombieList().size();i++){
+                              game.getZombieList().get(i).render(g);
+                        }
+                      
+                    }
+                }.start();
+            }
+        };
+    }
+
+     private Thread createEnergyThread(final Graphics g) {
+        return new Thread() {
+            public void run() {
+                new Thread() {
+                    public void run() {
+                        for(int i = 0; i< game.getEnergyList().size();i++){
+                              game.getEnergyList().get(i).render(g);
+                        }
+                      
+                    }
+                }.start();
             }
         };
     }

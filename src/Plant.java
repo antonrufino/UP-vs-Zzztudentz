@@ -11,6 +11,7 @@ public abstract class Plant extends Entity {
     protected BufferedImage[] animation;
 	private boolean isAlive;
     protected int cost;
+    private int hp;
 
     public Plant(int w, int h, int cost, Textures texx) {
         super(w,h,texx);
@@ -34,5 +35,13 @@ public abstract class Plant extends Entity {
 
     public int getCost() {
         return this.cost;
+    }
+
+    public int getHp(){
+    	return this.hp;
+    }
+
+    public void setHp(int hp){
+        this.hp = hp;
     }
 }

@@ -2,6 +2,7 @@ import java.awt.image.*;
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
+import avs.models.*;
 
 public class CollisionChecker{
 

@@ -2,6 +2,7 @@ package avs.models;
 
 import avs.utils.Animator;
 import avs.utils.Textures;
+import avs.ui.MainFrame;
 
 import java.util.ArrayList;
 import java.awt.image.*;
@@ -12,11 +13,15 @@ import javax.swing.*;
 public class Zombie extends Entity{
 	private BufferedImage[] animation;
 	private int speed;
+	private int hp;
+	private int damage;
 
 	public Zombie(double x, double y, Textures texx){
         super(x,y,117,217,texx);
 		this.animation = texx.getZombieWalkingArray();
 		this.speed = 1;
+		this.hp = 100;
+		this.damage = 20;
 		anim = new Animator(5,animation);
 	}
 
@@ -64,7 +69,7 @@ public class Zombie extends Entity{
 		this.speed = speed;
 	}
 	
-	public synchronized void attack(AllyEntity a){
+	public synchronized void attack(Plant a){
 		a.setHp(a.getHp() - this.damage);
 	}
 }
