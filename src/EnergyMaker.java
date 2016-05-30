@@ -2,6 +2,7 @@ package avs.models;
 
 public class EnergyMaker implements Runnable{
 	private Thread thread;
+    private int delay;
 
 	public EnergyMaker(){
 		thread = new Thread(this);
@@ -11,7 +12,7 @@ public class EnergyMaker implements Runnable{
         try {
             while (true) {
                 Game.getInstance().createEnergy();
-                Thread.sleep(1000);
+                Thread.sleep(10000);
             }
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());

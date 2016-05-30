@@ -27,7 +27,7 @@ public class Game{
     }
 
     public void init() {
-        this.energy = 999;
+        this.energy = 0;
         this.grid = new Grid();
         this.pendingPlant = null;
         this.pendingButton = null;
@@ -53,7 +53,7 @@ public class Game{
         return this.pendingPlant;
     }
 
-    public synchronized void addEnergy(int amount) {
+    public synchronized void increaseEnergy(int amount) {
         this.energy += amount;
     }
 
@@ -94,10 +94,11 @@ public class Game{
     }
 
     public synchronized void createEnergy(){
-        for(int i = 0; i < 5; i++){
-            int x = rand.nextInt(5) * 109;
-            addEnergy(new Energy(x,-1,tex));
-        }
+        int x = new Random().nextInt(Grid.WIDTH - Grid.TILE_WIDTH) +
+            Grid.TILE_WIDTH / 2 + Grid.BUS_OFFSET;
+        int targetY = new Random().nextInt(Grid.HEIGHT - Grid.TILE_HEIGHT) +
+            Grid.TILE_HEIGHT / 2 + Grid.SIDEWALK_OFFSET;
+        addEnergy(new Energy(x, 0, targetY, 50, tex));
     }
 
     public void addZombie(Zombie z){

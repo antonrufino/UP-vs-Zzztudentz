@@ -36,13 +36,12 @@ public class MainMenuBtnPanel extends JPanel{
             scaleImageIcon(new ImageIcon("../assets/img/buttons/main_menu_btns/play-hover.png"), width, height),
             width, 45
         );
-        
+
         button.addActionListener(new MainFrame.SwitchPanelAction(MainFrame.GAME));
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 gamePanel.start();
-                Game.getInstance().init();
             }
         });
 
