@@ -7,7 +7,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public abstract class AllyEntity{
+public abstract class Entity{
 
 	private double x;
 	private double y;
@@ -17,12 +17,12 @@ public abstract class AllyEntity{
     protected int width;
     protected int height;
 
-    public AllyEntity(Textures texx) {
+    public Entity(Textures texx) {
         this.texx = texx;
         this.isAlive = true;
     }
 
-	public AllyEntity(double x, double y, Textures texx){
+	public Entity(double x, double y, Textures texx){
 		this.x = x;
 		this.y = y;
 		this.texx = texx;
