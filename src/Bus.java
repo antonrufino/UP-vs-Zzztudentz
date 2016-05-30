@@ -15,7 +15,7 @@ public class Bus extends Entity{
 	Animator anim;
 
 	public Bus(double x, double y, Textures texx){
-		super(x,y,418,160,texx);
+		super(x,y,Textures.BUS_WIDTH,Textures.BUS_HEIGHT,texx);
 		this.animation = texx.getBusArray();
 		this.speed = 1;
 		anim = new Animator(5,animation);

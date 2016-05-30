@@ -9,20 +9,20 @@ import javax.swing.*;
 
 public class Textures{
 
-	public static final int BUS_WIDTH = 1742;
-	public static final int BUS_HEIGHT = 667;
-	public static final int BANGA_WIDTH = 396;
-	public static final int BANGA_HEIGHT = 660;
-	public static final int KOPIKO_WIDTH = 167;
-	public static final int KOPIKO_HEIGHT = 422;
-	public static final int ENERGY_WIDTH = 218;
-	public static final int ENERGY_HEIGHT = 314;
-	public static final int TOWER_WIDTH = 288;
-	public static final int TOWER_HEIGHT = 622;
-	public static final int ZOMBIE_WIDTH = 489;
-	public static final int ZOMBIE_HEIGHT = 901;
-	public static final int TC7_WIDTH = 417;
-	public static final int TC7_HEIGHT = 476;
+	public static final int BUS_WIDTH = 418;
+	public static final int BUS_HEIGHT = 160;
+	public static final int BANGA_WIDTH = 95;
+	public static final int BANGA_HEIGHT = 158;
+	public static final int KOPIKO_WIDTH = 40;
+	public static final int KOPIKO_HEIGHT = 101;
+	public static final int ENERGY_WIDTH = 47;
+	public static final int ENERGY_HEIGHT = 101;
+	public static final int TOWER_WIDTH = 69;
+	public static final int TOWER_HEIGHT = 149;
+	public static final int ZOMBIE_WIDTH = 117;
+	public static final int ZOMBIE_HEIGHT = 215;
+	public static final int TC7_WIDTH = 100;
+	public static final int TC7_HEIGHT = 114;
 	// public static final int EGG_WAFFLE_WIDTH = 90;
 	// public static final int EGG_WAFFLE_HEIGHT = 90;
 

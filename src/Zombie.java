@@ -14,7 +14,7 @@ public class Zombie extends Entity{
 	private int speed;
 
 	public Zombie(double x, double y, Textures texx){
-        super(x,y,117,217,texx);
+        super(x,y,Textures.ZOMBIE_WIDTH,Textures.ZOMBIE_HEIGHT,texx);
 		this.animation = texx.getZombieWalkingArray();
 		this.speed = 1;
 		anim = new Animator(5,animation);
@@ -27,6 +27,6 @@ public class Zombie extends Entity{
 	}
 
 	public void render(Graphics g){
-		anim.drawAnimation(g,x,y,117,217,0);
+		anim.drawAnimation(g,x,y,Textures.ZOMBIE_WIDTH,Textures.ZOMBIE_HEIGHT,0);
 	}
 }

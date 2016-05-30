@@ -14,7 +14,7 @@ public class Kopiko extends Plant {
 	private ArrayList<Energy> lightnings = new ArrayList<Energy>();
 
     public Kopiko(Textures texx) {
-		super(41, 102, 50, texx);
+		super(Textures.KOPIKO_WIDTH, Textures.KOPIKO_HEIGHT, 50, texx);
         this.animation = texx.getKopikoArray();
 
 		this.anim = new Animator(5,animation);

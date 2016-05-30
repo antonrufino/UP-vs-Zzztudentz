@@ -18,7 +18,7 @@ public class Tower extends Plant {
 	private Animator anim;
 
     public Tower(Textures texx){
-		super(69,150,100,texx);
+		super(Textures.TOWER_WIDTH,Textures.TOWER_HEIGHT,100,texx);
 		this.animation = texx.getTowerArray();
 
 		anim = new Animator(5,animation);

@@ -13,7 +13,7 @@ public class Banga extends Plant{
 	Animator anim;
 
     public Banga(Textures texx){
-		super(95, 159, 150, texx);
+		super(Textures.BANGA_WIDTH, Textures.BANGA_HEIGHT, 150, texx);
 		this.animation = texx.getBangaArray();
 		anim = new Animator(5,animation);
 	}

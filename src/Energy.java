@@ -11,7 +11,7 @@ public class Energy extends Entity{
 	private BufferedImage energyImg;
 
 	public Energy(double x, double y, Textures texx){
-		super(x,y,48,75,texx);
+		super(x,y,Textures.ENERGY_WIDTH,Textures.ENERGY_HEIGHT,texx);
 		energyImg = texx.getEnergy();
 	}
 

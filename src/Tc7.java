@@ -19,7 +19,7 @@ public class Tc7 extends Plant {
 	}
 
 	public Tc7(double x, double y, Textures texx){
-		super(x,y,100,114,50,texx);
+		super(x,y,Textures.TC7_WIDTH,Textures.TC7_HEIGHT,50,texx);
 		this.animation = texx.getTc7Array();
 		anim = new Animator(5,animation);
 	}
