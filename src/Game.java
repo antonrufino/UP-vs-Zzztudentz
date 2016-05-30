@@ -4,10 +4,14 @@ import avs.ui.PickerButton;
 
 public class Game {
     private static Game instance = new Game();
+    private ArrayList<Plant> plantList;
+    private ArrayList<Zombie> zombieList;
+    private ArrayList<Energy> energyList;
     private int energy;
     private Grid grid;
     private Plant pendingPlant;
     private PickerButton pendingButton;
+
 
     private Game() { }
 

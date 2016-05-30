@@ -5,18 +5,18 @@ import javax.swing.*;
 
 public class CollisionChecker{
 
-	public static boolean isColliding(Zombie z, ArrayList<AllyEntity> allyList){
+	public static boolean isColliding(Zombie z, ArrayList<Plant> plantList){
 		
-		for(int i = 0; i < allyList.size(); i++){
-			if(z.getBounds().intersects(allyList.get(i).getBounds())){
+		for(int i = 0; i < plantList.size(); i++){
+			if(z.getBounds().intersects(plantList.get(i).getBounds())){
 				return true;
 			}
 		}
 		
 		return false;
 	}
-	public static boolean isColliding(Zombie z, AllyEntity all){
-		if(z.getBounds().intersects(all.getBounds())){
+	public static boolean isColliding(Zombie z, Plant pl){
+		if(z.getBounds().intersects(pl.getBounds())){
 			return true;
 		}
 		
