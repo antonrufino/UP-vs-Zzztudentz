@@ -30,7 +30,7 @@ public class SpriteSheet{
 			}
 
 			else if(col == 17){
-				this.img = image.getSubimage((H_OFFSET*col)+(Textures.BANGA_WIDTH*9)+(Textures.TC7_WIDTH*3)+(Textures.TOWER_WIDTH*4),(V_OFFSET*2)+Textures.BUS_HEIGHT, width, height);
+				this.img = image.getSubimage((H_OFFSET*col)+(Textures.BANGA_WIDTH*9)+(Textures.TC7_WIDTH*3)+(Textures.TOWER_WIDTH*4),(V_OFFSET*2)+Textures.BUS_HEIGHT+(Textures.BANGA_HEIGHT-Textures.TOWER_HEIGHT), width, height);
 			}
 			else if(col >= 18 && col < 23){
 				this.img = image.getSubimage((H_OFFSET*col)+(Textures.BANGA_WIDTH*9)+(Textures.TC7_WIDTH*3)+(Textures.TOWER_WIDTH*5)+(Textures.ZOMBIE_WIDTH*(col%18))-40,(V_OFFSET*2)+Textures.BUS_HEIGHT, width, height);
