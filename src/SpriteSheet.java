@@ -26,7 +26,7 @@ public class SpriteSheet{
 
 			}
 			else if(col >= 13 && col < 17){
-				this.img = image.getSubimage((123*col)+(Textures.BANGA_WIDTH*9)+(Textures.TC7_WIDTH*3)+(width*(col%13)), (V_OFFSET*2)+Textures.BUS_HEIGHT, width, height);
+				this.img = image.getSubimage((123*col)+(Textures.BANGA_WIDTH*9)+(Textures.TC7_WIDTH*3)+(width*(col%13)), (V_OFFSET*2)+Textures.BUS_HEIGHT+(Textures.BANGA_HEIGHT-Textures.TOWER_HEIGHT), width, height);
 			}
 
 			else if(col == 17){
