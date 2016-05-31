@@ -1,13 +1,17 @@
 package avs.ui;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.io.*;
 
 
 
+
 public class PlayerNameTextField extends JTextField{
+    protected static String name;
     public PlayerNameTextField(){
         super();
+        this.name = "";
         this.setText("Enter Your Name");
         this.setPreferredSize(new Dimension(356, 37));
         this.setHorizontalAlignment(JTextField.CENTER);
@@ -15,6 +19,7 @@ public class PlayerNameTextField extends JTextField{
         this.setFont(this.loadFont());
         this.setBorder(null);
         this.setOpaque(false);
+        addListeners();
     }
     public Font loadFont(){
         try {
@@ -27,5 +32,22 @@ public class PlayerNameTextField extends JTextField{
         } catch (IOException|FontFormatException e) {
             return null;// Handle exception
         }
+    }
+    public void addListeners(){
+        this.addFocusListener(new FocusListener(){
+            public void focusGained(FocusEvent e){
+                setText("");
+            }
+            public void focusLost(FocusEvent e){
+                if(getText().equals("")){
+                    name = "";
+                    setText("Enter Your Name");
+                }
+                else{
+                    name = getText();
+                    setText(name);
+                }
+            }
+        });
     }
 }

@@ -228,7 +228,7 @@ public class Game{
     public synchronized void removeEggWaffle(EggWaffle ew){
         eggWaffleList.remove(ew);
     }
-    
+
     public synchronized CopyOnWriteArrayList<Zombie> getZombieList(){
         return this.zombieList;
     }
@@ -274,7 +274,7 @@ public class Game{
 
             if (!z.isAlive()) removeZombie(z);
             else {
-                if(z.getX() == 0 -z.getWidth()){
+                if(z.getX() <= 0 -z.getWidth()){
                     this.hasLost = true;
                     removeZombie(z);
                 }
