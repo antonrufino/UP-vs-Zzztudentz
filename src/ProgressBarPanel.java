@@ -22,11 +22,19 @@ public class ProgressBarPanel extends JPanel {
     }
 
     public void update() {
+        int zombieKilled;
+
         if(Game.getInstance().getZombieSummoner().getIsHugeWave())
             return;
 
-        int zombieKilled = (Game.getInstance().getZombieKilled()%10) + 1;
-        while(this.progress <= (220/10) * zombieKilled){
+        if((Game.getInstance().getZombieKilled()/10)%2 != 0 || Game.getInstance().getZombieKilled() == 0){
+            progress = 0;
+            zombieKilled = 0;
+        }else{
+            zombieKilled = (Game.getInstance().getZombieKilled()%10) + 1;
+        }
+
+        while(this.progress < (240/10) * zombieKilled){
             this.progress += 1;
         }
 
@@ -36,7 +44,7 @@ public class ProgressBarPanel extends JPanel {
     }
 
     public boolean isDone() {
-        return this.progress >= 220;
+        return this.progress >= 240;
     }
 
     @Override
@@ -48,7 +56,7 @@ public class ProgressBarPanel extends JPanel {
         try {
             g.drawImage(ProgressBarPanel.progressBar, 0, 10,
                 280, 46, null);
-            g.drawImage(ProgressBarPanel.zombieHead, 215 - progress, 0,
+            g.drawImage(ProgressBarPanel.zombieHead, 240 - progress, 0,
                 60, 60, null);
         } catch (Exception e) {
             System.out.println(e.getMessage());
