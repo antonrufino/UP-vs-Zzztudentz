@@ -37,7 +37,7 @@ public class Game{
     }
 
     public void init() {
-        this.energy = 0;
+        this.energy = 5000;
         this.grid = new Grid();
         this.pendingPlant = null;
         this.pendingButton = null;
@@ -197,12 +197,19 @@ public class Game{
     public void tick() {
         for (int i = 0; i < Grid.ROWS; ++i) {
             for (int j = 0; j < Grid.COLS; ++j) {
-                if (grid.hasPlant(i, j)) grid.getPlant(i, j).tick();
+                if (grid.hasPlant(i, j)) {
+                    Plant p = grid.getPlant(i, j);
+                    if (p.isAlive()) p.tick();
+                    else grid.setPlant(i, j, null);
+                }
             }
         }
 
-        for (int i = 0; i<zombieList.size(); i++){
-            zombieList.get(i).tick();
+        Iterator<Zombie> iter = zombieList.iterator();
+        while (iter.hasNext()) {
+            Zombie z = iter.next();
+            if (!z.isAlive()) iter.remove();
+            else z.tick();
         }
 
         for (int i = 0; i<energyList.size(); i++){

@@ -20,11 +20,11 @@ public abstract class Plant extends Entity implements Runnable {
     public Plant(int w, int h, int cost, Textures texx) {
         super(w,h,texx);
         this.cost = cost;
-        this.hp = 100;
+        this.hp = 300;
     }
 
     public abstract void run();
-    
+
     public void start() {
         new Thread(this).start();
     }
@@ -57,7 +57,7 @@ public abstract class Plant extends Entity implements Runnable {
         this.hp -= hp;
     }
 
-    void kill() {
+    synchronized void kill() {
         this.hp = 0;
     }
 

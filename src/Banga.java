@@ -60,7 +60,7 @@ public class Banga extends Plant implements Runnable {
         for (int i = 0; i < Game.getInstance().getZombieList().size(); ++i) {
             Zombie z = Game.getInstance().getZombieList().get(i);
             if (deathZone.intersects(z.getBounds()) || deathZone.contains(z.getBounds())) {
-                Game.getInstance().removeZombie(z);
+                z.kill();
             }
         }
     }
