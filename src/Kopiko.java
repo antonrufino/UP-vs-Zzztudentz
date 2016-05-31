@@ -31,7 +31,6 @@ public class Kopiko extends Plant implements Runnable{
                 Thread.sleep(500);
                 Game.getInstance().createEnergy(this);
                 animation = texx.getKopikoStaticArray();
-                System.out.println("fuck");
             }
 		}catch(InterruptedException e){
 			return;

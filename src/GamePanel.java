@@ -59,9 +59,17 @@ public class GamePanel extends JPanel implements Runnable {
         westPanel.add(energyBar, BorderLayout.WEST);
         westPanel.add(new PlantPickerPanel(this.tex), BorderLayout.EAST);
 
+        InGameMenuPanel igmp = new InGameMenuPanel(0);
+        igmp.addAdditionalActionListerner(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                game.stop();
+                stop();
+            }
+        });
+
         eastPanel.setOpaque(false);
         eastPanel.add(progressBarPanel, BorderLayout.WEST);
-        eastPanel.add(new InGameMenuPanel(0), BorderLayout.EAST);
+        eastPanel.add(igmp, BorderLayout.EAST);
         eastPanel.setPreferredSize(new Dimension(350, 45));
 
         topPanel.setOpaque(false);

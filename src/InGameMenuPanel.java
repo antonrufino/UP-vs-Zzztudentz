@@ -9,6 +9,8 @@ import javax.swing.*;
 
 
 public class InGameMenuPanel extends JPanel{
+    private JButton menuBtn;
+
     public InGameMenuPanel(int type){
         super();
         this.setOpaque(false);
@@ -26,6 +28,7 @@ public class InGameMenuPanel extends JPanel{
     private void addBtn(int type, final ImageIcon defaultIcon,
         final ImageIcon hoverIcon) {
         final JButton btn = new JButton(defaultIcon);
+        this.menuBtn = btn;
 
         btn.setBorder(null);
         btn.setContentAreaFilled(false);
@@ -55,5 +58,9 @@ public class InGameMenuPanel extends JPanel{
             btn.addActionListener(
                 new MainFrame.SwitchPanelAction(MainFrame.MENU));
         }
+    }
+
+    public void addAdditionalActionListerner(ActionListener al) {
+        menuBtn.addActionListener(al);
     }
 }
