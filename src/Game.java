@@ -99,8 +99,9 @@ public class Game{
     }
 
     public void createEggWaffle(Tower tower){
-      
-        addEggWaffle(new EggWaffle(tower.getX(), tower.getY(), tex));
+        EggWaffle e = new EggWaffle(tower.getX(), tower.getY(), tex);
+        e.setRow(tower.getRow());
+        addEggWaffle(e);
     }
 
     public synchronized void createZombie() {
@@ -200,8 +201,11 @@ public class Game{
             energyList.get(i).tick();
         }
 
-        for (int i = 0; i<eggWaffleList.size();i++){
-            eggWaffleList.get(i).tick();
+        Iterator<EggWaffle> eIter = eggWaffleList.iterator();
+        while (eIter.hasNext()) {
+            EggWaffle e = eIter.next();
+            if (!e.isAlive()) eIter.remove();
+            else e.tick();
         }
     }
 }
