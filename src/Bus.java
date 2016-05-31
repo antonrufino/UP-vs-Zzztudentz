@@ -16,6 +16,7 @@ public class Bus extends Entity{
 	private boolean isUsed;
 	private Zombie zombie;
 	Animator anim;
+    private int row;
 
 	public Bus(double x, double y, Textures texx){
 		super(x,y,418,160,texx);
@@ -34,11 +35,11 @@ public class Bus extends Entity{
 				this.isUsed = true;
 			}
 
-			
 		}
+
 		if(isUsed){
 			setX(getX()+speed);
-			Game.getInstance().removeZombie(this.zombie);
+			this.zombie.kill();
 		}
 		if(getX() >= MainFrame.WIDTH){
 			Game.getInstance().removeBus(this);
@@ -50,5 +51,14 @@ public class Bus extends Entity{
 		//g.drawImage(busImage, (int)this.getX(), (int)this.getY(), null);
 		anim.drawAnimation(g,getX(),getY(),width,height,0);
 	}
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public Rectangle getBounds() {
+        int y = Grid.SIDEWALK_OFFSET + this.row * Grid.TILE_HEIGHT;
+        return new Rectangle((int) this.getX(), y + 1, this.getWidth(), Grid.TILE_HEIGHT - 2);
+    }
 
 }

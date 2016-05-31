@@ -226,6 +226,7 @@ public class GamePanel extends JPanel implements Runnable {
     private void renderBus(Graphics g){
         for(int i = 0; i < game.getBusList().size(); i++){
             game.getBusList().get(i).render(g);
+            ((Graphics2D) g).draw(game.getBusList().get(i).getBounds());
         }
     }
 

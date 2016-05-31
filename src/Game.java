@@ -137,7 +137,9 @@ public class Game{
     public synchronized void createBus(){
        int j = Grid.TILE_HEIGHT;
        for(int i = 0; i < 5; i++){
-            addBus(new Bus(-300, j, tex));
+            Bus b = new Bus(-300, j, tex);
+            b.setRow(i);
+            addBus(b);
             j += Grid.TILE_HEIGHT;
        }
     }
