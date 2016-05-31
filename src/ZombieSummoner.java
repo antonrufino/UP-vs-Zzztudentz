@@ -14,7 +14,7 @@ public class ZombieSummoner implements Runnable{
             while (true) {
             	if(!isHugeWave){
             		Game.getInstance().createZombie();
-               		Thread.sleep(10000);
+               		Thread.sleep(1000);
             	}else{
             		Thread.sleep(3000);
             		for(int i = 0; i < 10; i++){
@@ -25,14 +25,17 @@ public class ZombieSummoner implements Runnable{
             	}
             }
         } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            return;
         }
 	}
 
 	public void start(){
 		this.thread.start();
 	}
+
+    public void stop() {
+        this.thread.interrupt();
+    }
 
 	public void setIsHugeWave(boolean isHugeWave){
 		this.isHugeWave = isHugeWave;

@@ -19,6 +19,7 @@ public class Zombie extends Entity implements Runnable{
 	private Plant target;
 	private int targetRow;
 	private int targetCol;
+    private Thread thread;
 
     public Zombie(Textures texx){
         super(117,217,texx);
@@ -47,12 +48,17 @@ public class Zombie extends Entity implements Runnable{
         				this.targetCol = j;
             			animation = texx.getZombieEatingArray();
             			this.speed = 0;
-            			new Thread(this).start();
+            			thread = new Thread(this);
+                        thread.start();
                 	}
                 }
             }
         }
 	}
+
+    public void stop() {
+        if (thread != null) thread.stop();
+    }
 
 	public void run(){
 		try{
@@ -68,7 +74,7 @@ public class Zombie extends Entity implements Runnable{
 			this.speed = 1;
 			animation = texx.getZombieWalkingArray();
 		}catch(InterruptedException e){
-			e.printStackTrace();
+			return;
 		}
 	}
 
@@ -98,6 +104,7 @@ public class Zombie extends Entity implements Runnable{
 
     synchronized void kill() {
         this.hp = 0;
+        stop();
     }
 
     boolean isAlive() {

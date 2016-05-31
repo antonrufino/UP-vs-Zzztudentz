@@ -10,20 +10,22 @@ public class EnergyMaker implements Runnable{
 	}
 
 	public void run(){
-    
+
         try {
             while (true) {
                 Game.getInstance().createEnergy();
                 Thread.sleep(10000);
             }
         } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            return;
         }
 	}
 
 	public void start(){
 		this.thread.start();
 	}
-}
 
+    public void stop() {
+        this.thread.interrupt();
+    }
+}

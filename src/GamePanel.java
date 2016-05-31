@@ -196,7 +196,6 @@ public class GamePanel extends JPanel implements Runnable {
                 g2d.drawString("YOU LOSE!!", MainFrame.WIDTH/2 - 150, MainFrame.HEIGHT/2-20);
                 topPanel.setVisible(false);
 
-
                 inviBtn.setBorder(null);
                 inviBtn.setContentAreaFilled(false);
                 inviBtn.setOpaque(false);
@@ -209,6 +208,7 @@ public class GamePanel extends JPanel implements Runnable {
                     public void mousePressed(MouseEvent e){}
                     public void mouseReleased(MouseEvent e){
                         stop();
+                        game.stop();
                     }
                 });
                 this.add(inviBtn, BorderLayout.CENTER);

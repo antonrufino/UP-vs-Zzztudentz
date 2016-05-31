@@ -40,6 +40,8 @@ public class Game{
     }
 
     public void init() {
+        System.out.println("Hello");
+
         this.energy = 0;
         this.grid = new Grid();
         this.pendingPlant = null;
@@ -60,6 +62,18 @@ public class Game{
 
         zombieThread.start();
         energyThread.start();
+    }
+
+    public void stop() {
+        zombieThread.stop();
+        energyThread.stop();
+
+        zombieList.clear();
+        energyList.clear();
+        eggWaffleList.clear();
+        busList.clear();
+
+        grid.killPlants();
     }
 
     public Grid getGrid() {

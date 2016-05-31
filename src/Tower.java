@@ -34,7 +34,7 @@ public class Tower extends Plant implements Runnable{
 				}
 			}
 		}catch(InterruptedException e){
-			e.printStackTrace();
+            return;
 		}
 	}
 

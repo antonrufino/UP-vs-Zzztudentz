@@ -14,7 +14,7 @@ public class Grid {
     public static final int HEIGHT = ROWS * TILE_HEIGHT;
 
     private Rectangle[][] tiles = new Rectangle[ROWS][COLS];
-    private Plant[][] plants = new Plant[ROWS][COLS]; //temporary
+    private Plant[][] plants = new Plant[ROWS][COLS];
 
     public Grid() {
         for (int i = 0; i < ROWS; ++i) {
@@ -23,6 +23,16 @@ public class Grid {
                 int y = SIDEWALK_OFFSET + i * TILE_HEIGHT;
                 tiles[i][j] = new Rectangle(x, y, TILE_WIDTH, TILE_HEIGHT);
                 plants[i][j] = null;
+            }
+        }
+    }
+
+    public void killPlants() {
+        for (int i = 0; i < ROWS; ++i) {
+            for (int j = 0; j < COLS; ++j) {
+                if (plants[i][j] != null) {
+                    plants[i][j].kill();
+                }
             }
         }
     }
