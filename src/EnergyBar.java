@@ -37,9 +37,9 @@ public class EnergyBar extends JPanel{
             return null;// Handle exception
         }
     }
-    public static Font loadFont(Float size){
+    public static Font loadFont(Float size, File file){
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("../assets/fonts/comixloud.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, file);
             return font.deriveFont(size);
         } catch (IOException|FontFormatException e) {
             return null;

@@ -30,7 +30,9 @@ public class GamePanel extends JPanel implements Runnable {
     private ProgressBarPanel progressBarPanel;
     private EnergyBar energyBar;
     private JPanel topPanel;
-    private JButton inviBtn = new JButton();
+    private JButton inviBtn;
+    private int renderFlag;
+    private int score;
 
     private static BufferedImage bg;
     private static BufferedImage spriteSheet;
@@ -41,6 +43,9 @@ public class GamePanel extends JPanel implements Runnable {
         this.tex = new Textures(this);
         this.running = false;
         this.game.setTextures(tex);
+        this.renderFlag = 0;
+        this.score = 0;
+        this.inviBtn  = new JButton();
         createPanelUI();
         addListeners();
     }
@@ -186,33 +191,9 @@ public class GamePanel extends JPanel implements Runnable {
             renderEnergies(g);
             renderBus(g);
             renderEggWaffles(g);
-
-            if(game.getGameState()){
-
-                g2d.setColor(new Color(0,0,0,128));
-                g2d.fillRect(0, 0, getWidth(), getHeight());
-                g2d.setFont(EnergyBar.loadFont(30f));
-                g2d.setColor(Color.WHITE);
-                g2d.drawString("YOU LOSE!!", MainFrame.WIDTH/2 - 150, MainFrame.HEIGHT/2-20);
-                topPanel.setVisible(false);
+            renderHighScore(g2d);
 
 
-                inviBtn.setBorder(null);
-                inviBtn.setContentAreaFilled(false);
-                inviBtn.setOpaque(false);
-                inviBtn.setBorderPainted(false);
-                inviBtn.addActionListener(new MainFrame.SwitchPanelAction(MainFrame.MENU));
-                inviBtn.addMouseListener(new MouseListener(){
-                    public void mouseEntered(MouseEvent e){}
-                    public void mouseExited(MouseEvent e){}
-                    public void mouseClicked(MouseEvent e){}
-                    public void mousePressed(MouseEvent e){}
-                    public void mouseReleased(MouseEvent e){
-                        stop();
-                    }
-                });
-                this.add(inviBtn, BorderLayout.CENTER);
-            }
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -228,6 +209,59 @@ public class GamePanel extends JPanel implements Runnable {
                     g2d.fill(rect);
                 };
             }
+        }
+    }
+
+    private void renderHighScore(Graphics2D g2d){
+        if(game.getGameState()){
+            if(this.renderFlag == 0){
+                this.score = game.getZombieKilled() -1;
+                this.renderFlag += 1;
+            }
+            g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+
+            g2d.setColor(new Color(0,0,0,128));
+            g2d.fillRect(0, 0, getWidth(), getHeight());
+            g2d.setFont(EnergyBar.loadFont(40f, new File("../assets/fonts/Adventure.otf")));
+            g2d.setColor(Color.WHITE);
+            g2d.drawString("YOUR SCORE", MainFrame.WIDTH/2 -80, 90);
+
+            g2d.setFont(EnergyBar.loadFont(120f, new File("../assets/fonts/Adventure.otf")));
+            g2d.setColor(Color.WHITE);
+            g2d.drawString(Integer.toString(score), MainFrame.WIDTH/2 -10, 200);
+
+            g2d.setFont(EnergyBar.loadFont(30f, new File("../assets/fonts/Adventure.otf")));
+            g2d.setColor(Color.YELLOW);
+
+            if(PlayerNameTextField.name == ""){
+                g2d.drawString("NO NAME", MainFrame.WIDTH/2 -30, 250);
+            }
+            else{
+                g2d.drawString(PlayerNameTextField.name.toUpperCase(), MainFrame.WIDTH/2 -30, 250);
+            }
+
+            g2d.setFont(EnergyBar.loadFont(20f, new File("../assets/fonts/Adventure.otf")));
+            g2d.setColor(Color.WHITE);
+            g2d.drawString("CLICK ANYWHERE TO CONTINUE", MainFrame.WIDTH/2 -110, 600);
+            topPanel.setVisible(false);
+
+
+            inviBtn.setBorder(null);
+            inviBtn.setContentAreaFilled(false);
+            inviBtn.setOpaque(false);
+            inviBtn.setBorderPainted(false);
+            inviBtn.addActionListener(new MainFrame.SwitchPanelAction(MainFrame.MENU));
+            inviBtn.addMouseListener(new MouseListener(){
+                public void mouseEntered(MouseEvent e){}
+                public void mouseExited(MouseEvent e){}
+                public void mouseClicked(MouseEvent e){}
+                public void mousePressed(MouseEvent e){}
+                public void mouseReleased(MouseEvent e){
+                    stop();
+                }
+            });
+            this.add(inviBtn, BorderLayout.CENTER);
+
         }
     }
 

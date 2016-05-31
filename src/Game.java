@@ -66,6 +66,10 @@ public class Game{
         return this.grid;
     }
 
+    public int getZombieKilled(){
+        return this.zombieKilled;
+    }
+
     public boolean getGameState(){
         return this.hasLost;
     }
@@ -234,7 +238,7 @@ public class Game{
 
             if (!z.isAlive()) removeZombie(z);
             else {
-                if(z.getX() == 0 -z.getWidth()){
+                if(z.getX() <= 0 -z.getWidth()){
                     this.hasLost = true;
                     removeZombie(z);
                 }
