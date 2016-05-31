@@ -18,12 +18,6 @@ public class Banga extends Plant{
 		anim = new Animator(5,animation);
 	}
 
-	public Banga(double x, double y, Textures texx){
-		super(x,y,95,159,150,texx);
-		this.animation = texx.getBangaArray();
-		anim = new Animator(5,animation);
-	}
-
 	public void tick(){
 		anim.runAnimation();
 	}
