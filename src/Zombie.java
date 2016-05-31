@@ -31,7 +31,6 @@ public class Zombie extends Entity implements Runnable{
 		this.target = null;
 	}
 	public void tick(){
-
 		this.x -= speed;
 		if (this.target == null) checkIfHitPlant();
 		anim.setImages(animation);

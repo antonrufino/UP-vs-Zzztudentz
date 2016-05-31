@@ -8,12 +8,14 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public abstract class Plant extends Entity {
+public abstract class Plant extends Entity implements Runnable {
     protected BufferedImage[] animation;
     protected int cost;
     private int hp;
 
     private int row;
+    private int col;
+
 
     public Plant(int w, int h, int cost, Textures texx) {
         super(w,h,texx);
@@ -21,8 +23,26 @@ public abstract class Plant extends Entity {
         this.hp = 100;
     }
 
+    public abstract void run();
+    
+    public void start() {
+        new Thread(this).start();
+    }
+
     public void setRow(int row) {
         this.row = row;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
+    }
+
+    public int getRow() {
+        return this.row;
+    }
+
+    public int getCol() {
+        return this.col;
     }
 
     public int getCost() {
@@ -35,6 +55,10 @@ public abstract class Plant extends Entity {
 
     public synchronized void reduceHp(int hp){
         this.hp -= hp;
+    }
+
+    void kill() {
+        this.hp = 0;
     }
 
     public boolean isAlive() {
