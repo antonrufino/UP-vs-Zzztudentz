@@ -53,7 +53,7 @@ public class Banga extends Plant implements Runnable {
             this.deathZone = null;
 
             this.animation = texx.getBangaDyingArray();
-            Thread.sleep(650);
+            Thread.sleep(580);
 
             this.kill();
             Game.getInstance().getGrid().setPlant(this.getRow(), this.getCol(), null);
