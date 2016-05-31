@@ -11,7 +11,7 @@ public class ZombieSummoner implements Runnable{
         try {
             while (true) {
                 Game.getInstance().createZombie();
-                Thread.sleep(20000);
+                Thread.sleep(1000);
             }
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
