@@ -59,7 +59,7 @@ public class Zombie extends Entity implements Runnable{
 	}
 
     public void stop() {
-        if (thread != null) thread.stop();
+        if (thread != null) thread.interrupt();
     }
 
 	public void run(){

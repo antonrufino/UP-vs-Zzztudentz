@@ -32,7 +32,7 @@ public abstract class Plant extends Entity implements Runnable {
     }
 
     public void stop() {
-        thread.stop();
+        thread.interrupt();
     }
 
     public void setRow(int row) {
