@@ -222,6 +222,14 @@ public class Game{
         this.tex = tex;
     }
 
+    public int getZombieKilled(){
+        return this.zombieKilled;
+    }
+
+    public ZombieSummoner getZombieSummoner(){
+        return this.zombieThread;
+    }
+
     public void tick() {
         for (int i = 0; i < Grid.ROWS; ++i) {
             for (int j = 0; j < Grid.COLS; ++j) {
