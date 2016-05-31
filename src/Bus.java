@@ -39,11 +39,15 @@ public class Bus extends Entity{
 
 		if(isUsed){
 			setX(getX()+speed);
-			this.zombie.kill();
+			for(int i = 0; i<Game.getInstance().getZombieList().size(); i++){
+				this.zombie = Game.getInstance().getZombieList().get(i);
+
+				if(CollisionChecker.isColliding(zombie, this)){
+					this.zombie.kill();
+				}
+			}
 		}
-		if(getX() >= MainFrame.WIDTH){
-			Game.getInstance().removeBus(this);
-		}
+
 		anim.runAnimation();
 	}
 
@@ -61,4 +65,7 @@ public class Bus extends Entity{
         return new Rectangle((int) this.getX(), y + 1, this.getWidth(), Grid.TILE_HEIGHT - 2);
     }
 
+    public boolean isAlive() {
+        return getX() <= MainFrame.WIDTH;
+    }
 }

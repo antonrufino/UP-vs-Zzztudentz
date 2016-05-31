@@ -230,10 +230,10 @@ public class Game{
             }
         }
 
-        Iterator<Zombie> iter = zombieList.iterator();
-        while (iter.hasNext()) {
-            Zombie z = iter.next();
-            if (!z.isAlive()) iter.remove();
+        Iterator<Zombie> zIter = zombieList.iterator();
+        while (zIter.hasNext()) {
+            Zombie z = zIter.next();
+            if (!z.isAlive()) zIter.remove();
             else z.tick();
         }
 
@@ -245,8 +245,11 @@ public class Game{
             eggWaffleList.get(i).tick();
         }
 
-        for(int i = 0; i < busList.size(); i++){
-            busList.get(i).tick();
+        Iterator<Bus> bIter = busList.iterator();
+        while (bIter.hasNext()) {
+            Bus b = bIter.next();
+            if (!b.isAlive()) bIter.remove();
+            else b.tick();
         }
     }
 }
