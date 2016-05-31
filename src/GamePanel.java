@@ -166,7 +166,7 @@ public class GamePanel extends JPanel implements Runnable {
             g2d.drawImage(GamePanel.bg, 0, 0,
                 this.getWidth(), this.getHeight(), null);
 
-            g2d.setColor(new Color(1, 68, 33));
+            g2d.setColor(new Color(1, 68, 33, 128));
 
             Point p = this.getMousePosition();
             if (p != null && game.getSelectedPlant() != null) {
@@ -190,7 +190,7 @@ public class GamePanel extends JPanel implements Runnable {
             for (int j = 0; j < Grid.COLS; ++j) {
                 Rectangle rect = game.getGrid().getRectangle(i, j);
                 if (rect.contains(p)) {
-                    g2d.draw(rect);
+                    g2d.fill(rect);
                 };
             }
         }

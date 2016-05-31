@@ -35,7 +35,6 @@ public class EggWaffle extends Entity{
 
 	public void render(Graphics g){
 		g.drawImage(waffleImg, (int)this.getX(), (int)this.getY(), width, height, null);
-        ((Graphics2D) g).draw(this.getBounds());
 	}
 
     public boolean isAlive() {
