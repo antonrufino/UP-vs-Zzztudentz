@@ -5,13 +5,15 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class MainFrame extends JFrame {
-    private static CardLayout cardLayout;
-    private static JPanel cardPanel;
+    private static CardLayout cardLayout; // Layout for window;
+    private static JPanel cardPanel; // This is where the cardlayout will be placed..
     private Container container;
 
+    // Dimensions of the window.
     public final static int WIDTH = 1280;
     public final static int HEIGHT = 720;
 
+    // Tags to be used for card layout.
     public final static String MENU = "menu";
     public final static String GAME = "game";
     public final static String CREDITS = "credits";
@@ -45,6 +47,7 @@ public class MainFrame extends JFrame {
         this.setResizable(false);
     }
 
+    // Set icon for window.
     public void setFrameIcon(){
         try{
             Image image = new ImageIcon("../assets/img/icon.png").getImage();
@@ -54,6 +57,7 @@ public class MainFrame extends JFrame {
         }
     }
 
+    // ActionListener that handles switching cards in the game.
     public static class SwitchPanelAction implements ActionListener {
         private String tag;
 

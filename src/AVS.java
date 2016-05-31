@@ -1,3 +1,5 @@
+//Program starting point
+
 package avs;
 
 import avs.models.*;
@@ -11,6 +13,7 @@ public class AVS {
     public static void main(String[] args) {
         // Demo goes here
         try {
+            // Thread for loading different imagesn needed by game.
             Thread bgThread2 = new Thread(new MainMenuPanel.AssetLoader());
             bgThread2.start();
 
@@ -34,13 +37,13 @@ public class AVS {
 
             bgThread1.join();
             bgThread2.join();
+            bgThread3.join();
+            creditBG.join();
             progressBarThread.join();
             energyBarThread.join();
             bangaThread.join();
         } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            System.exit(1);
+            return;
         }
 
         new MainFrame();

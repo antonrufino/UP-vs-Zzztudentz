@@ -1,3 +1,5 @@
+// The class for the buttons used to pick plants.
+
 package avs.ui;
 
 import avs.models.Game;
