@@ -18,12 +18,6 @@ public class Tc7 extends Plant {
 		anim = new Animator(5,animation);
 	}
 
-	public Tc7(double x, double y, Textures texx){
-		super(x,y,100,114,50,texx);
-		this.animation = texx.getTc7Array();
-		anim = new Animator(5,animation);
-	}
-
 	public void tick(){
 		anim.runAnimation();
 	}

@@ -90,11 +90,15 @@ public class Game{
     public synchronized void createZombie() {
         Zombie zombie = new Zombie(tex);
 
-        int y = rand.nextInt(5) * Grid.TILE_HEIGHT - 18;
-        y += (zombie.getHeight() - Grid.TILE_HEIGHT) / 2;
+        int row = rand.nextInt(5);
+        int y = Grid.SIDEWALK_OFFSET + row * Grid.TILE_HEIGHT;
+        y -= zombie.getHeight()/2;
+        y -= 18;
 
         zombie.setX(MainFrame.WIDTH);
         zombie.setY(y);
+        zombie.setRow(row);
+
         addZombie(zombie);
     }
 

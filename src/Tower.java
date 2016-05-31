@@ -27,18 +27,7 @@ public class Tower extends Plant {
 			waffles.add(new EggWaffle(100, 100, texx));
 		}
 	}
-
-	public Tower(double x, double y, Textures texx){
-		super(x,y,69,150,100,texx);
-		animation = texx.getTowerArray();
-
-		anim = new Animator(5,animation);
-
-		for(int i=0; i<10; i++){
-			waffles.add(new EggWaffle(100, 100, texx));
-		}
-	}
-
+    
 	public void tick(){
 		anim.runAnimation();
 

@@ -20,13 +20,6 @@ public class Kopiko extends Plant {
 		this.anim = new Animator(5,animation);
 	}
 
-	public Kopiko(double x, double y, Textures texx){
-		super(x, y, 41, 102, 50, texx);
-		animation = texx.getKopikoArray();
-
-		this.anim = new Animator(5,animation);
-	}
-
 	public void tick(){
 
 		this.anim.runAnimation();
