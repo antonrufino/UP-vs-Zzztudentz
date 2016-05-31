@@ -16,21 +16,27 @@ public class Kopiko extends Plant implements Runnable{
 
     public Kopiko(Textures texx) {
 		super(41, 102, 50, texx);
-        this.animation = texx.getKopikoArray();
+        this.animation = texx.getKopikoStaticArray();
         this.thread = new Thread(this);
-		this.anim = new Animator(5,animation);
+		this.anim = new Animator(5, animation);
 
 		thread.start();
 	}
-    
+
 	public void tick(){
+        this.anim.setImages(animation);
 		this.anim.runAnimation();
 	}
 
 	public void run(){
 		try{
-			thread.sleep(10*1000);
-			Game.getInstance().createEnergy(this);
+            while (this.isAlive()) {
+                Thread.sleep(10*1000);
+                animation = texx.getKopikoEmittingArray();
+                Thread.sleep(500);
+                Game.getInstance().createEnergy(this);
+                animation = texx.getKopikoStaticArray();
+            }
 		}catch(InterruptedException e){
 			e.printStackTrace();
 		}

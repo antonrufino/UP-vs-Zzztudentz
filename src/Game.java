@@ -106,7 +106,7 @@ public class Game{
         this.tower = tower;
         for(int i = 0; i < 15; i++){
             addEggWaffle(new EggWaffle(tower.getX(), tower.getY(), tex));
-            
+
             try{
                 eggWaffleThread.getThread().sleep(3 * 1000);
             }catch(InterruptedException e){
@@ -139,7 +139,7 @@ public class Game{
     }
 
     public synchronized void createEnergy(Kopiko kopiko){
-        addEnergy(new Energy(kopiko.getX()+15, kopiko.getY()-20, kopiko.getY() + kopiko.getHeight() -50, 50, tex));
+        addEnergy(new Energy(kopiko.getX()+15, kopiko.getY()-20, kopiko.getY() + kopiko.getHeight() -50, 25, tex));
     }
 
     public void addZombie(Zombie z){
