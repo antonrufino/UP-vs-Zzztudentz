@@ -15,7 +15,7 @@ public class MainMenuPanel extends JPanel {
     // public static final int TOP_OFFSET = 197;
     // public static final int BOTTOM_OFFSET = 385;
     public static final int BTN_PANEL_WIDTH = 175;
-    public static final int BTN_PANEL_HEIGHT = 140;
+    public static final int BTN_PANEL_HEIGHT = 130;
 
     public static final int LEFT_OFFSET = 720;
     public static final int RIGHT_OFFSET = 206;
