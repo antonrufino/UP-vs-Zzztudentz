@@ -38,6 +38,7 @@ public class Tower extends Plant implements Runnable{
 		}
 	}
 
+	//checks if there is a zombie in its shooting range
 	public boolean isShooting(){
 		CopyOnWriteArrayList<Zombie> zombieList = Game.getInstance().getZombieList();
         Iterator<Zombie> iter = zombieList.iterator();

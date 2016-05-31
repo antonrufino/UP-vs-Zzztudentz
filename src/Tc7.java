@@ -18,8 +18,6 @@ public class Tc7 extends Plant {
     public Tc7(Textures texx){
 		super(100, 114, 50, texx);
 		this.hp = 600;
-		//this.animation = texx.getTc7Array();
-		//anim = new Animator(5,animation);
 
 		this.notEaten = texx.getTc7Frame(0);
 		this.halfEaten = texx.getTc7Frame(1);
@@ -33,8 +31,6 @@ public class Tc7 extends Plant {
     public void run() { }
 
 	public void render(Graphics g){
-		//g.drawImage(busImage, (int)this.getX(), (int)this.getY(), null);
-		//anim.drawAnimation(g,getX(),getY(),width,height,0);
 		if(this.hp >= 400){
 			g.drawImage(notEaten, (int)this.getX(), (int)this.getY(),width,height, null);
 		}

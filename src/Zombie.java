@@ -36,6 +36,8 @@ public class Zombie extends Entity implements Runnable{
 		anim.runAnimation();
 	}
 
+
+	//if it collides with a plant, it starts the thread that will reduce the hp of the plant it is collided with
 	private void checkIfHitPlant() {
 		for (int i = 0; i < Grid.ROWS; ++i) {
             for (int j = 0; j < Grid.COLS; ++j) {
