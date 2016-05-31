@@ -10,7 +10,6 @@ import javax.swing.*;
 
 public abstract class Plant extends Entity {
     protected BufferedImage[] animation;
-	private boolean isAlive;
     protected int cost;
     private int hp;
 
@@ -19,20 +18,12 @@ public abstract class Plant extends Entity {
     public Plant(int w, int h, int cost, Textures texx) {
         super(w,h,texx);
         this.cost = cost;
-        this.isAlive = true;
+        this.hp = 100;
     }
 
     public void setRow(int row) {
         this.row = row;
     }
-
-	public boolean isAlive(){
-		return this.isAlive;
-	}
-
-	public void setIsAlive(boolean isAlive){
-		this.isAlive = isAlive;
-	}
 
     public int getCost() {
         return this.cost;
@@ -42,8 +33,12 @@ public abstract class Plant extends Entity {
     	return this.hp;
     }
 
-    public void setHp(int hp){
-        this.hp = hp;
+    public synchronized void reduceHp(int hp){
+        this.hp -= hp;
+    }
+
+    public boolean isAlive() {
+        return this.hp > 0;
     }
 
     public Rectangle getBounds() {

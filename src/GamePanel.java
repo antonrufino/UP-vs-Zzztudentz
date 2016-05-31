@@ -175,6 +175,7 @@ public class GamePanel extends JPanel implements Runnable {
             renderPlants(g);
             renderZombies(g);
             renderEnergies(g);
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -205,6 +206,12 @@ public class GamePanel extends JPanel implements Runnable {
     private void renderZombies(Graphics g) {
         for(int i = 0; i< game.getZombieList().size();i++){
               game.getZombieList().get(i).render(g);
+        }
+    }
+
+    private void renderEggWaffles(final Graphics g){
+        for(int i=0; i< game.getEggWaffleList().size();i++){
+            game.getEggWaffleList().get(i).render(g);
         }
     }
 

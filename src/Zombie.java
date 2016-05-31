@@ -2,6 +2,7 @@ package avs.models;
 
 import avs.utils.Animator;
 import avs.utils.Textures;
+import avs.utils.CollisionChecker;
 import avs.ui.MainFrame;
 
 import java.util.ArrayList;
@@ -10,12 +11,15 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class Zombie extends Entity{
+public class Zombie extends Entity implements Runnable{
 	private BufferedImage[] animation;
 	private int speed;
 	private int hp;
 	private int damage;
     private int row;
+	private Plant target;
+	private int targetRow;
+	private int targetCol;
 
     public Zombie(Textures texx){
         super(117,217,texx);
@@ -24,13 +28,47 @@ public class Zombie extends Entity{
 		this.hp = 100;
 		this.damage = 20;
 		anim = new Animator(5,animation);
+		this.target = null;
 	}
-
 	public void tick(){
 
 		this.x -= speed;
-
+		if (this.target == null) checkIfHitPlant();
+		anim.setImages(animation);
 		anim.runAnimation();
+	}
+
+	private void checkIfHitPlant() {
+		for (int i = 0; i < Grid.ROWS; ++i) {
+            for (int j = 0; j < Grid.COLS; ++j) {
+            	Plant p = Game.getInstance().getGrid().getPlant(i, j);
+                if(p != null){
+                	if(CollisionChecker.isColliding(this,p)){
+        				this.target = p;
+        				this.targetRow = i;
+        				this.targetCol = j;
+            			animation = texx.getZombieEatingArray();
+            			this.speed = 0;
+            			new Thread(this).start();
+                	}
+                }
+            }
+        }
+	}
+
+	public void run(){
+		try{
+			while (this.target.isAlive()) {
+				this.target.reduceHp(this.damage);
+				Thread.sleep(3*1000);
+			}
+			Game.getInstance().getGrid().setPlant(targetRow, targetCol, null);
+			this.target = null;
+			this.speed = 1;
+			animation = texx.getZombieWalkingArray();
+		}catch(InterruptedException e){
+			e.printStackTrace();
+		}
 	}
 
 	public void render(Graphics g){
@@ -64,16 +102,12 @@ public class Zombie extends Entity{
 		this.speed = speed;
 	}
 
-	public synchronized void attack(Plant a){
-		a.setHp(a.getHp() - this.damage);
-	}
-
     public void setRow(int row) {
         this.row = row;
     }
 
     public Rectangle getBounds() {
         int y = Grid.SIDEWALK_OFFSET + this.row * Grid.TILE_HEIGHT;
-        return new Rectangle((int) this.getX(), y, this.getWidth(), Grid.TILE_HEIGHT);
+        return new Rectangle((int) this.getX(), y + 1, this.getWidth() - 2, Grid.TILE_HEIGHT);
     }
 }

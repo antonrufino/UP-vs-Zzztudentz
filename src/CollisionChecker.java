@@ -7,19 +7,18 @@ import javax.swing.*;
 import avs.models.*;
 
 public class CollisionChecker{
+	public static boolean isColliding(Entity z, ArrayList<Entity> entityList){
 
-	public static boolean isColliding(Zombie z, ArrayList<Plant> plantList){
-
-		for(int i = 0; i < plantList.size(); i++){
-			if(z.getBounds().intersects(plantList.get(i).getBounds())){
+		for(int i = 0; i < entityList.size(); i++){
+			if(z.getBounds().intersects(entityList.get(i).getBounds())){
 				return true;
 			}
 		}
 
 		return false;
 	}
-	public static boolean isColliding(Zombie z, Plant pl){
-		if(z.getBounds().intersects(pl.getBounds())){
+	public static boolean isColliding(Entity z, Entity ent){
+		if(z.getBounds().intersects(ent.getBounds())){
 			return true;
 		}
 

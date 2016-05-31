@@ -23,7 +23,9 @@ public class Textures{
 	public static final int ZOMBIE_HEIGHT = 901;
 	public static final int TC7_WIDTH = 417;
 	public static final int TC7_HEIGHT = 476;
-	
+	// public static final int EGG_WAFFLE_WIDTH = 90;
+	// public static final int EGG_WAFFLE_HEIGHT = 90;
+
 	private BufferedImage[] zombieWalking;
 	private BufferedImage[] zombieEating;
 	private BufferedImage[] tc7;
@@ -45,7 +47,7 @@ public class Textures{
 		this.tc7 = new BufferedImage[3];
 		this.banga = new BufferedImage[11];
 		this.bus = new BufferedImage[6];
-		this.tower = new BufferedImage[12];
+		this.tower = new BufferedImage[4];
 		this.kopiko = new BufferedImage[6];
 
 		getTextures();

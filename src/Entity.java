@@ -12,7 +12,7 @@ public abstract class Entity{
 
 	protected double x;
 	protected double y;
-	private Textures texx;
+	protected Textures texx;
     protected int width;
     protected int height;
     protected Animator anim;

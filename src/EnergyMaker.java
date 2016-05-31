@@ -3,12 +3,14 @@ package avs.models;
 public class EnergyMaker implements Runnable{
 	private Thread thread;
     private int delay;
+    private Kopiko kopiko;
 
 	public EnergyMaker(){
 		thread = new Thread(this);
 	}
 
 	public void run(){
+    
         try {
             while (true) {
                 Game.getInstance().createEnergy();
@@ -24,3 +26,4 @@ public class EnergyMaker implements Runnable{
 		this.thread.start();
 	}
 }
+

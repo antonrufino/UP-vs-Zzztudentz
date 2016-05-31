@@ -36,18 +36,18 @@ public class Grid {
     }
 
     public void setPlant(int row, int col, Plant plant) {
-        int x = BUS_OFFSET + col * TILE_WIDTH;
-        x += (TILE_WIDTH - plant.getWidth()) / 2;
+        if(plant != null){
+            int x = BUS_OFFSET + col * TILE_WIDTH;
+            x += (TILE_WIDTH - plant.getWidth()) / 2;
 
-        int y = SIDEWALK_OFFSET + row * TILE_HEIGHT - 18;
-        y += (TILE_HEIGHT - plant.getHeight()) / 2;
+            int y = SIDEWALK_OFFSET + row * TILE_HEIGHT - 18;
+            y += (TILE_HEIGHT - plant.getHeight()) / 2;
+            
+            plant.setX(x);
+            plant.setY(y);
 
-        //plant.setX(BUS_OFFSET + col * TILE_WIDTH);
-        //plant.setY(SIDEWALK_OFFSET + row * TILE_HEIGHT - 18);
-        plant.setX(x);
-        plant.setY(y);
-
-        plant.setRow(row);
+            plant.setRow(row);
+        }
 
         plants[row][col] = plant;
     }
