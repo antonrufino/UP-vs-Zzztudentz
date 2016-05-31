@@ -11,7 +11,7 @@ import javax.swing.*;
 public abstract class Plant extends Entity implements Runnable {
     protected BufferedImage[] animation;
     protected int cost;
-    private int hp;
+    protected int hp;
 
     private int row;
     private int col;
