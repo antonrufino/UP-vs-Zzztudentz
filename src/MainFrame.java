@@ -50,7 +50,7 @@ public class MainFrame extends JFrame {
             Image image = new ImageIcon("../assets/img/icon.png").getImage();
             this.setIconImage(image);
         }catch(Exception e){
-            System.out.println("Appilcation icon not found");
+            System.out.println(e.getMessage());
         }
     }
 
