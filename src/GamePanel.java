@@ -2,6 +2,7 @@ package avs.ui;
 
 import avs.models.Grid;
 import avs.models.Game;
+import avs.models.Energy;
 import avs.utils.BufferedImageLoader;
 import avs.utils.Textures;
 
@@ -71,25 +72,40 @@ public class GamePanel extends JPanel implements Runnable {
             public void mouseReleased(MouseEvent me){}
             public void mousePressed(MouseEvent me){}
             public void mouseClicked(MouseEvent me){
-                if (game.getSelectedPlant() == null) return;
 
-                for (int i = 0; i < Grid.ROWS; ++i) {
-                    for (int j = 0; j < Grid.COLS; ++j) {
-                        Rectangle rect = game.getGrid().getRectangle(i, j);
-                        if (rect.contains(me.getPoint())) {
-                            if (!game.getGrid().hasPlant(i, j)) {
-                                game.getGrid().setPlant(i, j, game.getSelectedPlant());
-                                game.reduceEnergy();
-                                game.startButtonCoolDown();
-                                game.setPendingButton(null);
-                                game.selectPlant(null);
-                            }
-                            return;
-                        }
-                    }
-                }
+                Point p = me.getPoint();
+                if (game.getSelectedPlant() != null) placePlant(p);
+                collectEnergy(p);
             }
         });
+    }
+
+    private void placePlant(Point p) {
+        for (int i = 0; i < Grid.ROWS; ++i) {
+            for (int j = 0; j < Grid.COLS; ++j) {
+                Rectangle rect = game.getGrid().getRectangle(i, j);
+                if (rect.contains(p)) {
+                    if (!game.getGrid().hasPlant(i, j)) {
+                        game.getGrid().setPlant(i, j, game.getSelectedPlant());
+                        game.reduceEnergy();
+                        game.startButtonCoolDown();
+                        game.setPendingButton(null);
+                        game.selectPlant(null);
+                    }
+                    return;
+                }
+            }
+        }
+    }
+
+    private void collectEnergy(Point p) {
+        for (int i = 0; i < game.getEnergyList().size(); ++i) {
+            Energy e = game.getEnergyList().get(i);
+            if (e.getBounds().contains(p)) {
+                game.increaseEnergy(e.getAmount());
+                game.getEnergyList().remove(e);
+            }
+        }
     }
 
     public void run(){
@@ -153,61 +169,55 @@ public class GamePanel extends JPanel implements Runnable {
 
             Point p = this.getMousePosition();
             if (p != null && game.getSelectedPlant() != null) {
-                createHiglightThread(p, g2d).start();
+                highlightTile(p, g2d);
             }
 
-            createPrintPlantThread(g);
-            createZombieThread(g);
-            createEnergyThread(g);
-            createEggWaffleThread(g);
+            renderPlants(g);
+            renderZombies(g);
+            renderEnergies(g);
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
     }
 
-    private Thread createHiglightThread(final Point p, final Graphics2D g2d) {
-        return new Thread() {
-            public void run() {
-                for (int i = 0; i < Grid.ROWS; ++i) {
-                    for (int j = 0; j < Grid.COLS; ++j) {
-                        Rectangle rect = game.getGrid().getRectangle(i, j);
-                        if (rect.contains(p)) {
-                            g2d.draw(rect);
-                        };
-                    }
-                }
+    private void highlightTile(Point p, Graphics2D g2d) {
+        for (int i = 0; i < Grid.ROWS; ++i) {
+            for (int j = 0; j < Grid.COLS; ++j) {
+                Rectangle rect = game.getGrid().getRectangle(i, j);
+                if (rect.contains(p)) {
+                    g2d.draw(rect);
+                };
             }
-        };
+        }
     }
 
-    private void createPrintPlantThread(final Graphics g) {
+    private void renderPlants(Graphics g) {
         for (int i = 0; i < Grid.ROWS; ++i) {
             for (int j = 0; j < Grid.COLS; ++j) {
                 if (game.getGrid().hasPlant(i, j)) {
-                    final int row = i;
-                    final int col = j;
-                    game.getGrid().getPlant(row, col).render(g);
+                    game.getGrid().getPlant(i, j).render(g);
                 }
             }
         }
     }
 
-    private void createZombieThread(final Graphics g) {
+    private void renderZombies(Graphics g) {
         for(int i = 0; i< game.getZombieList().size();i++){
               game.getZombieList().get(i).render(g);
         }
     }
 
-    private void createEnergyThread(final Graphics g) {
-        for(int i = 0; i< game.getEnergyList().size();i++){
-              game.getEnergyList().get(i).render(g);
+    private void renderEggWaffles(final Graphics g){
+        for(int i=0; i< game.getEggWaffleList().size();i++){
+            game.getEggWaffleList().get(i).render(g);
         }
     }
 
-    private void createEggWaffleThread(final Graphics g){
-        for(int i=0; i< game.getEggWaffleList().size();i++){
-            game.getEggWaffleList().get(i).render(g);
+    private void renderEnergies(Graphics g) {
+        for(int i = 0; i< game.getEnergyList().size();i++){
+              game.getEnergyList().get(i).render(g);
         }
     }
 

@@ -1,6 +1,7 @@
 package avs.models;
 
 import avs.ui.PickerButton;
+import avs.ui.MainFrame;
 
 import avs.utils.Animator;
 import avs.utils.Textures;
@@ -36,7 +37,7 @@ public class Game{
     }
 
     public void init() {
-        this.energy = 999;
+        this.energy = 0;
         this.grid = new Grid();
         this.pendingPlant = null;
         this.pendingButton = null;
@@ -68,7 +69,7 @@ public class Game{
         return this.pendingPlant;
     }
 
-    public synchronized void addEnergy(int amount) {
+    public synchronized void increaseEnergy(int amount) {
         this.energy += amount;
     }
 
@@ -101,56 +102,6 @@ public class Game{
         return this.pendingButton != null;
     }
 
-   public void createZombie(int enemyCount, int spawnDelay){
-        for(int i = 0; i<3; i++){
-            try{
-                zombieThread.getThread().sleep(10*1000);
-            }catch (InterruptedException e){
-                e.printStackTrace();
-            }
-            int y = rand.nextInt(5) * 109;
-            addZombie(new Zombie(1280,y,tex));
-        }
-        try{
-            zombieThread.getThread().join();
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void createEnergy(){
-        for(int i = 0; i<3; i++){
-            try{
-                energyThread.getThread().sleep(10*1000);
-            }catch (InterruptedException e){
-                e.printStackTrace();
-            }
-            int x = rand.nextInt(5) * 109;
-            addEnergy(new Energy(x,-1,tex));
-        }
-        try{
-            energyThread.getThread().join();
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
-    }
-    /*
-    public void createEnergy(Kopiko kopiko){
-        for(int i = 0; i<3; i++){
-            try{
-                energyThread.getThread().sleep(10*1000);
-            }catch (InterruptedException e){
-                e.printStackTrace();
-            }
-            addEnergy(new Energy(kopiko.getX(),kopiko.getY(),tex));
-        }
-        try{
-            energyThread.getThread().join();
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
-    }*/
-
     public void createEggWaffle(Tower tower){
         this.tower = tower;
         for(int i = 0; i < 15; i++){
@@ -162,6 +113,29 @@ public class Game{
                 e.printStackTrace();
             }
         }
+    }
+
+    public synchronized void createZombie() {
+        Zombie zombie = new Zombie(tex);
+
+        int y = rand.nextInt(5) * Grid.TILE_HEIGHT - 18;
+        y += (zombie.getHeight() - Grid.TILE_HEIGHT) / 2;
+
+        zombie.setX(MainFrame.WIDTH);
+        zombie.setY(y);
+        addZombie(zombie);
+    }
+
+    public synchronized void createEnergy(){
+        int x = new Random().nextInt(Grid.WIDTH - Grid.TILE_WIDTH) +
+            Grid.TILE_WIDTH / 2 + Grid.BUS_OFFSET;
+        int targetY = new Random().nextInt(Grid.HEIGHT - Grid.TILE_HEIGHT) +
+            Grid.TILE_HEIGHT / 2 + Grid.SIDEWALK_OFFSET;
+        addEnergy(new Energy(x, 0, targetY, 50, tex));
+    }
+
+    public synchronized void createEnergy(Kopiko kopiko){
+        addEnergy(new Energy(kopiko.getX()+15, kopiko.getY()-20, kopiko.getY() + kopiko.getHeight() -50, 50, tex));
     }
 
     public void addZombie(Zombie z){

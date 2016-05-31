@@ -17,7 +17,20 @@ public class Zombie extends Entity implements Runnable{
 	private int hp;
 	private int damage;
 	private Thread thread;
-	private boolean isEating;
+	private Plant target; 
+	private int targetRow;
+	private int targetCol;
+
+    public Zombie(Textures texx){
+        super(117,217,texx);
+		this.animation = texx.getZombieWalkingArray();
+		this.speed = 1;
+		this.hp = 100;
+		this.damage = 20;
+		this.thread = new Thread(this);
+		anim = new Animator(5,animation);
+		this.target = null;
+	}
 
 	public Zombie(double x, double y, Textures texx){
         super(x,y,117,217,texx);
@@ -27,36 +40,49 @@ public class Zombie extends Entity implements Runnable{
 		this.damage = 20;
 		this.thread = new Thread(this);
 		anim = new Animator(5,animation);
+		this.target = null;
 	}
 
 	public void tick(){
 
 		this.x -= speed;
-
-		for (int i = 0; i < Grid.ROWS; ++i) {
-            for (int j = 0; j < Grid.COLS; ++j) {
-                if(Game.getInstance().getGrid().hasPlant(i, j)){
-                	if(CollisionChecker.isColliding(this,Game.getInstance().getGrid().getPlant(i,j))){
-                		if(Game.getInstance().getGrid().getPlant(i,j).getHp() != 0){
-                			animation = texx.getZombieEatingArray();
-                			Game.getInstance().getGrid().getPlant(i,j).setHp(Game.getInstance().getGrid().getPlant(i,j).getHp() - this.damage);
-                			this.speed = 0;
-                		}else{
-                			Game.getInstance().getGrid().setPlant(i,j,null);
-                			animation = texx.getZombieWalkingArray();
-                			this.speed = 1;
-                		}
-                	}
-                }
-            }
-        }
+		if (this.target == null) checkIfHitPlant();
 
 		anim.setImages(animation);
 		anim.runAnimation();
 	}
 
-	public void run(){
+	private void checkIfHitPlant() {
+		for (int i = 0; i < Grid.ROWS; ++i) {
+            for (int j = 0; j < Grid.COLS; ++j) {
+            	Plant p = Game.getInstance().getGrid().getPlant(i, j);
+                if(p != null){ 
+                	if(CollisionChecker.isColliding(this,p)){
+        				this.target = p;
+        				this.targetRow = i;
+        				this.targetCol = j;
+            			animation = texx.getZombieEatingArray();
+            			this.speed = 0;
+            			this.thread.start();
+                	}
+                }
+            }
+        }
+	}
 
+	public void run(){
+		try{
+			while (this.target.isAlive()) {
+				this.target.reduceHp(this.damage);
+				Thread.sleep(3*1000);
+			}	
+			Game.getInstance().getGrid().setPlant(targetRow, targetCol, null);
+			this.target = null;
+			this.speed = 1;
+			animation = texx.getZombieWalkingArray();
+		}catch(InterruptedException e){
+			e.printStackTrace();
+		}
 	}
 
 	public void render(Graphics g){
@@ -64,7 +90,7 @@ public class Zombie extends Entity implements Runnable{
 	}
 
 	public Rectangle getBounds(){
-		return new Rectangle((int) x, (int) y, 113, 109); 
+		return new Rectangle((int) x, (int) y, 150, 150);
 	}
 
 	public double getX(){
@@ -73,28 +99,24 @@ public class Zombie extends Entity implements Runnable{
 	public void setX(double x){
 		this.x = x;
 	}
-	
+
 	public double getY(){
 		return y;
 	}
-	
+
 	public void damageRec(int x){
 		this.hp = hp - x;
 	}
-	
+
 	public int getHp(){
 		return this.hp;
 	}
-	
+
 	public int getDamage(){
 		return this.damage;
 	}
-	
+
 	public void setSpeed(int speed){
 		this.speed = speed;
-	}
-	
-	public synchronized void attack(Plant a){
-		a.setHp(a.getHp() - this.damage);
 	}
 }

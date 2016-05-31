@@ -3,12 +3,15 @@ package avs.models;
 import java.awt.Rectangle;
 
 public class Grid {
+    final static int TILE_WIDTH = 113;
+    final static int TILE_HEIGHT = 109;
+    final static int BUS_OFFSET = 139;
+    final static int SIDEWALK_OFFSET = 157;
+
     public static final int ROWS = 5;
     public static final int COLS = 9;
-    private final int TILE_WIDTH = 113;
-    private final int TILE_HEIGHT = 109;
-    private final int BUS_OFFSET = 139;
-    private final int SIDEWALK_OFFSET = 157;
+    public static final int WIDTH = COLS * TILE_WIDTH;
+    public static final int HEIGHT = ROWS * TILE_HEIGHT;
 
     private Rectangle[][] tiles = new Rectangle[ROWS][COLS];
     private Plant[][] plants = new Plant[ROWS][COLS]; //temporary

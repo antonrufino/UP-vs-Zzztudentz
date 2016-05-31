@@ -35,8 +35,4 @@ public class EggWaffle extends Entity{
 	public void render(Graphics g){
 		g.drawImage(waffleImg, (int)this.getX(), (int)this.getY(), width, height, null);
 	}
-
-	public Rectangle getBounds(){
-		return new Rectangle((int) this.getX(), (int) this.getY(),50, 50); 
-	}
 }
