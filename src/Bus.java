@@ -38,7 +38,15 @@ public class Bus extends Entity{
 		}
 		if(isUsed){
 			setX(getX()+speed);
-			Game.getInstance().removeZombie(this.zombie);
+			for(int i = 0; i<Game.getInstance().getZombieList().size(); i++){
+				this.zombie = Game.getInstance().getZombieList().get(i);
+
+				if(CollisionChecker.isColliding(zombie, this)){
+					Game.getInstance().removeZombie(this.zombie);
+				}
+			
+			}
+				
 		}
 		if(getX() >= MainFrame.WIDTH){
 			Game.getInstance().removeBus(this);

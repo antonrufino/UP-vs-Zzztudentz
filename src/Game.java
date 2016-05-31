@@ -123,13 +123,13 @@ public class Game{
         Zombie zombie = new Zombie(tex);
 
         int row = rand.nextInt(5);
-        int y = Grid.SIDEWALK_OFFSET + row * Grid.TILE_HEIGHT;
+        int y = Grid.SIDEWALK_OFFSET + 3 * Grid.TILE_HEIGHT;
         y -= zombie.getHeight()/2;
         y -= 18;
 
         zombie.setX(MainFrame.WIDTH);
         zombie.setY(y);
-        zombie.setRow(row);
+        zombie.setRow(3);
 
         addZombie(zombie);
     }
@@ -138,7 +138,7 @@ public class Game{
        int j = Grid.TILE_HEIGHT;
        for(int i = 0; i < 5; i++){
             addBus(new Bus(-300, j, tex));
-            j += Grid.TILE_HEIGHT;
+            j += Grid.TILE_HEIGHT -2;
        }
     }
 
