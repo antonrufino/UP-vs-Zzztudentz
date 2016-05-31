@@ -1,4 +1,4 @@
-package avs.utils; 
+package avs.utils;
 
 import java.util.ArrayList;
 import java.awt.image.*;
@@ -58,5 +58,6 @@ public class Animator{
 
 	public void setImages(BufferedImage[] images){
 		this.images = images;
+        this.frames = images.length-1;
 	}
 }
