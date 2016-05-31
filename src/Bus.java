@@ -34,7 +34,6 @@ public class Bus extends Entity{
 			if(CollisionChecker.isColliding(zombie, this)){
 				this.isUsed = true;
 			}
-
 		}
 
 		if(isUsed){
@@ -47,12 +46,10 @@ public class Bus extends Entity{
 				}
 			}
 		}
-
 		anim.runAnimation();
 	}
 
 	public void render(Graphics g){
-		//g.drawImage(busImage, (int)this.getX(), (int)this.getY(), null);
 		anim.drawAnimation(g,getX(),getY(),width,height,0);
 	}
 

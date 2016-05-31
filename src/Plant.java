@@ -9,7 +9,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public abstract class Plant extends Entity implements Runnable {
-    protected BufferedImage[] animation;
+    protected BufferedImage[] animation; //images for the animation
     protected int cost;
     protected int hp;
 

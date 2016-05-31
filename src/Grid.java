@@ -45,6 +45,10 @@ public class Grid {
         return plants[row][col] != null;
     }
 
+    public Plant getPlant(int row, int col) {
+        return plants[row][col];
+    }
+
     public synchronized void setPlant(int row, int col, Plant plant) {
         if(plant != null){
             int x = BUS_OFFSET + col * TILE_WIDTH;
@@ -61,9 +65,5 @@ public class Grid {
         }
 
         plants[row][col] = plant;
-    }
-
-    public Plant getPlant(int row, int col) {
-        return plants[row][col];
     }
 }

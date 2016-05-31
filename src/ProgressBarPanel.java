@@ -1,6 +1,6 @@
 package avs.ui;
 
-import avs.models.Game;
+import avs.models.*;
 
 import javax.swing.*;
 import java.awt.*;

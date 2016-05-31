@@ -8,11 +8,12 @@ import java.awt.*;
 
 import javax.swing.*;
 
+//Super class for the objects in the Game. i.e. Banga,Bus,Tower, etc.
 public abstract class Entity{
 
-	protected double x;
-	protected double y;
-	protected Textures texx;
+	protected double x;	//horizontal positioning
+	protected double y;	//vertical positioning
+	protected Textures texx; //has all the images used for the animations and drawing images
     protected int width;
     protected int height;
     protected Animator anim;
@@ -31,7 +32,10 @@ public abstract class Entity{
 		this.texx = texx;
 	}
 
+	//updates the state of the class
 	public abstract void tick();
+
+	//renders/draw the object
 	public abstract void render(Graphics g);
 
 	public double getX(){
@@ -58,6 +62,7 @@ public abstract class Entity{
         return this.height;
     }
 
+    //method used for checking collisions
     public Rectangle getBounds(){
 		return new Rectangle((int) this.x, (int) this.y, this.width, this.height);
 	}

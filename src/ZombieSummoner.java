@@ -41,7 +41,7 @@ public class ZombieSummoner implements Runnable{
 		this.isHugeWave = isHugeWave;
 	}
 
-	public boolean getIsHugeWave(){
-		return this.isHugeWave;
-	}
+    public boolean getIsHugeWave(){
+        return this.isHugeWave;
+    }
 }

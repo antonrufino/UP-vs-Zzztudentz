@@ -11,14 +11,20 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Game{
     private static Game instance = new Game();
+
+    //ArrayList for all the running entities aside from plant (which can be accessed through the grid)
     private CopyOnWriteArrayList<Zombie> zombieList;
     private CopyOnWriteArrayList<Energy> energyList;
     private CopyOnWriteArrayList<EggWaffle> eggWaffleList;
     private CopyOnWriteArrayList<Bus> busList;
 
+    //Initial energy
     private int energy;
 
+    //Handler for the plants
     private Grid grid;
+
+    //Clicked plant
     private Plant pendingPlant;
     private PickerButton pendingButton;
 
@@ -28,7 +34,6 @@ public class Game{
     private EnergyMaker energyThread;
 
     private Textures tex;
-    private Tower tower;
 
     private boolean hasLost;
     private int zombieKilled;
@@ -132,12 +137,14 @@ public class Game{
         return this.pendingButton != null;
     }
 
+    //adds 'bullets' to the tower
     public void createEggWaffle(Tower tower){
         EggWaffle e = new EggWaffle(tower.getX(), tower.getY(), tex);
         e.setRow(tower.getRow());
         addEggWaffle(e);
     }
 
+    //spawn zombie
     public synchronized void createZombie() {
         Zombie zombie = new Zombie(tex);
 
@@ -153,7 +160,7 @@ public class Game{
         addZombie(zombie);
     }
 
-
+    //initializes the buses
     public synchronized void createBus(){
        int j = Grid.TILE_HEIGHT;
        for(int i = 0; i < 5; i++){
@@ -164,6 +171,7 @@ public class Game{
        }
     }
 
+    //spawns energy automatically
     public synchronized void createEnergy(){
         int x = new Random().nextInt(Grid.WIDTH - Grid.TILE_WIDTH) +
             Grid.TILE_WIDTH / 2 + Grid.BUS_OFFSET;
@@ -172,21 +180,27 @@ public class Game{
         addEnergy(new Energy(x, 0, targetY, 50, tex));
     }
 
+    //spawns energy from a kopiko
     public synchronized void createEnergy(Kopiko kopiko){
         addEnergy(new Energy(kopiko.getX()+15, kopiko.getY()-20, kopiko.getY() + kopiko.getHeight() -50, 25, tex));
     }
 
-    public void addZombie(Zombie z){
-        zombieList.add(z);
-    }
-
+    //adds a bus to the list of buses
     public void addBus(Bus z){
         busList.add(z);
     }
 
+    //removes a bus from the list of buses
     public void removeBus(Bus z){
         busList.remove(z);
     }
+
+    //adds a zombie to the list of zombies
+    public void addZombie(Zombie z){
+        zombieList.add(z);
+    }
+
+    //removes a zombie from the list of zombies
     public synchronized void removeZombie(Zombie z){
         zombieList.remove(z);
         zombieKilled += 1;
@@ -195,38 +209,26 @@ public class Game{
         }
     }
 
+    //adds a energy to the list of energies
     public synchronized void addEnergy(Energy e){
         energyList.add(e);
     }
 
+    //removes a energy from the list of energies
     public synchronized void removeEnergy(Energy e){
         energyList.remove(e);
     }
 
+    //adds a eggwaffle to the list of eggwaffles
     public synchronized void addEggWaffle(EggWaffle ew){
         eggWaffleList.add(ew);
     }
 
+    //removes a eggwaffle from the list of eggwaffles
     public synchronized void removeEggWaffle(EggWaffle ew){
         eggWaffleList.remove(ew);
     }
-
-    public void setTextures(Textures tex){
-        this.tex = tex;
-    }
-
-    public void setTower(Tower tower){
-        this.tower = tower;
-    }
-
-    public Tower getTower(){
-        return this.tower;
-    }
-
-    public int getZombieKilled(){
-        return this.zombieKilled;
-    }
-
+    
     public synchronized CopyOnWriteArrayList<Zombie> getZombieList(){
         return this.zombieList;
     }
@@ -235,12 +237,20 @@ public class Game{
         return this.energyList;
     }
 
-    public CopyOnWriteArrayList<Bus> getBusList(){
+    public synchronized CopyOnWriteArrayList<Bus> getBusList(){
         return this.busList;
     }
 
     public synchronized CopyOnWriteArrayList<EggWaffle> getEggWaffleList(){
         return this.eggWaffleList;
+    }
+
+    public void setTextures(Textures tex){
+        this.tex = tex;
+    }
+
+    public int getZombieKilled(){
+        return this.zombieKilled;
     }
 
     public ZombieSummoner getZombieSummoner(){

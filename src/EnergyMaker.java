@@ -1,8 +1,8 @@
 package avs.models;
 
+// class that produces energy
 public class EnergyMaker implements Runnable{
 	private Thread thread;
-    private int delay;
     private Kopiko kopiko;
 
 	public EnergyMaker(){
