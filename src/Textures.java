@@ -31,7 +31,8 @@ public class Textures{
 	private BufferedImage[] tc7;
 	private BufferedImage[] bus;
 	private BufferedImage[] banga;
-	private BufferedImage[] kopiko;
+	private BufferedImage[] kopikoStatic;
+    private BufferedImage[] kopikoEmitting;
 	private BufferedImage[] tower;
 
 	private BufferedImage energy;
@@ -48,7 +49,8 @@ public class Textures{
 		this.banga = new BufferedImage[11];
 		this.bus = new BufferedImage[6];
 		this.tower = new BufferedImage[4];
-		this.kopiko = new BufferedImage[6];
+		this.kopikoStatic = new BufferedImage[1];
+        this.kopikoEmitting = new BufferedImage[5];
 
 		getTextures();
 	}
@@ -78,7 +80,9 @@ public class Textures{
 
 		for(int i = 0; i < 6; i++)	bus[i] = ss.grabImage(i+1, 1, BUS_WIDTH, BUS_HEIGHT);
 
-		for(int i = 0; i < 6; i++)	kopiko[i] = ss.grabImage(i+1,3,KOPIKO_WIDTH,KOPIKO_HEIGHT);
+		//for(int i = 0; i < 6; i++)	kopiko[i] = ss.grabImage(i+1,3,KOPIKO_WIDTH,KOPIKO_HEIGHT);
+        kopikoStatic[0] = ss.grabImage(1, 3, KOPIKO_WIDTH, KOPIKO_HEIGHT);
+        for (int i = 0; i < 5; i++) kopikoEmitting[i] = ss.grabImage(i+2,3,KOPIKO_WIDTH,KOPIKO_HEIGHT);
 
 		this.energy = ss.grabImage(7,3,ENERGY_WIDTH,ENERGY_HEIGHT);
 
@@ -104,9 +108,13 @@ public class Textures{
 		return this.bus;
 	}
 
-	public BufferedImage[] getKopikoArray(){
-		return this.kopiko;
+	public BufferedImage[] getKopikoStaticArray(){
+		return this.kopikoStatic;
 	}
+
+    public BufferedImage[] getKopikoEmittingArray(){
+        return this.kopikoEmitting;
+    }
 
 	public BufferedImage[] getTowerArray(){
 		return this.tower;
