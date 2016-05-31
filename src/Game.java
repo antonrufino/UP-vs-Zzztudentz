@@ -195,6 +195,10 @@ public class Game{
         return this.tower;
     }
 
+    public int getZombieKilled(){
+        return this.zombieKilled;
+    }
+
     public synchronized CopyOnWriteArrayList<Zombie> getZombieList(){
         return this.zombieList;
     }
@@ -209,6 +213,10 @@ public class Game{
 
     public synchronized CopyOnWriteArrayList<EggWaffle> getEggWaffleList(){
         return this.eggWaffleList;
+    }
+
+    public ZombieSummoner getZombieSummoner(){
+        return this.zombieThread;
     }
 
     public void tick() {
