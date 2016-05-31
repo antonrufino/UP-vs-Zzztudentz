@@ -46,8 +46,10 @@ public class Textures{
 		this.zombieWalking = new BufferedImage[2];
 		this.zombieEating = new BufferedImage[4];
 		this.tc7 = new BufferedImage[3];
-		this.banga = new BufferedImage[11];
-		this.bus = new BufferedImage[6];
+		this.bangaStatic = new BufferedImage[1];
+        this.bangaSpinning = new BufferedImage[2];
+        this.bangaDying = new BufferedImage[6];
+        this.bus = new BufferedImage[6];
 		this.tower = new BufferedImage[4];
 		this.kopikoStatic = new BufferedImage[1];
         this.kopikoEmitting = new BufferedImage[5];
@@ -67,13 +69,10 @@ public class Textures{
 			}
 		}
 
-		for(int i = 0; i != 9; i++)	{
-			if(i > 1 && i < 5){
-				banga[i] = (i%2 == 0) ? ss.grabImage(3,2,BANGA_WIDTH,BANGA_HEIGHT):ss.grabImage(2,2,BANGA_WIDTH,BANGA_HEIGHT);
-			}else{
-				banga[i] = ss.grabImage(i+1,2,BANGA_WIDTH,BANGA_HEIGHT);
-			}
-		}
+        this.bangaStatic[0] = ss.grabImage(1, 2, BANGA_WIDTH, BANGA_HEIGHT);
+        for (int i = 0; i < 2; ++i) this.bangaSpinning[i] ss.grabImage(i+2, 2, BANGA_WIDTH, BANGA_HEIGHT);
+        for (int i = 0; i < 2; ++i) this.bangaDying[i] = ss.grabImage(i+4, 2, BANGA_WIDTH, BANGA_HEIGHT);
+
 		for(int i = 0; i < 3; i++)	tc7[i] = ss.grabImage(i+10,2,TC7_WIDTH,TC7_HEIGHT);
 		for(int i = 0; i < 4; i++)	tower[i] = ss.grabImage(i+13, 2, TOWER_WIDTH, TOWER_HEIGHT);
 		this.eggWaffle = ss.grabImage(17,2,KOPIKO_WIDTH,KOPIKO_HEIGHT);
@@ -100,8 +99,16 @@ public class Textures{
 		return this.tc7;
 	}
 
-	public BufferedImage[] getBangaArray(){
-		return this.banga;
+	public BufferedImage[] getBangaStaticArray(){
+		return this.bangaStatic;
+	}
+
+    public BufferedImage[] getBangaSpinningArray(){
+		return this.bangaSpinning;
+	}
+
+    public BufferedImage[] getBangaDyingArray(){
+		return this.bangaDying;
 	}
 
 	public BufferedImage[] getBusArray(){
