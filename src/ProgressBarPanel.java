@@ -20,11 +20,21 @@ public class ProgressBarPanel extends JPanel {
     }
 
     public void update() {
-        this.progress += 215/100;
+        if(Game.getInstance().getZombieSummoner().getIsHugeWave())
+            return;
+
+        int zombieKilled = (Game.getInstance().getZombieKilled()%10) + 1;
+        while(this.progress <= (220/10) * zombieKilled){
+            this.progress += 1;
+        }
+
+        if(isDone()){
+            this.progress = 0;
+        }
     }
 
     public boolean isDone() {
-        return this.progress >= 215;
+        return this.progress >= 220;
     }
 
     @Override
