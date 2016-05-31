@@ -68,12 +68,21 @@ public class Game{
         zombieThread.stop();
         energyThread.stop();
 
+        killZombies();
+
         zombieList.clear();
         energyList.clear();
         eggWaffleList.clear();
         busList.clear();
 
         grid.killPlants();
+    }
+
+    public void killZombies() {
+        Iterator<Zombie> iter = zombieList.iterator();
+        while(iter.hasNext()) {
+            iter.next().kill();
+        }
     }
 
     public Grid getGrid() {
@@ -145,6 +154,7 @@ public class Game{
 
         addZombie(zombie);
     }
+
 
     public synchronized void createBus(){
        int j = Grid.TILE_HEIGHT;
