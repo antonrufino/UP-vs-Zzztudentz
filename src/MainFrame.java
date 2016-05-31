@@ -15,9 +15,10 @@ public class MainFrame extends JFrame {
     public final static String MENU = "menu";
     public final static String GAME = "game";
     public final static String CREDITS = "credits";
+    public final static String HELP = "help";
 
     public MainFrame() {
-        super("Acads vs. Students");
+        super("UP vs. Zzztudentz");
 
         cardLayout = new CardLayout();
         container = this.getContentPane();
@@ -29,8 +30,10 @@ public class MainFrame extends JFrame {
         cardPanel.add(MENU, new MainMenuPanel(gamePanel));
         cardPanel.add(GAME, gamePanel);
         cardPanel.add(CREDITS, new CreditsPanel());
+        cardPanel.add(HELP, new HelpPanel());
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setFrameIcon();
         container.setPreferredSize(
             new Dimension(MainFrame.WIDTH, MainFrame.HEIGHT));
         this.pack();
@@ -40,6 +43,15 @@ public class MainFrame extends JFrame {
 
         this.setVisible(true);
         this.setResizable(false);
+    }
+
+    public void setFrameIcon(){
+        try{
+            Image image = new ImageIcon("../assets/img/icon.png").getImage();
+            this.setIconImage(image);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public static class SwitchPanelAction implements ActionListener {
