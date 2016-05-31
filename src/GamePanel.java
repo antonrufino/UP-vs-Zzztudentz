@@ -87,6 +87,7 @@ public class GamePanel extends JPanel implements Runnable {
                 if (rect.contains(p)) {
                     if (!game.getGrid().hasPlant(i, j)) {
                         game.getGrid().setPlant(i, j, game.getSelectedPlant());
+                        game.getSelectedPlant().start();
                         game.reduceEnergy();
                         game.startButtonCoolDown();
                         game.setPendingButton(null);

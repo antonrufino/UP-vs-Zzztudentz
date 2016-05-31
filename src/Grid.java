@@ -35,18 +35,19 @@ public class Grid {
         return plants[row][col] != null;
     }
 
-    public void setPlant(int row, int col, Plant plant) {
+    public synchronized void setPlant(int row, int col, Plant plant) {
         if(plant != null){
             int x = BUS_OFFSET + col * TILE_WIDTH;
             x += (TILE_WIDTH - plant.getWidth()) / 2;
 
             int y = SIDEWALK_OFFSET + row * TILE_HEIGHT - 18;
             y += (TILE_HEIGHT - plant.getHeight()) / 2;
-            
+
             plant.setX(x);
             plant.setY(y);
 
             plant.setRow(row);
+            plant.setCol(col);
         }
 
         plants[row][col] = plant;

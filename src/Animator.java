@@ -31,9 +31,9 @@ public class Animator{
 	}
 
 	public void nextFrame(){
-		current = images[count];
+        if(count > frames)	count = 0;
+        current = images[count];
 		count += 1;
-		if(count > frames)	count = 0;
 	}
 
 	public void drawAnimation(Graphics g, double x, double y, int width, int height,int offset){

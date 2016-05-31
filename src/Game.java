@@ -38,7 +38,7 @@ public class Game{
     }
 
     public void init() {
-        this.energy = 0;
+        this.energy = 5000;
         this.grid = new Grid();
         this.pendingPlant = null;
         this.pendingButton = null;
@@ -162,27 +162,26 @@ public class Game{
         busList.add(z);
     }
 
-    public void removeZombie(Zombie z){
-        zombieList.remove(z);
-    }
-
     public void removeBus(Bus z){
         busList.remove(z);
     }
+    public synchronized void removeZombie(Zombie z){
+        zombieList.remove(z);
+    }
 
-    public void addEnergy(Energy e){
+    public synchronized void addEnergy(Energy e){
         energyList.add(e);
     }
 
-    public void removeEnergy(Energy e){
+    public synchronized void removeEnergy(Energy e){
         energyList.remove(e);
     }
 
-    public void addEggWaffle(EggWaffle ew){
+    public synchronized void addEggWaffle(EggWaffle ew){
         eggWaffleList.add(ew);
     }
 
-    public void removeEggWaffle(EggWaffle ew){
+    public synchronized void removeEggWaffle(EggWaffle ew){
         eggWaffleList.remove(ew);
     }
 
@@ -202,11 +201,11 @@ public class Game{
         return this.eggWaffleThread;
     }
 
-    public ArrayList<Zombie> getZombieList(){
+    public synchronized ArrayList<Zombie> getZombieList(){
         return this.zombieList;
     }
 
-    public ArrayList<Energy> getEnergyList(){
+    public synchronized ArrayList<Energy> getEnergyList(){
         return this.energyList;
     }
 
@@ -214,19 +213,26 @@ public class Game{
         return this.busList;
     }
 
-    public ArrayList<EggWaffle> getEggWaffleList(){
+    public synchronized ArrayList<EggWaffle> getEggWaffleList(){
         return this.eggWaffleList;
     }
 
     public void tick() {
         for (int i = 0; i < Grid.ROWS; ++i) {
             for (int j = 0; j < Grid.COLS; ++j) {
-                if (grid.hasPlant(i, j)) grid.getPlant(i, j).tick();
+                if (grid.hasPlant(i, j)) {
+                    Plant p = grid.getPlant(i, j);
+                    if (p.isAlive()) p.tick();
+                    else grid.setPlant(i, j, null);
+                }
             }
         }
 
-        for (int i = 0; i<zombieList.size(); i++){
-            zombieList.get(i).tick();
+        Iterator<Zombie> iter = zombieList.iterator();
+        while (iter.hasNext()) {
+            Zombie z = iter.next();
+            if (!z.isAlive()) iter.remove();
+            else z.tick();
         }
 
         for (int i = 0; i<energyList.size(); i++){

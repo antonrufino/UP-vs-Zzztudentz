@@ -31,7 +31,6 @@ public class Zombie extends Entity implements Runnable{
 		this.target = null;
 	}
 	public void tick(){
-
 		this.x -= speed;
 		if (this.target == null) checkIfHitPlant();
 		anim.setImages(animation);
@@ -60,9 +59,9 @@ public class Zombie extends Entity implements Runnable{
 		try{
 			while (this.target.isAlive()) {
 				this.target.reduceHp(this.damage);
-				Thread.sleep(3*1000);
+				Thread.sleep(1000);
 			}
-			Game.getInstance().getGrid().setPlant(targetRow, targetCol, null);
+
 			this.target = null;
 			this.speed = 1;
 			animation = texx.getZombieWalkingArray();
@@ -78,6 +77,7 @@ public class Zombie extends Entity implements Runnable{
 	public double getX(){
 		return x;
 	}
+
 	public void setX(double x){
 		this.x = x;
 	}
@@ -93,6 +93,14 @@ public class Zombie extends Entity implements Runnable{
 	public int getHp(){
 		return this.hp;
 	}
+
+    synchronized void kill() {
+        this.hp = 0;
+    }
+
+    boolean isAlive() {
+        return this.hp > 0;
+    }
 
 	public int getDamage(){
 		return this.damage;
