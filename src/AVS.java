@@ -20,6 +20,9 @@ public class AVS {
             Thread bgThread1 = new Thread(new GamePanel.AssetLoader());
             bgThread1.start();
 
+            Thread creditBG = new Thread(new HelpPanel.AssetLoader());
+            creditBG.start();
+
 
 
             Thread progressBarThread = new Thread(new ProgressBarPanel.AssetLoader());
