@@ -42,11 +42,12 @@ public class Grid {
 
             int y = SIDEWALK_OFFSET + row * TILE_HEIGHT - 18;
             y += (TILE_HEIGHT - plant.getHeight()) / 2;
-            
+
             plant.setX(x);
             plant.setY(y);
 
             plant.setRow(row);
+            plant.setCol(col);
         }
 
         plants[row][col] = plant;

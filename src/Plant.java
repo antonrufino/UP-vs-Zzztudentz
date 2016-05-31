@@ -14,6 +14,7 @@ public abstract class Plant extends Entity {
     private int hp;
 
     private int row;
+    private int col;
 
     public Plant(int w, int h, int cost, Textures texx) {
         super(w,h,texx);
@@ -23,6 +24,10 @@ public abstract class Plant extends Entity {
 
     public void setRow(int row) {
         this.row = row;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
     }
 
     public int getCost() {
