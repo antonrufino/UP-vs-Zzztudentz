@@ -28,7 +28,7 @@ public class Tower extends Plant implements Runnable{
 	public void run(){
 		try{
 			while(true){
-				if(isShooting()){
+				if(isShooting() && this.isAlive()){
 					Game.getInstance().createEggWaffle(this);
                     Thread.sleep(3*1000);
 				}
