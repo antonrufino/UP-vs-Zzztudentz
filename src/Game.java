@@ -29,6 +29,8 @@ public class Game{
     private Textures tex;
     private Tower tower;
 
+    private int zombieKilled;
+
     private Game() { }
 
     public static Game getInstance() {
@@ -36,11 +38,12 @@ public class Game{
     }
 
     public void init() {
-        this.energy = 0;
+        this.energy = 9000;
         this.grid = new Grid();
         this.pendingPlant = null;
         this.pendingButton = null;
         this.rand = new Random();
+        this.zombieKilled = 0;
 
         this.zombieThread = new ZombieSummoner();
         this.energyThread = new EnergyMaker();
@@ -54,7 +57,6 @@ public class Game{
 
         zombieThread.start();
         energyThread.start();
-        //eggWaffleThread.start();
     }
 
     public Grid getGrid() {
@@ -158,6 +160,10 @@ public class Game{
     }
     public synchronized void removeZombie(Zombie z){
         zombieList.remove(z);
+        zombieKilled += 1;
+        if((zombieKilled / 10) % 2 != 0){
+            zombieThread.setIsHugeWave(true);
+        }
     }
 
     public synchronized void addEnergy(Energy e){
