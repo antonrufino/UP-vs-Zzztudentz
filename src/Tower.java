@@ -3,7 +3,8 @@ package avs.models;
 import avs.utils.Animator;
 import avs.utils.Textures;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Iterator;
 import java.awt.image.*;
 import java.awt.*;
 
@@ -27,7 +28,7 @@ public class Tower extends Plant implements Runnable{
 	public void run(){
 		try{
 			while(true){
-				if(isShooting()){
+				if(isShooting() && this.isAlive()){
 					Game.getInstance().createEggWaffle(this);
                     Thread.sleep(3*1000);
 				}
@@ -38,9 +39,10 @@ public class Tower extends Plant implements Runnable{
 	}
 
 	public boolean isShooting(){
-		ArrayList<Zombie> zombieList = Game.getInstance().getZombieList();
-		for(int i = 0; i<zombieList.size(); i++){
-			if(this.getRow() == zombieList.get(i).getRow()){
+		CopyOnWriteArrayList<Zombie> zombieList = Game.getInstance().getZombieList();
+        Iterator<Zombie> iter = zombieList.iterator();
+        while(iter.hasNext()){
+			if(this.getRow() == iter.next().getRow()){
 				return true;
 			}
 		}

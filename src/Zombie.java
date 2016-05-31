@@ -5,7 +5,6 @@ import avs.utils.Textures;
 import avs.utils.CollisionChecker;
 import avs.ui.MainFrame;
 
-import java.util.ArrayList;
 import java.awt.image.*;
 import java.awt.*;
 
@@ -26,7 +25,7 @@ public class Zombie extends Entity implements Runnable{
 		this.animation = texx.getZombieWalkingArray();
 		this.speed = 1;
 		this.hp = 350;
-		this.damage = 20;
+		this.damage = 60;
 		anim = new Animator(5,animation);
 		this.target = null;
 	}
@@ -58,6 +57,9 @@ public class Zombie extends Entity implements Runnable{
 	public void run(){
 		try{
 			while (this.target.isAlive()) {
+				if(!this.isAlive()){
+					break;
+				}
 				this.target.reduceHp(this.damage);
 				Thread.sleep(1000);
 			}

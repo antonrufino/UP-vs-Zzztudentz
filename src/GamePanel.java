@@ -3,7 +3,9 @@ package avs.ui;
 import avs.models.Grid;
 import avs.models.Game;
 import avs.models.Energy;
-import avs.ui.EnergyBar;
+import avs.models.Bus;
+import avs.models.Zombie;
+import avs.models.EggWaffle;
 import avs.utils.BufferedImageLoader;
 import avs.utils.Textures;
 
@@ -18,6 +20,8 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import java.util.Iterator;
 
 public class GamePanel extends JPanel implements Runnable {
     private Game game;
@@ -238,27 +242,30 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     private void renderZombies(Graphics g) {
-        for(int i = 0; i< game.getZombieList().size();i++){
-              game.getZombieList().get(i).render(g);
+        Iterator<Zombie> iter = game.getZombieList().iterator();
+        while(iter.hasNext()){
+              iter.next().render(g);
         }
     }
 
     private void renderEggWaffles(final Graphics g){
-        for(int i=0; i< game.getEggWaffleList().size();i++){
-            game.getEggWaffleList().get(i).render(g);
+        Iterator<EggWaffle> iter = game.getEggWaffleList().iterator();
+        while(iter.hasNext()){
+              iter.next().render(g);
         }
     }
 
     private void renderEnergies(Graphics g) {
-        for(int i = 0; i< game.getEnergyList().size();i++){
-              game.getEnergyList().get(i).render(g);
+        Iterator<Energy> iter = game.getEnergyList().iterator();
+        while(iter.hasNext()){
+              iter.next().render(g);
         }
     }
 
     private void renderBus(Graphics g){
-        for(int i = 0; i < game.getBusList().size(); i++){
-            game.getBusList().get(i).render(g);
-            ((Graphics2D) g).draw(game.getBusList().get(i).getBounds());
+        Iterator<Bus> iter = game.getBusList().iterator();
+        while(iter.hasNext()){
+              iter.next().render(g);
         }
     }
 

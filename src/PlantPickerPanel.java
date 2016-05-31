@@ -31,7 +31,7 @@ public class PlantPickerPanel extends JPanel{
         this.add(new PickerButton(
             scaleImageIcon(new ImageIcon("../assets/img/buttons/banga_picker/banga_picker_default.png")),
             scaleImageIcon(new ImageIcon("../assets/img/buttons/banga_picker/banga_picker_hover.png")),
-            new PlantFactory(PlantFactory.BANGA, tex), 100
+            new PlantFactory(PlantFactory.BANGA, tex), 200
         ));
 
         this.add(new PickerButton(
