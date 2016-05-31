@@ -33,8 +33,6 @@ public abstract class Entity{
 
 	public abstract void tick();
 	public abstract void render(Graphics g);
-	public abstract Rectangle getBounds();
-
 
 	public double getX(){
 		return this.x;
@@ -59,4 +57,8 @@ public abstract class Entity{
     public int getHeight() {
         return this.height;
     }
+
+    public Rectangle getBounds(){
+		return new Rectangle((int) this.x, (int) this.y, this.width, this.height);
+	}
 }

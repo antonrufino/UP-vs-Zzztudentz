@@ -35,8 +35,4 @@ public class Kopiko extends Plant {
 	public void render (Graphics g){
 		this.anim.drawAnimation(g,getX(),getY(),width,height,0);
 	}
-
-	public Rectangle getBounds(){
-		return new Rectangle((int) this.getX(), (int) this.getY(), 60, 99); 
-	}
 }

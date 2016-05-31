@@ -30,8 +30,4 @@ public class Bus extends Entity{
 		//g.drawImage(busImage, (int)this.getX(), (int)this.getY(), null);
 		anim.drawAnimation(g,getX(),getY(),width,height,0);
 	}
-
-	public Rectangle getBounds(){
-		return new Rectangle((int) this.getX(), (int) this.getY(), 418, 160); 
-	}
 }
