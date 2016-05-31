@@ -18,7 +18,5 @@ public class EggWaffleBaker implements Runnable{
 
 	public Thread getThread(){
 		return this.thread;
-	}
-
-	
+	}	
 }

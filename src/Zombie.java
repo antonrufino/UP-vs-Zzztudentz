@@ -26,7 +26,7 @@ public class Zombie extends Entity implements Runnable{
 		this.animation = texx.getZombieWalkingArray();
 		this.speed = 1;
 		this.hp = 350;
-		this.damage = 20;
+		this.damage = 60;
 		anim = new Animator(5,animation);
 		this.target = null;
 	}
