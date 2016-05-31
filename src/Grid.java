@@ -46,6 +46,9 @@ public class Grid {
         //plant.setY(SIDEWALK_OFFSET + row * TILE_HEIGHT - 18);
         plant.setX(x);
         plant.setY(y);
+
+        plant.setRow(row);
+
         plants[row][col] = plant;
     }
 
