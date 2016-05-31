@@ -18,7 +18,7 @@ public class MainFrame extends JFrame {
     public final static String HELP = "help";
 
     public MainFrame() {
-        super("Acads vs. Students");
+        super("UP vs. Zzztudentz");
 
         cardLayout = new CardLayout();
         container = this.getContentPane();
