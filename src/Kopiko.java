@@ -12,7 +12,6 @@ import javax.swing.*;
 public class Kopiko extends Plant implements Runnable{
 	private Energy e;
 	private Thread thread;
-	private ArrayList<Energy> lightnings = new ArrayList<Energy>();
 
     public Kopiko(Textures texx) {
 		super(41, 102, 50, texx);
