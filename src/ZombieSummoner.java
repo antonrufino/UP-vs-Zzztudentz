@@ -14,7 +14,7 @@ public class ZombieSummoner implements Runnable{
             while (true) {
             	if(!isHugeWave){
             		Game.getInstance().createZombie();
-               		Thread.sleep(1000);
+               		Thread.sleep(10000);
             	}else{
             		Thread.sleep(3000);
             		for(int i = 0; i < 10; i++){
