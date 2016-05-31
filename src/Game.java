@@ -30,6 +30,7 @@ public class Game{
     private Textures tex;
     private Tower tower;
 
+    private boolean hasLost;
     private int zombieKilled;
 
     private Game() { }
@@ -44,6 +45,7 @@ public class Game{
         this.pendingPlant = null;
         this.pendingButton = null;
         this.rand = new Random();
+        this.hasLost = false;
         this.zombieKilled = 0;
 
         this.zombieThread = new ZombieSummoner();
@@ -62,6 +64,10 @@ public class Game{
 
     public Grid getGrid() {
         return this.grid;
+    }
+
+    public boolean getGameState(){
+        return this.hasLost;
     }
 
     public void selectPlant(Plant plant) {
@@ -233,8 +239,15 @@ public class Game{
         Iterator<Zombie> zIter = zombieList.iterator();
         while (zIter.hasNext()) {
             Zombie z = zIter.next();
+
             if (!z.isAlive()) removeZombie(z);
-            else z.tick();
+            else {
+                if(z.getX() == 0 -z.getWidth()){
+                    this.hasLost = true;
+                    removeZombie(z);
+                }
+                else z.tick();
+            }
         }
 
         Iterator<Energy> enIter = energyList.iterator();

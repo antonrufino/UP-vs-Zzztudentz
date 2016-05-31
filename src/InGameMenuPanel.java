@@ -6,6 +6,8 @@ import java.awt.event.*;
 import java.awt.image.*;
 import javax.imageio.*;
 import javax.swing.*;
+
+
 public class InGameMenuPanel extends JPanel{
     public InGameMenuPanel(int type){
         super();
@@ -45,7 +47,11 @@ public class InGameMenuPanel extends JPanel{
 
         this.add(btn);
 
-        if(type == 1){
+        if(type == 0){
+            btn.addActionListener(
+                new MainFrame.SwitchPanelAction(MainFrame.MENU));
+        }
+        else if(type == 1){
             btn.addActionListener(
                 new MainFrame.SwitchPanelAction(MainFrame.MENU));
         }
