@@ -9,7 +9,7 @@ import javax.swing.*;
 
 public class Energy extends Entity{
 	private BufferedImage energyImg;
-    private double targetY;
+    private double targetY;	//where will it land
     int amount;
 
 	public Energy(double x, double y, double targetY, int amount, Textures texx){

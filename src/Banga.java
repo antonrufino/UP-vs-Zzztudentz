@@ -11,8 +11,8 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Banga extends Plant implements Runnable {
-	private Animator anim;
-    private Rectangle deathZone;
+	private Animator anim; //animates this plant
+    private Rectangle deathZone; //all the zombies that will come near this area will die
 
     public Banga(Textures texx){
 		super(95, 159, 150, texx);
@@ -29,7 +29,6 @@ public class Banga extends Plant implements Runnable {
 	}
 
 	public void render(Graphics g){
-		//g.drawImage(busImage, (int)this.getX(), (int)this.getY(), null);
         if (this.deathZone != null) {
             g.setColor(new Color(123, 17, 19, 128));
             ((Graphics2D) g).fill(this.deathZone);
@@ -61,6 +60,7 @@ public class Banga extends Plant implements Runnable {
         }
     }
 
+    //iterates through the Zombie list and if intersects or it is contained in the bounds of the Banga, it will die
     public void killZombies() {
         for (int i = 0; i < Game.getInstance().getZombieList().size(); ++i) {
             Zombie z = Game.getInstance().getZombieList().get(i);

@@ -11,14 +11,19 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Game{
     private static Game instance = new Game();
+
+    //ArrayList for all the running entities aside from plant (which can be accessed through the grid)
     private CopyOnWriteArrayList<Zombie> zombieList;
     private CopyOnWriteArrayList<Energy> energyList;
     private CopyOnWriteArrayList<EggWaffle> eggWaffleList;
     private CopyOnWriteArrayList<Bus> busList;
 
+    //Initial energy
     private int energy;
 
+    //Handler for the plants
     private Grid grid;
+    
     private Plant pendingPlant;
     private PickerButton pendingButton;
 
