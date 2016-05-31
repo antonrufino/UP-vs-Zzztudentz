@@ -15,18 +15,10 @@ public class Zombie extends Entity{
 	private int speed;
 	private int hp;
 	private int damage;
+    private int row;
 
     public Zombie(Textures texx){
         super(117,217,texx);
-		this.animation = texx.getZombieWalkingArray();
-		this.speed = 1;
-		this.hp = 100;
-		this.damage = 20;
-		anim = new Animator(5,animation);
-	}
-
-	public Zombie(double x, double y, Textures texx){
-        super(x,y,117,217,texx);
 		this.animation = texx.getZombieWalkingArray();
 		this.speed = 1;
 		this.hp = 100;
@@ -38,17 +30,11 @@ public class Zombie extends Entity{
 
 		this.x -= speed;
 
-
-
 		anim.runAnimation();
 	}
 
 	public void render(Graphics g){
-		anim.drawAnimation(g,x,y,117,217,0);
-	}
-
-	public Rectangle getBounds(){
-		return new Rectangle((int) x, (int) y, 150, 150);
+		anim.drawAnimation(g,x,y,width,height,0);
 	}
 
 	public double getX(){
@@ -81,4 +67,13 @@ public class Zombie extends Entity{
 	public synchronized void attack(Plant a){
 		a.setHp(a.getHp() - this.damage);
 	}
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public Rectangle getBounds() {
+        int y = Grid.SIDEWALK_OFFSET + this.row * Grid.TILE_HEIGHT;
+        return new Rectangle((int) this.getX(), y, this.getWidth(), Grid.TILE_HEIGHT);
+    }
 }
