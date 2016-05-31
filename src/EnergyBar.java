@@ -32,12 +32,17 @@ public class EnergyBar extends JPanel{
         try {
             //Returned font is of pt size 1
             Font font = Font.createFont(Font.TRUETYPE_FONT, new File("../assets/fonts/comixloud.ttf"));
-            //Derive and return a 12 pt version:
-            //Need to use float otherwise
-            //it would be interpreted as style
             return font.deriveFont(9.5f);
         } catch (IOException|FontFormatException e) {
             return null;// Handle exception
+        }
+    }
+    public static Font loadFont(Float size){
+        try {
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("../assets/fonts/comixloud.ttf"));
+            return font.deriveFont(size);
+        } catch (IOException|FontFormatException e) {
+            return null;
         }
     }
 

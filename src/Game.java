@@ -29,6 +29,8 @@ public class Game{
     private Textures tex;
     private Tower tower;
 
+    private boolean hasLost;
+
     private Game() { }
 
     public static Game getInstance() {
@@ -41,6 +43,7 @@ public class Game{
         this.pendingPlant = null;
         this.pendingButton = null;
         this.rand = new Random();
+        this.hasLost = false;
 
         this.zombieThread = new ZombieSummoner();
         this.energyThread = new EnergyMaker();
@@ -59,6 +62,10 @@ public class Game{
 
     public Grid getGrid() {
         return this.grid;
+    }
+
+    public boolean getGameState(){
+        return this.hasLost;
     }
 
     public void selectPlant(Plant plant) {
@@ -219,7 +226,14 @@ public class Game{
         while (zIter.hasNext()) {
             Zombie z = zIter.next();
             if (!z.isAlive()) zIter.remove();
-            else z.tick();
+            else {
+                if(z.getX() == 0 -z.getWidth()){
+                    this.hasLost = true;
+                    // this.removeZombie(z);
+                    // System.out.println("remove");
+                }
+                z.tick();
+            }
         }
 
         for (int i = 0; i<energyList.size(); i++){
