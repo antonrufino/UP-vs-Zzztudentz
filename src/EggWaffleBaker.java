@@ -1,14 +1,15 @@
 package avs.models;
 
-public class ZombieSummoner implements Runnable{
+public class EggWaffleBaker implements Runnable{
 	private Thread thread;
+	private Tower tower;
 
-	public ZombieSummoner(){
-		this.thread = new Thread(this);
+	public EggWaffleBaker(){
+		thread = new Thread(this);
 	}
 
 	public void run(){
-		Game.getInstance().createZombie(5,5);
+		Game.getInstance().createEggWaffle(tower);
 	}
 
 	public void start(){
@@ -18,4 +19,6 @@ public class ZombieSummoner implements Runnable{
 	public Thread getThread(){
 		return this.thread;
 	}
+
+	
 }

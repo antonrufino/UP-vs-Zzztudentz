@@ -17,12 +17,14 @@ public abstract class Plant extends Entity {
         super(w,h,texx);
         this.cost = cost;
         this.isAlive = true;
+        this.hp = 100;
     }
 
 	public Plant(double x, double y, int w, int h, int cost, Textures texx){
 		super(x, y, w, h, texx);
         this.cost = cost;
 		this.isAlive = true;
+        this.hp = 100;
 	}
 
 	public boolean isAlive(){

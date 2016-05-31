@@ -12,7 +12,7 @@ public abstract class Entity{
 
 	protected double x;
 	protected double y;
-	private Textures texx;
+	protected Textures texx;
     protected int width;
     protected int height;
     protected Animator anim;
@@ -33,8 +33,10 @@ public abstract class Entity{
 
 	public abstract void tick();
 	public abstract void render(Graphics g);
-	public abstract Rectangle getBounds();
-
+	
+	public Rectangle getBounds(){
+        return new Rectangle((int) x, (int) y, 113, 109); 
+	}
 
 	public double getX(){
 		return this.x;

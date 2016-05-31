@@ -156,9 +156,10 @@ public class GamePanel extends JPanel implements Runnable {
                 createHiglightThread(p, g2d).start();
             }
 
-            createPrintPlantThread(g).start();
-            createZombieThread(g).start();
-            createEnergyThread(g).start();
+            createPrintPlantThread(g);
+            createZombieThread(g);
+            createEnergyThread(g);
+            createEggWaffleThread(g);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -180,54 +181,34 @@ public class GamePanel extends JPanel implements Runnable {
         };
     }
 
-    private Thread createPrintPlantThread(final Graphics g) {
-        return new Thread() {
-            public void run() {
-                for (int i = 0; i < Grid.ROWS; ++i) {
-                    for (int j = 0; j < Grid.COLS; ++j) {
-                        if (game.getGrid().hasPlant(i, j)) {
-                            final int row = i;
-                            final int col = j;
-                            new Thread() {
-                                public void run() {
-                                    game.getGrid().getPlant(row, col).render(g);
-                                }
-                            }.start();
-                        }
-                    }
+    private void createPrintPlantThread(final Graphics g) {
+        for (int i = 0; i < Grid.ROWS; ++i) {
+            for (int j = 0; j < Grid.COLS; ++j) {
+                if (game.getGrid().hasPlant(i, j)) {
+                    final int row = i;
+                    final int col = j;
+                    game.getGrid().getPlant(row, col).render(g);
                 }
             }
-        };
+        }
     }
 
-    private Thread createZombieThread(final Graphics g) {
-        return new Thread() {
-            public void run() {
-                new Thread() {
-                    public void run() {
-                        for(int i = 0; i< game.getZombieList().size();i++){
-                              game.getZombieList().get(i).render(g);
-                        }
-                      
-                    }
-                }.start();
-            }
-        };
+    private void createZombieThread(final Graphics g) {
+        for(int i = 0; i< game.getZombieList().size();i++){
+              game.getZombieList().get(i).render(g);
+        }
     }
 
-     private Thread createEnergyThread(final Graphics g) {
-        return new Thread() {
-            public void run() {
-                new Thread() {
-                    public void run() {
-                        for(int i = 0; i< game.getEnergyList().size();i++){
-                              game.getEnergyList().get(i).render(g);
-                        }
-                      
-                    }
-                }.start();
-            }
-        };
+    private void createEnergyThread(final Graphics g) {
+        for(int i = 0; i< game.getEnergyList().size();i++){
+              game.getEnergyList().get(i).render(g);
+        }
+    }
+
+    private void createEggWaffleThread(final Graphics g){
+        for(int i=0; i< game.getEggWaffleList().size();i++){
+            game.getEggWaffleList().get(i).render(g);
+        }
     }
 
     public static BufferedImage getSpriteSheet() {

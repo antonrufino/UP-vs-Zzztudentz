@@ -11,14 +11,23 @@ public class Game{
     private static Game instance = new Game();
     private ArrayList<Zombie> zombieList;
     private ArrayList<Energy> energyList;
+    private ArrayList<EggWaffle> eggWaffleList;
+
     private int energy;
+
     private Grid grid;
     private Plant pendingPlant;
     private PickerButton pendingButton;
+
     private Random rand;
-    private ZombieSummoner necro;
-    private EnergyMaker em;
+
+    private ZombieSummoner zombieThread;
+    private EnergyMaker energyThread;
+    private EnergyMaker kopikoThread;
+    private EggWaffleBaker eggWaffleThread;
+
     private Textures tex;
+    private Tower tower;
 
     private Game() { }
 
@@ -32,13 +41,19 @@ public class Game{
         this.pendingPlant = null;
         this.pendingButton = null;
         this.rand = new Random();
-        this.necro = new ZombieSummoner();
-        this.em = new EnergyMaker();
+
+        this.zombieThread = new ZombieSummoner();
+        this.energyThread = new EnergyMaker();
+        this.eggWaffleThread = new EggWaffleBaker();
+        this.kopikoThread = new EnergyMaker();
+
         zombieList = new ArrayList<Zombie>();
         energyList = new ArrayList<Energy>();
+        eggWaffleList = new ArrayList<EggWaffle>();
 
-        necro.start();
-        em.start();
+        zombieThread.start();
+        energyThread.start();
+        //eggWaffleThread.start();
     }
 
     public Grid getGrid() {
@@ -87,16 +102,65 @@ public class Game{
     }
 
    public void createZombie(int enemyCount, int spawnDelay){
-        for(int i = 0; i < enemyCount; i++){
+        for(int i = 0; i<3; i++){
+            try{
+                zombieThread.getThread().sleep(10*1000);
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
             int y = rand.nextInt(5) * 109;
             addZombie(new Zombie(1280,y,tex));
+        }
+        try{
+            zombieThread.getThread().join();
+        }catch (InterruptedException e){
+            e.printStackTrace();
         }
     }
 
     public void createEnergy(){
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i<3; i++){
+            try{
+                energyThread.getThread().sleep(10*1000);
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
             int x = rand.nextInt(5) * 109;
             addEnergy(new Energy(x,-1,tex));
+        }
+        try{
+            energyThread.getThread().join();
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+    /*
+    public void createEnergy(Kopiko kopiko){
+        for(int i = 0; i<3; i++){
+            try{
+                energyThread.getThread().sleep(10*1000);
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
+            addEnergy(new Energy(kopiko.getX(),kopiko.getY(),tex));
+        }
+        try{
+            energyThread.getThread().join();
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }*/
+
+    public void createEggWaffle(Tower tower){
+        this.tower = tower;
+        for(int i = 0; i < 15; i++){
+            addEggWaffle(new EggWaffle(tower.getX(), tower.getY(), tex));
+            
+            try{
+                eggWaffleThread.getThread().sleep(3 * 1000);
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
         }
     }
 
@@ -116,8 +180,28 @@ public class Game{
         energyList.remove(e);
     }
 
+    public void addEggWaffle(EggWaffle ew){
+        eggWaffleList.add(ew);
+    }
+
+    public void removeEggWaffle(EggWaffle ew){
+        eggWaffleList.remove(ew);
+    }
+
     public void setTextures(Textures tex){
         this.tex = tex;
+    }
+
+    public void setTower(Tower tower){
+        this.tower = tower;
+    }
+
+    public Tower getTower(){
+        return this.tower;
+    }
+
+    public EggWaffleBaker getEggWaffleThread(){
+        return this.eggWaffleThread;
     }
 
     public ArrayList<Zombie> getZombieList(){
@@ -126,6 +210,10 @@ public class Game{
 
     public ArrayList<Energy> getEnergyList(){
         return this.energyList;
+    }
+
+    public ArrayList<EggWaffle> getEggWaffleList(){
+        return this.eggWaffleList;
     }
 
     public void tick() {
@@ -141,6 +229,10 @@ public class Game{
 
         for (int i = 0; i<energyList.size(); i++){
             energyList.get(i).tick();
+        }
+
+        for (int i = 0; i<eggWaffleList.size();i++){
+            eggWaffleList.get(i).tick();
         }
     }
 }

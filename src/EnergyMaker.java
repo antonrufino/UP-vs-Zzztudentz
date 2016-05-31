@@ -14,4 +14,8 @@ public class EnergyMaker implements Runnable{
 	public void start(){
 		this.thread.start();
 	}
+
+	public Thread getThread(){
+		return this.thread;
+	}
 }
