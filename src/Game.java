@@ -24,8 +24,6 @@ public class Game{
 
     private ZombieSummoner zombieThread;
     private EnergyMaker energyThread;
-    private EnergyMaker kopikoThread;
-    private EggWaffleBaker eggWaffleThread;
 
     private Textures tex;
     private Tower tower;
@@ -45,8 +43,6 @@ public class Game{
 
         this.zombieThread = new ZombieSummoner();
         this.energyThread = new EnergyMaker();
-        this.eggWaffleThread = new EggWaffleBaker();
-        this.kopikoThread = new EnergyMaker();
 
         zombieList = new ArrayList<Zombie>();
         energyList = new ArrayList<Energy>();
@@ -103,16 +99,8 @@ public class Game{
     }
 
     public void createEggWaffle(Tower tower){
-        this.tower = tower;
-        for(int i = 0; i < 15; i++){
-            addEggWaffle(new EggWaffle(tower.getX(), tower.getY(), tex));
-
-            try{
-                eggWaffleThread.getThread().sleep(3 * 1000);
-            }catch(InterruptedException e){
-                e.printStackTrace();
-            }
-        }
+      
+        addEggWaffle(new EggWaffle(tower.getX(), tower.getY(), tex));
     }
 
     public synchronized void createZombie() {
@@ -176,10 +164,6 @@ public class Game{
 
     public Tower getTower(){
         return this.tower;
-    }
-
-    public EggWaffleBaker getEggWaffleThread(){
-        return this.eggWaffleThread;
     }
 
     public synchronized ArrayList<Zombie> getZombieList(){

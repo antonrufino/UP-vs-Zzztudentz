@@ -176,6 +176,7 @@ public class GamePanel extends JPanel implements Runnable {
             renderPlants(g);
             renderZombies(g);
             renderEnergies(g);
+            renderEggWaffles(g);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

@@ -114,6 +114,10 @@ public class Zombie extends Entity implements Runnable{
         this.row = row;
     }
 
+    public int getRow(){
+    	return this.row;
+    }
+
     public Rectangle getBounds() {
         int y = Grid.SIDEWALK_OFFSET + this.row * Grid.TILE_HEIGHT;
         return new Rectangle((int) this.getX(), y + 1, this.getWidth() - 2, Grid.TILE_HEIGHT);
