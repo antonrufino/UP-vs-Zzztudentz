@@ -119,4 +119,8 @@ public class Textures{
 	public BufferedImage getEggWaffle(){
 		return this.eggWaffle;
 	}
+
+	public BufferedImage getTc7Frame(int f){
+		return this.tc7[f];
+	}
 }

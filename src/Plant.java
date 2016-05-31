@@ -10,7 +10,7 @@ import javax.swing.*;
 public abstract class Plant extends Entity {
     protected BufferedImage[] animation;
     protected int cost;
-    private int hp;
+    protected int hp;
 
     public Plant(int w, int h, int cost, Textures texx) {
         super(w,h,texx);
