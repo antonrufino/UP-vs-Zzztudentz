@@ -1,6 +1,7 @@
 package avs.models;
 
 import avs.ui.PickerButton;
+import avs.ui.MainFrame;
 
 import avs.utils.Animator;
 import avs.utils.Textures;
@@ -86,11 +87,15 @@ public class Game{
         return this.pendingButton != null;
     }
 
-   public synchronized void createZombie(int enemyCount, int spawnDelay){
-        for(int i = 0; i < enemyCount; i++){
-            int y = rand.nextInt(5) * 109;
-            addZombie(new Zombie(1280,y,tex));
-        }
+    public synchronized void createZombie() {
+        Zombie zombie = new Zombie(tex);
+
+        int y = rand.nextInt(5) * Grid.TILE_HEIGHT - 18;
+        y += (zombie.getHeight() - Grid.TILE_HEIGHT) / 2;
+
+        zombie.setX(MainFrame.WIDTH);
+        zombie.setY(y);
+        addZombie(zombie);
     }
 
     public synchronized void createEnergy(){

@@ -8,7 +8,15 @@ public class ZombieSummoner implements Runnable{
 	}
 
 	public void run(){
-		Game.getInstance().createZombie(5,5);
+        try {
+            while (true) {
+                Game.getInstance().createZombie();
+                Thread.sleep(1000);
+            }
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
 	}
 
 	public void start(){
