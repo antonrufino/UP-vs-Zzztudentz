@@ -31,7 +31,6 @@ public class Banga extends Plant implements Runnable {
 	public void render(Graphics g){
 		//g.drawImage(busImage, (int)this.getX(), (int)this.getY(), null);
 		anim.drawAnimation(g,getX(),getY(),width,height,0);
-        if (this.deathZone != null) ((Graphics2D) g).draw(this.deathZone);
     }
 
     public void run() {
