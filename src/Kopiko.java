@@ -11,16 +11,12 @@ import javax.swing.*;
 
 public class Kopiko extends Plant implements Runnable{
 	private Energy e;
-	private Thread thread;
 	private ArrayList<Energy> lightnings = new ArrayList<Energy>();
 
     public Kopiko(Textures texx) {
 		super(41, 102, 50, texx);
         this.animation = texx.getKopikoStaticArray();
-        this.thread = new Thread(this);
 		this.anim = new Animator(5, animation);
-
-		thread.start();
 	}
 
 	public void tick(){

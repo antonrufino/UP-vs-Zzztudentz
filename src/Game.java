@@ -37,7 +37,7 @@ public class Game{
     }
 
     public void init() {
-        this.energy = 0;
+        this.energy = 5000;
         this.grid = new Grid();
         this.pendingPlant = null;
         this.pendingButton = null;
@@ -146,23 +146,23 @@ public class Game{
         zombieList.add(z);
     }
 
-    public void removeZombie(Zombie z){
+    public synchronized void removeZombie(Zombie z){
         zombieList.remove(z);
     }
 
-    public void addEnergy(Energy e){
+    public synchronized void addEnergy(Energy e){
         energyList.add(e);
     }
 
-    public void removeEnergy(Energy e){
+    public synchronized void removeEnergy(Energy e){
         energyList.remove(e);
     }
 
-    public void addEggWaffle(EggWaffle ew){
+    public synchronized void addEggWaffle(EggWaffle ew){
         eggWaffleList.add(ew);
     }
 
-    public void removeEggWaffle(EggWaffle ew){
+    public synchronized void removeEggWaffle(EggWaffle ew){
         eggWaffleList.remove(ew);
     }
 
@@ -182,15 +182,15 @@ public class Game{
         return this.eggWaffleThread;
     }
 
-    public ArrayList<Zombie> getZombieList(){
+    public synchronized ArrayList<Zombie> getZombieList(){
         return this.zombieList;
     }
 
-    public ArrayList<Energy> getEnergyList(){
+    public synchronized ArrayList<Energy> getEnergyList(){
         return this.energyList;
     }
 
-    public ArrayList<EggWaffle> getEggWaffleList(){
+    public synchronized ArrayList<EggWaffle> getEggWaffleList(){
         return this.eggWaffleList;
     }
 

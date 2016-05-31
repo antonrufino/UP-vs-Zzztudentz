@@ -22,6 +22,8 @@ public class Tc7 extends Plant {
 		anim.runAnimation();
 	}
 
+    public void run() { }
+
 	public void render(Graphics g){
 		//g.drawImage(busImage, (int)this.getX(), (int)this.getY(), null);
 		anim.drawAnimation(g,getX(),getY(),width,height,0);

@@ -20,7 +20,9 @@ public class Tower extends Plant {
 
 		anim = new Animator(5,animation);
 	}
-    
+
+    public void run() { }
+
 	public void tick(){
 		anim.runAnimation();
 

@@ -35,7 +35,7 @@ public class Grid {
         return plants[row][col] != null;
     }
 
-    public void setPlant(int row, int col, Plant plant) {
+    public synchronized void setPlant(int row, int col, Plant plant) {
         if(plant != null){
             int x = BUS_OFFSET + col * TILE_WIDTH;
             x += (TILE_WIDTH - plant.getWidth()) / 2;

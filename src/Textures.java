@@ -30,7 +30,9 @@ public class Textures{
 	private BufferedImage[] zombieEating;
 	private BufferedImage[] tc7;
 	private BufferedImage[] bus;
-	private BufferedImage[] banga;
+	private BufferedImage[] bangaStatic;
+    private BufferedImage[] bangaSpinning;
+    private BufferedImage[] bangaDying;
 	private BufferedImage[] kopikoStatic;
     private BufferedImage[] kopikoEmitting;
 	private BufferedImage[] tower;
@@ -70,8 +72,8 @@ public class Textures{
 		}
 
         this.bangaStatic[0] = ss.grabImage(1, 2, BANGA_WIDTH, BANGA_HEIGHT);
-        for (int i = 0; i < 2; ++i) this.bangaSpinning[i] ss.grabImage(i+2, 2, BANGA_WIDTH, BANGA_HEIGHT);
-        for (int i = 0; i < 2; ++i) this.bangaDying[i] = ss.grabImage(i+4, 2, BANGA_WIDTH, BANGA_HEIGHT);
+        for (int i = 0; i < 2; ++i) this.bangaSpinning[i] = ss.grabImage(i+2, 2, BANGA_WIDTH, BANGA_HEIGHT);
+        for (int i = 0; i < 6; ++i) this.bangaDying[i] = ss.grabImage(i+4, 2, BANGA_WIDTH, BANGA_HEIGHT);
 
 		for(int i = 0; i < 3; i++)	tc7[i] = ss.grabImage(i+10,2,TC7_WIDTH,TC7_HEIGHT);
 		for(int i = 0; i < 4; i++)	tower[i] = ss.grabImage(i+13, 2, TOWER_WIDTH, TOWER_HEIGHT);
