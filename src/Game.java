@@ -13,6 +13,7 @@ public class Game{
     private ArrayList<Zombie> zombieList;
     private ArrayList<Energy> energyList;
     private ArrayList<EggWaffle> eggWaffleList;
+    private ArrayList<Bus> busList;
 
     private int energy;
 
@@ -51,6 +52,9 @@ public class Game{
         zombieList = new ArrayList<Zombie>();
         energyList = new ArrayList<Energy>();
         eggWaffleList = new ArrayList<EggWaffle>();
+        busList = new ArrayList<Bus>();
+
+        createBus();
 
         zombieThread.start();
         energyThread.start();
@@ -130,6 +134,14 @@ public class Game{
         addZombie(zombie);
     }
 
+    public synchronized void createBus(){
+       int j = Grid.TILE_HEIGHT;
+       for(int i = 0; i < 5; i++){
+            addBus(new Bus(-300, j, tex));
+            j += Grid.TILE_HEIGHT;
+       }
+    }
+
     public synchronized void createEnergy(){
         int x = new Random().nextInt(Grid.WIDTH - Grid.TILE_WIDTH) +
             Grid.TILE_WIDTH / 2 + Grid.BUS_OFFSET;
@@ -146,8 +158,16 @@ public class Game{
         zombieList.add(z);
     }
 
+    public void addBus(Bus z){
+        busList.add(z);
+    }
+
     public void removeZombie(Zombie z){
         zombieList.remove(z);
+    }
+
+    public void removeBus(Bus z){
+        busList.remove(z);
     }
 
     public void addEnergy(Energy e){
@@ -190,6 +210,10 @@ public class Game{
         return this.energyList;
     }
 
+    public ArrayList<Bus> getBusList(){
+        return this.busList;
+    }
+
     public ArrayList<EggWaffle> getEggWaffleList(){
         return this.eggWaffleList;
     }
@@ -211,6 +235,10 @@ public class Game{
 
         for (int i = 0; i<eggWaffleList.size();i++){
             eggWaffleList.get(i).tick();
+        }
+
+        for(int i = 0; i < busList.size(); i++){
+            busList.get(i).tick();
         }
     }
 }
