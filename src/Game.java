@@ -40,9 +40,7 @@ public class Game{
     }
 
     public void init() {
-        System.out.println("Hello");
-
-        this.energy = 0;
+        this.energy = 5000;
         this.grid = new Grid();
         this.pendingPlant = null;
         this.pendingButton = null;

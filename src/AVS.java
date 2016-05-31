@@ -23,18 +23,20 @@ public class AVS {
             Thread creditBG = new Thread(new HelpPanel.AssetLoader());
             creditBG.start();
 
-
-
             Thread progressBarThread = new Thread(new ProgressBarPanel.AssetLoader());
             progressBarThread.start();
 
             Thread energyBarThread = new Thread(new EnergyBar.AssetLoader());
             energyBarThread.start();
 
+            Thread bangaThread = new Thread(new Banga.AssetLoader());
+            bangaThread.start();
+
             bgThread1.join();
             bgThread2.join();
             progressBarThread.join();
             energyBarThread.join();
+            bangaThread.join();
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();

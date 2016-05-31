@@ -5,14 +5,17 @@ import avs.utils.Textures;
 import avs.models.Grid;
 
 import java.util.ArrayList;
+import java.io.File;
 import java.awt.image.*;
 import java.awt.*;
 
 import javax.swing.*;
+import javax.imageio.ImageIO;
 
 public class Banga extends Plant implements Runnable {
 	private Animator anim;
     private Rectangle deathZone;
+    private static BufferedImage deathZoneImg;
 
     public Banga(Textures texx){
 		super(95, 159, 150, texx);
@@ -31,8 +34,10 @@ public class Banga extends Plant implements Runnable {
 	public void render(Graphics g){
 		//g.drawImage(busImage, (int)this.getX(), (int)this.getY(), null);
         if (this.deathZone != null) {
-            g.setColor(new Color(123, 17, 19, 128));
-            ((Graphics2D) g).fill(this.deathZone);
+            //g.setColor(new Color(123, 17, 19, 128));
+            //((Graphics2D) g).fill(this.deathZone);
+            g.drawImage(deathZoneImg, (int)deathZone.getX(), (int)deathZone.getY(),
+                (int)deathZone.getWidth(), (int)deathZone.getHeight(), null);
         }
 
 		anim.drawAnimation(g,getX(),getY(),width,height,0);
@@ -74,5 +79,16 @@ public class Banga extends Plant implements Runnable {
     @Override
     public void setY(double y) {
         super.setY(y - 26);
+    }
+
+    public static class AssetLoader implements Runnable {
+        public void run() {
+            try {
+                Banga.deathZoneImg = ImageIO.read(new File("../assets/img/area-of-death.png"));
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
+        }
     }
 }
