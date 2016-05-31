@@ -29,6 +29,7 @@ public class GamePanel extends JPanel implements Runnable {
     private Thread thread;
     private ProgressBarPanel progressBarPanel;
     private EnergyBar energyBar;
+    private PlantPickerPanel pickerPanel;
     private JPanel topPanel;
     private JButton inviBtn = new JButton();
 
@@ -55,15 +56,17 @@ public class GamePanel extends JPanel implements Runnable {
         progressBarPanel = new ProgressBarPanel();
         energyBar = new EnergyBar();
 
+        pickerPanel = new PlantPickerPanel(this.tex);
         westPanel.setOpaque(false);
         westPanel.add(energyBar, BorderLayout.WEST);
-        westPanel.add(new PlantPickerPanel(this.tex), BorderLayout.EAST);
+        westPanel.add(pickerPanel, BorderLayout.EAST);
 
         InGameMenuPanel igmp = new InGameMenuPanel(0);
         igmp.addAdditionalActionListerner(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 game.stop();
                 stop();
+                pickerPanel.reset();
             }
         });
 

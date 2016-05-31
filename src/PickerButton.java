@@ -18,6 +18,7 @@ public class PickerButton extends JButton implements Runnable {
     private int progress;
     private static final int SPEED = 100;
     private boolean isPending;
+    private Thread thread;
 
     private final ImageIcon defaultIcon;
     private final ImageIcon hoverIcon;
@@ -71,14 +72,21 @@ public class PickerButton extends JButton implements Runnable {
             this.isClickable = true;
             this.stopPending();
         } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            return;
         }
     }
 
     public void startCoolDown() {
         this.isClickable = false;
-        new Thread(this).start();
+        thread = new Thread(this);
+        thread.start();
+    }
+
+    public void reset() {
+        if (thread != null) thread.interrupt();
+        this.isClickable = true;
+        this.stopPending();
+        this.repaint();
     }
 
     @Override

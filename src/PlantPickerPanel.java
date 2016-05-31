@@ -12,37 +12,53 @@ import java.awt.image.*;
 import java.io.*;
 
 public class PlantPickerPanel extends JPanel{
+    private PickerButton kopiko;
+    private PickerButton tower;
+    private PickerButton banga;
+    private PickerButton tc7;
 
     public PlantPickerPanel(Textures tex) {
         super();
         this.setOpaque(false);
-        this.add(new PickerButton(
+
+        this.kopiko = new PickerButton(
             scaleImageIcon(new ImageIcon("../assets/img/buttons/kopiko_picker/kopiko_picker_default.png")),
             scaleImageIcon(new ImageIcon("../assets/img/buttons/kopiko_picker/kopiko_picker_hover.png")),
             new PlantFactory(PlantFactory.KOPIKO, tex), 40
-        ));
+        );
+        this.add(this.kopiko);
 
-        this.add(new PickerButton(
+        this.tower = new PickerButton(
             scaleImageIcon(new ImageIcon("../assets/img/buttons/kwekkwek_picker/kwekkwek_picker_default.png")),
             scaleImageIcon(new ImageIcon("../assets/img/buttons/kwekkwek_picker/kwekkwek_picker_hover.png")),
             new PlantFactory(PlantFactory.TOWER, tex), 60
-        ));
+        );
+        this.add(this.tower);
 
-        this.add(new PickerButton(
+        this.banga = new PickerButton(
             scaleImageIcon(new ImageIcon("../assets/img/buttons/banga_picker/banga_picker_default.png")),
             scaleImageIcon(new ImageIcon("../assets/img/buttons/banga_picker/banga_picker_hover.png")),
             new PlantFactory(PlantFactory.BANGA, tex), 200
-        ));
+        );
+        this.add(this.banga);
 
-        this.add(new PickerButton(
+        this.tc7 = new PickerButton(
             scaleImageIcon(new ImageIcon("../assets/img/buttons/tc7_picker/tc7_picker_default.png")),
             scaleImageIcon(new ImageIcon("../assets/img/buttons/tc7_picker/tc7_picker_hover.png")),
             new PlantFactory(PlantFactory.TC7, tex), 75
-        ));
+        );
+        this.add(this.tc7);
     }
 
     private ImageIcon scaleImageIcon(ImageIcon icon) {
         Image scaledImg = icon.getImage().getScaledInstance(100, 60, java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(scaledImg);
+    }
+
+    void reset() {
+        this.kopiko.reset();
+        this.tower.reset();
+        this.banga.reset();
+        this.tc7.reset();
     }
 }
