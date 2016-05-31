@@ -5,7 +5,6 @@ import avs.utils.Textures;
 import avs.utils.CollisionChecker;
 import avs.ui.MainFrame;
 
-import java.util.ArrayList;
 import java.awt.image.*;
 import java.awt.*;
 

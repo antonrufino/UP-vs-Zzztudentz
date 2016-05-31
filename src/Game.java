@@ -7,13 +7,14 @@ import avs.utils.Animator;
 import avs.utils.Textures;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Game{
     private static Game instance = new Game();
-    private ArrayList<Zombie> zombieList;
-    private ArrayList<Energy> energyList;
-    private ArrayList<EggWaffle> eggWaffleList;
-    private ArrayList<Bus> busList;
+    private CopyOnWriteArrayList<Zombie> zombieList;
+    private CopyOnWriteArrayList<Energy> energyList;
+    private CopyOnWriteArrayList<EggWaffle> eggWaffleList;
+    private CopyOnWriteArrayList<Bus> busList;
 
     private int energy;
 
@@ -38,7 +39,7 @@ public class Game{
     }
 
     public void init() {
-        this.energy = 0;
+        this.energy = 5000;
         this.grid = new Grid();
         this.pendingPlant = null;
         this.pendingButton = null;
@@ -48,10 +49,10 @@ public class Game{
         this.zombieThread = new ZombieSummoner();
         this.energyThread = new EnergyMaker();
 
-        zombieList = new ArrayList<Zombie>();
-        energyList = new ArrayList<Energy>();
-        eggWaffleList = new ArrayList<EggWaffle>();
-        busList = new ArrayList<Bus>();
+        zombieList = new CopyOnWriteArrayList<Zombie>();
+        energyList = new CopyOnWriteArrayList<Energy>();
+        eggWaffleList = new CopyOnWriteArrayList<EggWaffle>();
+        busList = new CopyOnWriteArrayList<Bus>();
 
         createBus();
 
@@ -194,19 +195,19 @@ public class Game{
         return this.tower;
     }
 
-    public synchronized ArrayList<Zombie> getZombieList(){
+    public synchronized CopyOnWriteArrayList<Zombie> getZombieList(){
         return this.zombieList;
     }
 
-    public synchronized ArrayList<Energy> getEnergyList(){
+    public synchronized CopyOnWriteArrayList<Energy> getEnergyList(){
         return this.energyList;
     }
 
-    public ArrayList<Bus> getBusList(){
+    public CopyOnWriteArrayList<Bus> getBusList(){
         return this.busList;
     }
 
-    public synchronized ArrayList<EggWaffle> getEggWaffleList(){
+    public synchronized CopyOnWriteArrayList<EggWaffle> getEggWaffleList(){
         return this.eggWaffleList;
     }
 
@@ -224,25 +225,26 @@ public class Game{
         Iterator<Zombie> zIter = zombieList.iterator();
         while (zIter.hasNext()) {
             Zombie z = zIter.next();
-            if (!z.isAlive()) zIter.remove();
+            if (!z.isAlive()) removeZombie(z);
             else z.tick();
         }
 
-        for (int i = 0; i<energyList.size(); i++){
-            energyList.get(i).tick();
+        Iterator<Energy> enIter = energyList.iterator();
+        while (enIter.hasNext()){
+            enIter.next().tick();
         }
 
         Iterator<EggWaffle> eIter = eggWaffleList.iterator();
         while (eIter.hasNext()) {
             EggWaffle e = eIter.next();
-            if (!e.isAlive()) eIter.remove();
+            if (!e.isAlive()) removeEggWaffle(e);
             else e.tick();
         }
 
         Iterator<Bus> bIter = busList.iterator();
         while (bIter.hasNext()) {
             Bus b = bIter.next();
-            if (!b.isAlive()) bIter.remove();
+            if (!b.isAlive()) removeBus(b);
             else b.tick();
         }
     }

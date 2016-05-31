@@ -23,7 +23,6 @@ public class ZombieSummoner implements Runnable{
             		}
             		isHugeWave = false;
             	}
-
             }
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
