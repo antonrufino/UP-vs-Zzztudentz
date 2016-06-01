@@ -9,7 +9,6 @@ import java.awt.event.*;
 
 public class AVS {
     public static void main(String[] args) {
-        // Demo goes here
         try {
             Thread bgThread2 = new Thread(new MainMenuPanel.AssetLoader());
             bgThread2.start();

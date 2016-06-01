@@ -1,3 +1,5 @@
+// This is where the game will be played
+
 package avs.ui;
 
 import avs.models.Grid;
@@ -267,6 +269,8 @@ public class GamePanel extends JPanel implements Runnable {
                 public void mousePressed(MouseEvent e){}
                 public void mouseReleased(MouseEvent e){
                     stop();
+                    game.stop();
+                    pickerPanel.reset();
                 }
             });
             this.add(inviBtn, BorderLayout.CENTER);

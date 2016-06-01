@@ -28,7 +28,7 @@ public class EggWaffle extends Entity{
 
 			if(CollisionChecker.isColliding(z,this)){
 				this.alive = false;
-				z.damageRec(50);
+				z.damageRec(70);
 			}
 		}
 	}
