@@ -51,12 +51,12 @@ public class MainMenuPanel extends JPanel {
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
-        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR); //Smoothens the rendering of scaled bg
         super.paintComponent(g);
 
         try {
             g2d.drawImage(MainMenuPanel.bg, 0, 0,
-                this.getWidth(), this.getHeight(), null);
+                this.getWidth(), this.getHeight(), null); //Draws the BG image
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
