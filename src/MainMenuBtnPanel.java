@@ -20,12 +20,12 @@ public class MainMenuBtnPanel extends JPanel{
 
     }
 
-    private ImageIcon scaleImageIcon(ImageIcon icon, int width, int height) {
+    private ImageIcon scaleImageIcon(ImageIcon icon, int width, int height) { //Scales button image
         Image scaledImg = icon.getImage().getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(scaledImg);
     }
 
-    private JPanel createBtn(final GamePanel gamePanel, int width, int height){
+    private JPanel createBtn(final GamePanel gamePanel, int width, int height){ //Setup the states of the button
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
         panel.setPreferredSize(new Dimension(width, height));
@@ -49,7 +49,7 @@ public class MainMenuBtnPanel extends JPanel{
         return panel;
     }
 
-    private JPanel createSubBtn(int type, int width, int height){
+    private JPanel createSubBtn(int type, int width, int height){ //Setups the states of the sub btns
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
         panel.setPreferredSize(new Dimension(width, height));

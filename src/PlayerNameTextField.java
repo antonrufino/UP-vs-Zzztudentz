@@ -23,14 +23,10 @@ public class PlayerNameTextField extends JTextField{
     }
     public Font loadFont(){
         try {
-            //Returned font is of pt size 1
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("../assets/fonts/FREESCPT.TTF"));
-            //Derive and return a 12 pt version:
-            //Need to use float otherwise
-            //it would be interpreted as style
-            return font.deriveFont(30f);
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("../assets/fonts/FREESCPT.TTF")); //loads the font
+            return font.deriveFont(30f); //returns the font with the size of 30f;
         } catch (IOException|FontFormatException e) {
-            return null;// Handle exception
+            return null;
         }
     }
     public void addListeners(){

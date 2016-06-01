@@ -20,7 +20,7 @@ public class InGameMenuPanel extends JPanel{
         );
         this.setPreferredSize(new Dimension(65,40));
     }
-    private ImageIcon scaleImageIcon(ImageIcon icon) {
+    private ImageIcon scaleImageIcon(ImageIcon icon) { //Scales the button
         Image scaledImg = icon.getImage().getScaledInstance(49, 30, java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(scaledImg);
     }
@@ -36,7 +36,7 @@ public class InGameMenuPanel extends JPanel{
         btn.setBorderPainted(false);
         btn.setPreferredSize(new Dimension(49,30));
 
-        btn.addMouseListener(new MouseListener(){
+        btn.addMouseListener(new MouseListener(){ //Set the hovering of the button
             public void mouseEntered(MouseEvent me){
                 btn.setIcon(hoverIcon);
             }
