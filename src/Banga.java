@@ -5,7 +5,7 @@ import avs.utils.Textures;
 import avs.utils.BufferedImageLoader;
 import avs.models.Grid;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.io.File;
 import java.awt.image.*;
 import java.awt.*;
@@ -66,8 +66,10 @@ public class Banga extends Plant implements Runnable {
 
     //iterates through the Zombie list and if intersects or it is contained in the bounds of the Banga, it will die
     public void killZombies() {
-        for (int i = 0; i < Game.getInstance().getZombieList().size(); ++i) {
-            Zombie z = Game.getInstance().getZombieList().get(i);
+        Iterator<Zombie> iter = Game.getInstance().getZombieList().iterator();
+        while (iter.hasNext()) {
+            Zombie z = iter.next();
+            if (z == null) return;
             if (deathZone.intersects(z.getBounds()) || deathZone.contains(z.getBounds())) {
                 z.kill();
             }
