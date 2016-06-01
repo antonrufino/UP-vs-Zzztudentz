@@ -26,12 +26,12 @@ import javax.swing.*;
 import java.util.Iterator;
 
 public class GamePanel extends JPanel implements Runnable {
-    private Game game;
+    private Game game; // Instance of game singleton class
     private boolean running;
-    private Thread thread;
+    private Thread thread; // Game thread
     private ProgressBarPanel progressBarPanel;
     private EnergyBar energyBar;
-    private PlantPickerPanel pickerPanel;
+    private PlantPickerPanel pickerPanel; // Panel containing buttons where players can choose plants.
     private JPanel topPanel;
     private JButton inviBtn;
     private int renderFlag;

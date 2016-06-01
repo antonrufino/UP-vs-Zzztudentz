@@ -68,8 +68,8 @@ public class Zombie extends Entity implements Runnable{
 				if(!this.isAlive()){
 					break;
 				}
+                Thread.sleep(1000);
 				this.target.reduceHp(this.damage);
-				Thread.sleep(1000);
 			}
 
 			this.target = null;
