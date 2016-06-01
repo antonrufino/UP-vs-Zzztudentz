@@ -1,29 +1,27 @@
 # UP vs. Zzztudentz
 As if Plants vs. Zombies wasn't crazy enough already.
 
-## Building and running the game
+## Running the JAR file
+Run `java -jar UPvZ.jar` or double click if using Windows.
+
+## Building the game
 1. Download a copy of the source code and the assets. You can do this by clicking "Clone or download" on the upper right or by going to Releases and picking the version of the code you want.
 2. Extract code from the zip archive.
 3. Navigate to the project directory/folder using cmd or terminal.
 
-### Ubuntu (might work on Mac)
-First time build and run:
+#### Ubuntu (might work on Mac)
+First time build:
 ``` bash
 mkdir bin
-make build
+make
 ```
 
-All subsequent calls to `make build` will build and run the game.
+All subsequent calls to `make` will build the game.
 
-### Windows
-1. Create a bin directory in the project folder.
-2. To compile
+#### Windows
+Create a bin directory in the project folder then run:
 ```
 javac -d bin src/*.java
-```
-3. To run
-```
-java avs.avs
 ```
 
 ## Known issues
