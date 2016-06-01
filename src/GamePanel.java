@@ -68,6 +68,7 @@ public class GamePanel extends JPanel implements Runnable {
         westPanel.add(energyBar, BorderLayout.WEST);
         westPanel.add(pickerPanel, BorderLayout.EAST);
 
+        // Stops game.
         InGameMenuPanel igmp = new InGameMenuPanel(0);
         igmp.addAdditionalActionListerner(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -96,7 +97,7 @@ public class GamePanel extends JPanel implements Runnable {
             public void mouseReleased(MouseEvent me){}
             public void mousePressed(MouseEvent me){}
             public void mouseClicked(MouseEvent me){
-
+                // A mouse click can collect energy or place a plant on the grid.
                 Point p = me.getPoint();
                 if (game.getSelectedPlant() != null) game.placePlant(p);
                 game.collectEnergy(p);
@@ -151,6 +152,8 @@ public class GamePanel extends JPanel implements Runnable {
 
         running = false;
     }
+
+    // Rendering functions.
 
     @Override
     public void paintComponent(Graphics g) {
@@ -291,6 +294,7 @@ public class GamePanel extends JPanel implements Runnable {
         return GamePanel.spriteSheet;
     }
 
+    // Asynchronously loads assets.
     public static class AssetLoader implements Runnable {
         @Override
         public void run() {
