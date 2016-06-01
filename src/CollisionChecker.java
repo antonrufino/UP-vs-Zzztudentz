@@ -1,10 +1,15 @@
-package avs.utils;
+package avs.utils; 
 
 import java.awt.image.*;
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
 import avs.models.*;
+
+/************************************************************************
+	This class will be responsible for checking if there is a collosion
+	between a zombie and other entities.
+*************************************************************************/
 
 public class CollisionChecker{
 	public static boolean isColliding(Entity z, ArrayList<Entity> entityList){
