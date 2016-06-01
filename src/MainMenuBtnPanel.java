@@ -32,8 +32,12 @@ public class MainMenuBtnPanel extends JPanel{
         panel.setOpaque(false);
 
         MainMenuBtn button = new MainMenuBtn(
-            scaleImageIcon(new ImageIcon("../assets/img/buttons/main_menu_btns/play-default.png"), width, height),
-            scaleImageIcon(new ImageIcon("../assets/img/buttons/main_menu_btns/play-hover.png"), width, height),
+            scaleImageIcon(new ImageIcon(getClass()
+                .getResource("/assets/img/buttons/main_menu_btns/play-default.png")),
+                width, height),
+            scaleImageIcon(new ImageIcon(getClass()
+                .getResource("/assets/img/buttons/main_menu_btns/play-hover.png")),
+                width, height),
             width, 45
         );
 
@@ -56,17 +60,25 @@ public class MainMenuBtnPanel extends JPanel{
         panel.setOpaque(false);
         if(type == 1){
             MainMenuBtn button = new MainMenuBtn(
-                scaleImageIcon(new ImageIcon("../assets/img/buttons/main_menu_btns/help-default.png"), width-OPTIONAL_OFFSET, height),
-                scaleImageIcon(new ImageIcon("../assets/img/buttons/main_menu_btns/help-hover.png"), width-OPTIONAL_OFFSET, height),
-                width-OPTIONAL_OFFSET, height
+                scaleImageIcon(new ImageIcon(getClass()
+                    .getResource("/assets/img/buttons/main_menu_btns/help-default.png")),
+                    width-OPTIONAL_OFFSET, height),
+                scaleImageIcon(new ImageIcon(getClass()
+                    .getResource("/assets/img/buttons/main_menu_btns/help-hover.png")),
+                    width-OPTIONAL_OFFSET, height),
+                    width-OPTIONAL_OFFSET, height
             );
             button.addActionListener(new MainFrame.SwitchPanelAction(MainFrame.HELP));
             panel.add(button, BorderLayout.EAST);
         }
         else if(type == 2){
             MainMenuBtn button = new MainMenuBtn(
-                scaleImageIcon(new ImageIcon("../assets/img/buttons/main_menu_btns/credits-default.png"), width-OPTIONAL_OFFSET, height),
-                scaleImageIcon(new ImageIcon("../assets/img/buttons/main_menu_btns/credits-hover.png"), width-OPTIONAL_OFFSET, height),
+                scaleImageIcon(new ImageIcon(getClass()
+                    .getResource("/assets/img/buttons/main_menu_btns/credits-default.png")),
+                    width-OPTIONAL_OFFSET, height),
+                scaleImageIcon(new ImageIcon(getClass()
+                    .getResource("/assets/img/buttons/main_menu_btns/credits-hover.png")),
+                    width-OPTIONAL_OFFSET, height),
                 width-OPTIONAL_OFFSET, height
             );
             button.addActionListener(new MainFrame.SwitchPanelAction(MainFrame.CREDITS));
@@ -74,8 +86,12 @@ public class MainMenuBtnPanel extends JPanel{
         }
         else if(type == 3){
             MainMenuBtn button = new MainMenuBtn(
-                scaleImageIcon(new ImageIcon("../assets/img/buttons/main_menu_btns/quit-default.png"), width-OPTIONAL_OFFSET, height),
-                scaleImageIcon(new ImageIcon("../assets/img/buttons/main_menu_btns/quit-hover.png"), width-OPTIONAL_OFFSET, height),
+                scaleImageIcon(new ImageIcon(getClass()
+                    .getResource("/assets/img/buttons/main_menu_btns/quit-default.png")),
+                    width-OPTIONAL_OFFSET, height),
+                scaleImageIcon(new ImageIcon(getClass()
+                    .getResource("/assets/img/buttons/main_menu_btns/quit-hover.png")),
+                    width-OPTIONAL_OFFSET, height),
                 width-OPTIONAL_OFFSET, height
             );
             button.addMouseListener(new MouseListener(){

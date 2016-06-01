@@ -18,7 +18,7 @@ public class EnergyBar extends JPanel{
 
     public EnergyBar(){
         super();
-        icon = new ImageIcon(getClass().getResource("/assets/energy_counter/energy_counter_notext.png"));
+        icon = new ImageIcon(getClass().getResource("/assets/img/counters/energy_counter/energy_counter_notext.png"));
         this.setPreferredSize(new Dimension(121, 60));
         value = new JLabel("0");
         this.setOpaque(false);
@@ -35,16 +35,17 @@ public class EnergyBar extends JPanel{
 
     public Font loadFont(){
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("../assets/fonts/comixloud.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, getClass()
+                .getResourceAsStream("/assets/fonts/comixloud.ttf"));
             return font.deriveFont(9.5f);
         } catch (IOException|FontFormatException e) {
             return null;// Handle exception
         }
     }
 
-    public static Font loadFont(Float size, File file){ //Loads font with size and file directory
+    public static Font loadFont(Float size, InputStream stream){ //Loads font with size and file directory
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, file);
+            Font font = Font.createFont(Font.TRUETYPE_FONT, stream);
             return font.deriveFont(size);
         } catch (IOException|FontFormatException e) {
             return null;

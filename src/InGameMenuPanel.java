@@ -15,8 +15,8 @@ public class InGameMenuPanel extends JPanel{
         super();
         this.setOpaque(false);
         this.addBtn(type,
-            scaleImageIcon(new ImageIcon("../assets/img/buttons/menu/menu_default.png")),
-            scaleImageIcon(new ImageIcon("../assets/img/buttons/menu/menu_hover.png"))
+            scaleImageIcon(new ImageIcon(getClass().getResource("/assets/img/buttons/menu/menu_default.png"))),
+            scaleImageIcon(new ImageIcon(getClass().getResource("/assets/img/buttons/menu/menu_hover.png")))
         );
         this.setPreferredSize(new Dimension(65,40));
     }

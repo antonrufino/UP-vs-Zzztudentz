@@ -207,15 +207,15 @@ public class GamePanel extends JPanel implements Runnable {
 
             g2d.setColor(new Color(0,0,0,128));
             g2d.fillRect(0, 0, getWidth(), getHeight());
-            g2d.setFont(EnergyBar.loadFont(40f, new File("../assets/fonts/Adventure.otf")));
+            g2d.setFont(EnergyBar.loadFont(40f, getClass().getResourceAsStream("/assets/fonts/Adventure.otf")));
             g2d.setColor(Color.WHITE);
             g2d.drawString("YOUR SCORE", MainFrame.WIDTH/2 -80, 90);
 
-            g2d.setFont(EnergyBar.loadFont(120f, new File("../assets/fonts/Adventure.otf")));
+            g2d.setFont(EnergyBar.loadFont(120f, getClass().getResourceAsStream("/assets/fonts/Adventure.otf")));
             g2d.setColor(Color.WHITE);
             g2d.drawString(Integer.toString(score), MainFrame.WIDTH/2 -10, 200);
 
-            g2d.setFont(EnergyBar.loadFont(30f, new File("../assets/fonts/Adventure.otf")));
+            g2d.setFont(EnergyBar.loadFont(30f, getClass().getResourceAsStream("/assets/fonts/Adventure.otf")));
             g2d.setColor(Color.YELLOW);
 
             if(PlayerNameTextField.name == ""){
@@ -225,7 +225,7 @@ public class GamePanel extends JPanel implements Runnable {
                 g2d.drawString(PlayerNameTextField.name.toUpperCase(), MainFrame.WIDTH/2 -30, 250);
             }
 
-            g2d.setFont(EnergyBar.loadFont(20f, new File("../assets/fonts/Adventure.otf")));
+            g2d.setFont(EnergyBar.loadFont(20f, getClass().getResourceAsStream("/assets/fonts/Adventure.otf")));
             g2d.setColor(Color.WHITE);
             g2d.drawString("CLICK ANYWHERE TO CONTINUE", MainFrame.WIDTH/2 -110, 600);
             topPanel.setVisible(false);
