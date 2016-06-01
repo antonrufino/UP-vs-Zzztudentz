@@ -1,10 +1,14 @@
-package avs.utils;
+package avs.utils; 
 
 import java.util.ArrayList;
 import java.awt.image.*;
 import java.awt.*;
 
 import javax.swing.*;
+
+/************************************************************************
+	This class will be responsible for animating the images in the game.
+*************************************************************************/
 
 public class Animator{
 	private BufferedImage[] images;
