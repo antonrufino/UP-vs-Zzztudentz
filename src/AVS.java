@@ -11,7 +11,6 @@ import java.awt.event.*;
 
 public class AVS {
     public static void main(String[] args) {
-        // Demo goes here
         try {
             // Thread for loading different imagesn needed by game.
             Thread bgThread2 = new Thread(new MainMenuPanel.AssetLoader());
