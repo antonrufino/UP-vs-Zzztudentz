@@ -98,39 +98,10 @@ public class GamePanel extends JPanel implements Runnable {
             public void mouseClicked(MouseEvent me){
 
                 Point p = me.getPoint();
-                if (game.getSelectedPlant() != null) placePlant(p);
-                collectEnergy(p);
+                if (game.getSelectedPlant() != null) game.placePlant(p);
+                game.collectEnergy(p);
             }
         });
-    }
-
-    private void placePlant(Point p) {
-        for (int i = 0; i < Grid.ROWS; ++i) {
-            for (int j = 0; j < Grid.COLS; ++j) {
-                Rectangle rect = game.getGrid().getRectangle(i, j);
-                if (rect.contains(p)) {
-                    if (!game.getGrid().hasPlant(i, j)) {
-                        game.getGrid().setPlant(i, j, game.getSelectedPlant());
-                        game.getSelectedPlant().start();
-                        game.reduceEnergy();
-                        game.startButtonCoolDown();
-                        game.setPendingButton(null);
-                        game.selectPlant(null);
-                    }
-                    return;
-                }
-            }
-        }
-    }
-
-    private void collectEnergy(Point p) {
-        for (int i = 0; i < game.getEnergyList().size(); ++i) {
-            Energy e = game.getEnergyList().get(i);
-            if (e.getBounds().contains(p)) {
-                game.increaseEnergy(e.getAmount());
-                game.getEnergyList().remove(e);
-            }
-        }
     }
 
     public void run(){

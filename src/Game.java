@@ -8,6 +8,8 @@ import avs.utils.Textures;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.awt.Rectangle;
+import java.awt.Point;
 
 public class Game{
     private static Game instance = new Game();
@@ -79,6 +81,35 @@ public class Game{
         busList.clear();
 
         grid.killPlants();
+    }
+
+    public void placePlant(Point p) {
+        for (int i = 0; i < Grid.ROWS; ++i) {
+            for (int j = 0; j < Grid.COLS; ++j) {
+                Rectangle rect = grid.getRectangle(i, j);
+                if (rect.contains(p)) {
+                    if (!grid.hasPlant(i, j)) {
+                        grid.setPlant(i, j, this.getSelectedPlant());
+                        this.getSelectedPlant().start();
+                        this.reduceEnergy();
+                        this.startButtonCoolDown();
+                        this.setPendingButton(null);
+                        this.selectPlant(null);
+                    }
+                    return;
+                }
+            }
+        }
+    }
+
+    public void collectEnergy(Point p) {
+        for (int i = 0; i < energyList.size(); ++i) {
+            Energy e = energyList.get(i);
+            if (e.getBounds().contains(p)) {
+                this.increaseEnergy(e.getAmount());
+                energyList.remove(e);
+            }
+        }
     }
 
     public void killZombies() {
