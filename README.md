@@ -1,19 +1,31 @@
-# CMSC-22-Acads-VS-Students
-Private repository for project in CMSC 22.
+# UP vs. Zzztudentz
+As if Plants vs. Zombies wasn't crazy enough already.
 
-## WEEK 1
-- Make moving zombies
-- Make moving plants
-- Make falling energy
-- Make Plants and Zombies kill each other.
+## Building and running the game
+1. Download a copy of the source code and the assets. You can do this by clicking "Clone or download" on the upper right.
+2. Extract code from the zip archive.
+3. Navigate to the project directory/folder using cmd or terminal.
 
-## WEEK 2
-- Implement lanes
-- Implement levels
+### Ubuntu (might work on Mac)
+First time build and run:
+``` bash
+mkdir bin
+make build
+```
 
-## WEEK 3
-- Settings
-- File I/O
+All subsequent calls to `make build` will build and run the game.
 
-## WEEK 4
-- Finalization
+### Windows
+1. Create a bin directory in the project folder.
+2. To compile
+```
+javac -d bin src/*.java
+```
+3. To run
+```
+java avs.avs
+```
+
+## Known issues
+1. This game has been known to use up a large amount of resources. It may lag on low spec computers.
+2. An OutOfMemoryError is sometimes thrown on computers running Windows. No solution found as of writing.
