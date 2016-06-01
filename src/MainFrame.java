@@ -50,7 +50,7 @@ public class MainFrame extends JFrame {
     // Set icon for window.
     public void setFrameIcon(){
         try{
-            Image image = new ImageIcon("../assets/img/icon.png").getImage();
+            Image image = new ImageIcon(getClass().getResource("/assets/img/icon.png")).getImage();
             this.setIconImage(image);
         }catch(Exception e){
             System.out.println(e.getMessage());
