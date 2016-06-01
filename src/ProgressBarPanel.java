@@ -1,6 +1,7 @@
 package avs.ui;
 
 import avs.models.*;
+import avs.utils.BufferedImageLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -73,11 +74,10 @@ public class ProgressBarPanel extends JPanel {
         @Override
         public void run() {
             try {
-                ProgressBarPanel.progressBar = ImageIO.read(
-                    new File("../assets/img/counters/wave_counter/wave_counter_empty.png"));
-
-                ProgressBarPanel.zombieHead = ImageIO.read(
-                    new File("../assets/img/counters/wave_counter/wave_counter_seek.png"));
+                ProgressBarPanel.progressBar = new BufferedImageLoader()
+                    .loadImage("/assets/img/counters/wave_counter/wave_counter_empty.png");
+                ProgressBarPanel.zombieHead = new BufferedImageLoader()
+                    .loadImage("/assets/img/counters/wave_counter/wave_counter_seek.png");
             } catch (IOException e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();

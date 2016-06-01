@@ -1,5 +1,7 @@
 package avs.ui;
 
+import avs.utils.BufferedImageLoader;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -37,8 +39,7 @@ public class HelpPanel extends JPanel {
         @Override
         public void run() {
             try {
-                HelpPanel.bg = ImageIO.read(
-                    new File("../assets/img/help.png"));
+                HelpPanel.bg = new BufferedImageLoader().loadImage("/assets/img/help.png");
             } catch (IOException e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();

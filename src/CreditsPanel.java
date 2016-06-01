@@ -2,6 +2,8 @@
 
 package avs.ui;
 
+import avs.utils.BufferedImageLoader;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -40,8 +42,7 @@ public class CreditsPanel extends JPanel {
         @Override
         public void run() {
             try {
-                CreditsPanel.bg = ImageIO.read(
-                    new File("../assets/img/credits.png"));
+                CreditsPanel.bg = new BufferedImageLoader().loadImage("/assets/img/credits.png");
             } catch (IOException e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();

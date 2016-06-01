@@ -301,8 +301,8 @@ public class GamePanel extends JPanel implements Runnable {
             BufferedImageLoader loader = new BufferedImageLoader();
 
             try {
-                GamePanel.bg = loader.loadImage("../assets/img/background.png");
-                GamePanel.spriteSheet = loader.loadImage("../assets/img/spritesheets/spritesheet-fullres.png");
+                GamePanel.bg = loader.loadImage("/assets/img/background.png");
+                GamePanel.spriteSheet = loader.loadImage("/assets/img/spritesheets/spritesheet-fullres.png");
             } catch (IOException e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();

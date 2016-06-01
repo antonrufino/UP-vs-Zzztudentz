@@ -2,6 +2,7 @@ package avs.models;
 
 import avs.utils.Animator;
 import avs.utils.Textures;
+import avs.utils.BufferedImageLoader;
 import avs.models.Grid;
 
 import java.util.ArrayList;
@@ -82,7 +83,7 @@ public class Banga extends Plant implements Runnable {
     public static class AssetLoader implements Runnable {
         public void run() {
             try {
-                Banga.deathZoneImg = ImageIO.read(new File("../assets/img/area-of-death.png"));
+                Banga.deathZoneImg = new BufferedImageLoader().loadImage("/assets/img/area-of-death.png");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();

@@ -1,6 +1,7 @@
 package avs.ui;
 
 import avs.models.Game;
+import avs.utils.BufferedImageLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -68,8 +69,7 @@ public class MainMenuPanel extends JPanel {
         @Override
         public void run() {
             try {
-                MainMenuPanel.bg = ImageIO.read(
-                    new File("../assets/img/main-menu.png"));
+                MainMenuPanel.bg = new BufferedImageLoader().loadImage("/assets/img/main-menu.png");
             } catch (IOException e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();

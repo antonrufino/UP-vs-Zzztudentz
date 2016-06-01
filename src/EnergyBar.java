@@ -2,6 +2,8 @@
 
 package avs.ui;
 
+import avs.utils.BufferedImageLoader;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
@@ -16,7 +18,7 @@ public class EnergyBar extends JPanel{
 
     public EnergyBar(){
         super();
-        icon = new ImageIcon("../assets/energy_counter/energy_counter_notext.png");
+        icon = new ImageIcon(getClass().getResource("/assets/energy_counter/energy_counter_notext.png"));
         this.setPreferredSize(new Dimension(121, 60));
         value = new JLabel("0");
         this.setOpaque(false);
@@ -79,8 +81,8 @@ public class EnergyBar extends JPanel{
         @Override
         public void run() {
             try {
-                EnergyBar.bg = ImageIO.read(
-                    new File("../assets/img/counters/energy_counter/energy_counter_notext.png"));
+                EnergyBar.bg = new BufferedImageLoader()
+                    .loadImage("/assets/img/counters/energy_counter/energy_counter_notext.png");
             } catch (IOException e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();
