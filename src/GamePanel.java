@@ -197,13 +197,13 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    private void renderHighScore(Graphics2D g2d){
+    private void renderHighScore(Graphics2D g2d){ //Checks if a Zombie goes beyond the size of the frame
         if(game.getGameState()){
             if(this.renderFlag == 0){
                 this.score = game.getZombieKilled() -1;
                 this.renderFlag += 1;
             }
-            g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //Smoothens the edges of the g2d
 
             g2d.setColor(new Color(0,0,0,128));
             g2d.fillRect(0, 0, getWidth(), getHeight());
@@ -235,8 +235,8 @@ public class GamePanel extends JPanel implements Runnable {
             inviBtn.setContentAreaFilled(false);
             inviBtn.setOpaque(false);
             inviBtn.setBorderPainted(false);
-            inviBtn.addActionListener(new MainFrame.SwitchPanelAction(MainFrame.MENU));
-            inviBtn.addMouseListener(new MouseListener(){
+            inviBtn.addActionListener(new MainFrame.SwitchPanelAction(MainFrame.MENU)); //Go back to the main menu
+            inviBtn.addMouseListener(new MouseListener(){ //Ends the game and resets the state of in-game buttons
                 public void mouseEntered(MouseEvent e){}
                 public void mouseExited(MouseEvent e){}
                 public void mouseClicked(MouseEvent e){}
