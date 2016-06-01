@@ -1,3 +1,5 @@
+// Panel for credits.
+
 package avs.ui;
 
 import javax.swing.*;
@@ -33,6 +35,7 @@ public class CreditsPanel extends JPanel {
         }
     }
 
+    // Asynchronously loads assets.
     public static class AssetLoader implements Runnable {
         @Override
         public void run() {

@@ -1,3 +1,5 @@
+// Shows amount of energy player has in the game.
+
 package avs.ui;
 
 import javax.swing.*;
@@ -28,6 +30,7 @@ public class EnergyBar extends JPanel{
         this.add(value, BorderLayout.CENTER);
 
     }
+
     public Font loadFont(){
         try {
             //Returned font is of pt size 1
@@ -37,6 +40,7 @@ public class EnergyBar extends JPanel{
             return null;// Handle exception
         }
     }
+
     public static Font loadFont(Float size, File file){
         try {
             Font font = Font.createFont(Font.TRUETYPE_FONT, file);
@@ -46,10 +50,12 @@ public class EnergyBar extends JPanel{
         }
     }
 
+    // Set value of energy bar
     public void setValue(int value) {
         this.value.setText(Integer.toString(value));
     }
 
+    // Get value of energy bar.
     public int getValue() {
         return Integer.parseInt(this.value.getText());
     }
@@ -69,6 +75,7 @@ public class EnergyBar extends JPanel{
         }
     }
 
+    // Asynchronously loads assets.
     public static class AssetLoader implements Runnable {
         @Override
         public void run() {
