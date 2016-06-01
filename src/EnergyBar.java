@@ -33,7 +33,6 @@ public class EnergyBar extends JPanel{
 
     public Font loadFont(){
         try {
-            //Returned font is of pt size 1
             Font font = Font.createFont(Font.TRUETYPE_FONT, new File("../assets/fonts/comixloud.ttf"));
             return font.deriveFont(9.5f);
         } catch (IOException|FontFormatException e) {
@@ -41,7 +40,7 @@ public class EnergyBar extends JPanel{
         }
     }
 
-    public static Font loadFont(Float size, File file){
+    public static Font loadFont(Float size, File file){ //Loads font with size and file directory
         try {
             Font font = Font.createFont(Font.TRUETYPE_FONT, file);
             return font.deriveFont(size);
