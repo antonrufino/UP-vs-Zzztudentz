@@ -2,7 +2,7 @@
 As if Plants vs. Zombies wasn't crazy enough already.
 
 ## Building and running the game
-1. Download a copy of the source code and the assets. You can do this by clicking "Clone or download" on the upper right.
+1. Download a copy of the source code and the assets. You can do this by clicking "Clone or download" on the upper right or by going to Releases and picking the version of the code you want.
 2. Extract code from the zip archive.
 3. Navigate to the project directory/folder using cmd or terminal.
 
