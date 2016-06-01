@@ -42,7 +42,7 @@ public class GamePanel extends JPanel implements Runnable {
     private Textures tex;
 
     public GamePanel() {
-        this.game = Game.getInstance();
+        this.game = Game.getInstance(); // Get an instance of the Game singleton class.
         this.tex = new Textures(this);
         this.running = false;
         this.game.setTextures(tex);
