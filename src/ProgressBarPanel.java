@@ -27,7 +27,7 @@ public class ProgressBarPanel extends JPanel {
         if(Game.getInstance().getZombieSummoner().getIsHugeWave())
             return;
 
-        if((Game.getInstance().getZombieKilled()/10)%2 != 0 || Game.getInstance().getZombieKilled() == 0){
+        if(Game.getInstance().getZombieKilled() % 10 == 0 && ((Game.getInstance().getZombieKilled()/10)%2 != 0 || Game.getInstance().getZombieKilled() == 0)){
             progress = 0;
             zombieKilled = 0;
         }else{

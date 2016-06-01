@@ -1,6 +1,11 @@
-package avs.utils;
+package avs.utils; 
 
 import java.awt.image.BufferedImage;
+
+/************************************************************************
+	This class will be responsible for loading the subimages from 
+	the spritesheet.
+*************************************************************************/
 
 public class SpriteSheet{
 	private BufferedImage image;

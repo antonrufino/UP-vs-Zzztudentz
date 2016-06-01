@@ -1,4 +1,4 @@
-package avs.utils;
+package avs.utils; 
 
 import avs.ui.GamePanel;
 
@@ -6,6 +6,11 @@ import java.awt.image.*;
 import java.awt.*;
 
 import javax.swing.*;
+
+/************************************************************************
+	This class will be responsible for placing different frames of
+	an objects animation into an array.
+*************************************************************************/
 
 public class Textures{
 
