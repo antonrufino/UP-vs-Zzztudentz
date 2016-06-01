@@ -13,7 +13,7 @@ public class SpriteSheet{
 		this.image = image;
 	}
 
-	public BufferedImage grabImage(int col, int row, int width, int height){
+	public BufferedImage grabImage(int col, int row, int width, int height){ //Grabs images from sprite sheet
 		if(row == 1){ //DLTB Sprites
 			this.img = image.getSubimage((H_OFFSET*col)+(width*(col-1)), V_OFFSET, width, height);
 		}
