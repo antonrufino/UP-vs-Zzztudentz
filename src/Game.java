@@ -309,8 +309,7 @@ public class Game{
             if (!z.isAlive()) {
                 z.kill();
                 removeZombie(z);
-            }
-            else {
+            } else {
                 if(z.getX() <= 0 -z.getWidth()){
                     this.hasLost = true;
                     z.kill();
