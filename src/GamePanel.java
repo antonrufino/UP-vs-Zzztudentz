@@ -99,8 +99,16 @@ public class GamePanel extends JPanel implements Runnable {
             public void mouseClicked(MouseEvent me){
                 // A mouse click can collect energy or place a plant on the grid.
                 Point p = me.getPoint();
-                if (game.getSelectedPlant() != null) game.placePlant(p);
-                game.collectEnergy(p);
+
+                if (p == null) return;
+
+                if (SwingUtilities.isLeftMouseButton(me)) {
+                    if (game.getSelectedPlant() != null)game.placePlant(p);
+                    else game.collectEnergy(p);
+                } else if (SwingUtilities.isRightMouseButton(me)) {
+                    if (game.getSelectedPlant() != null) game.undoSelectPlant();
+                    else game.removePlant(p);
+                }
             }
         });
     }

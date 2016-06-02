@@ -102,6 +102,26 @@ public class Game{
         }
     }
 
+    public void removePlant(Point p) {
+        for (int i = 0; i < Grid.ROWS; ++i) {
+            for (int j = 0; j < Grid.COLS; ++j) {
+                Rectangle rect = grid.getRectangle(i, j);
+                if (rect.contains(p)) {
+                    if (grid.hasPlant(i, j)) {
+                        grid.getPlant(i, j).kill();
+                        grid.setPlant(i, j, null);
+                    }
+                    return;
+                }
+            }
+        }
+    }
+
+    public void undoSelectPlant() {
+        this.setPendingButton(null);
+        this.selectPlant(null);
+    }
+
     public void collectEnergy(Point p) {
         for (int i = 0; i < energyList.size(); ++i) {
             Energy e = energyList.get(i);

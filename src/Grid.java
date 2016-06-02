@@ -52,7 +52,7 @@ public class Grid {
     }
 
     // Get the plant contained by a tile.
-    public Plant getPlant(int row, int col) {
+    public synchronized Plant getPlant(int row, int col) {
         return plants[row][col];
     }
 

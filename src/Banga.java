@@ -66,8 +66,7 @@ public class Banga extends Plant implements Runnable {
             this.kill();
             Game.getInstance().getGrid().setPlant(this.getRow(), this.getCol(), null);
         } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            return;
         }
     }
 
