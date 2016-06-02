@@ -17,23 +17,33 @@ public class Banga extends Plant implements Runnable {
 	private Animator anim; //animates this plant
     private Rectangle deathZone; //all the zombies that will come near this area will die
     private static BufferedImage deathZoneImg; //image for the death zone
+    private boolean killModeOn;
 
     public Banga(Textures texx){
 		super(95, 159, 150, texx);
 		this.animation = texx.getBangaStaticArray();
 		anim = new Animator(5,animation);
-        this.deathZone = null;
+        this.killModeOn = false;
 	}
 
+    @Override
+    public void start() {
+        int x = Grid.BUS_OFFSET + (this.getCol() - 1) * Grid.TILE_WIDTH;
+        int y = Grid.SIDEWALK_OFFSET + (this.getRow() - 1) * Grid.TILE_HEIGHT;
+        this.deathZone = new Rectangle(x + 1, y + 1, Grid.TILE_WIDTH * 3 - 2, Grid.TILE_HEIGHT * 3 - 2);
+
+        super.start();
+    }
+
 	public void tick(){
-        if (this.deathZone != null) killZombies();
+        if (this.killModeOn) killZombies();
 
         anim.setImages(this.animation);
 		anim.runAnimation();
 	}
 
 	public void render(Graphics g){
-        if (this.deathZone != null) {
+        if (this.killModeOn) {
             g.drawImage(deathZoneImg, (int)deathZone.getX(), (int)deathZone.getY(),
                 (int)deathZone.getWidth(), (int)deathZone.getHeight(), null);
         }
@@ -43,16 +53,13 @@ public class Banga extends Plant implements Runnable {
 
     public void run() {
         try {
-            int x = Grid.BUS_OFFSET + (this.getCol() - 1) * Grid.TILE_WIDTH;
-            int y = Grid.SIDEWALK_OFFSET + (this.getRow() - 1) * Grid.TILE_HEIGHT;
-
             Thread.sleep(3000);
 
-            this.deathZone = new Rectangle(x + 1, y + 1, Grid.TILE_WIDTH * 3 - 2, Grid.TILE_HEIGHT * 3 - 2);
+            this.killModeOn = true;
             this.animation = texx.getBangaSpinningArray();
             Thread.sleep(2000);
-            this.deathZone = null;
 
+            this.killModeOn = false;
             this.animation = texx.getBangaDyingArray();
             Thread.sleep(580);
 
@@ -70,6 +77,7 @@ public class Banga extends Plant implements Runnable {
         while (iter.hasNext()) {
             Zombie z = iter.next();
             if (z == null) continue;
+            if (deathZone == null) System.out.println(true);
             if (deathZone.intersects(z.getBounds()) || deathZone.contains(z.getBounds())) {
                 z.kill();
             }
