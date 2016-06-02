@@ -208,12 +208,18 @@ public class Game{
             Grid.TILE_WIDTH / 2 + Grid.BUS_OFFSET;
         int targetY = new Random().nextInt(Grid.HEIGHT - Grid.TILE_HEIGHT) +
             Grid.TILE_HEIGHT / 2 + Grid.SIDEWALK_OFFSET;
-        addEnergy(new Energy(x, 0, targetY, 50, tex));
+        Energy e = new Energy(x, 0, targetY, 50, tex);
+
+        addEnergy(e);
+        e.start();
     }
 
     //spawns energy from a kopiko
     public synchronized void createEnergy(Kopiko kopiko){
-        addEnergy(new Energy(kopiko.getX()+15, kopiko.getY()-20, kopiko.getY() + kopiko.getHeight() -50, 25, tex));
+        Energy e = new Energy(kopiko.getX()+15, kopiko.getY()-20, kopiko.getY() + kopiko.getHeight() -50, 25, tex);
+
+        addEnergy(e);
+        e.start();
     }
 
     //adds a bus to the list of buses
@@ -233,6 +239,7 @@ public class Game{
 
     //removes a zombie from the list of zombies
     public synchronized void removeZombie(Zombie z){
+        z.kill();
         zombieList.remove(z);
         zombieKilled += 1;
         if((zombieKilled / 10) % 2 != 0){
@@ -247,6 +254,7 @@ public class Game{
 
     //removes a energy from the list of energies
     public synchronized void removeEnergy(Energy e){
+        e.kill();
         energyList.remove(e);
     }
 
@@ -307,12 +315,10 @@ public class Game{
             Zombie z = zIter.next();
 
             if (!z.isAlive()) {
-                z.kill();
                 removeZombie(z);
             } else {
                 if(z.getX() <= 0 -z.getWidth()){
                     this.hasLost = true;
-                    z.kill();
                     removeZombie(z);
                 }
                 else z.tick();
@@ -321,7 +327,9 @@ public class Game{
 
         Iterator<Energy> enIter = energyList.iterator();
         while (enIter.hasNext()){
-            enIter.next().tick();
+            Energy e = enIter.next();
+            if (!e.isAlive()) removeEnergy(e);
+            else e.tick();
         }
 
         Iterator<EggWaffle> eIter = eggWaffleList.iterator();
