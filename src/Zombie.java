@@ -30,6 +30,7 @@ public class Zombie extends Entity implements Runnable{
 		anim = new Animator(5,animation);
 		this.target = null;
 	}
+
 	public void tick(){
 		this.x -= speed;
 		if (this.target == null) checkIfHitPlant();
@@ -40,20 +41,19 @@ public class Zombie extends Entity implements Runnable{
 
 	//if it collides with a plant, it starts the thread that will reduce the hp of the plant it is collided with
 	private void checkIfHitPlant() {
-		for (int i = 0; i < Grid.ROWS; ++i) {
-            for (int j = 0; j < Grid.COLS; ++j) {
-            	Plant p = Game.getInstance().getGrid().getPlant(i, j);
-                if(p != null){
-                	if(CollisionChecker.isColliding(this,p)){
-        				this.target = p;
-        				this.targetRow = i;
-        				this.targetCol = j;
-            			animation = texx.getZombieEatingArray();
-            			this.speed = 0;
-            			thread = new Thread(this);
-                        thread.start();
-                	}
-                }
+		int i = this.row;
+        for (int j = 0; j < Grid.COLS; ++j) {
+        	Plant p = Game.getInstance().getGrid().getPlant(i, j);
+            if(p != null){
+            	if(CollisionChecker.isColliding(this,p)){
+    				this.target = p;
+    				this.targetRow = i;
+    				this.targetCol = j;
+        			animation = texx.getZombieEatingArray();
+        			this.speed = 0;
+        			thread = new Thread(this);
+                    thread.start();
+            	}
             }
         }
 	}

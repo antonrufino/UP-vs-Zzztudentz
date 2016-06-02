@@ -2,11 +2,13 @@ package avs.models;
 
 import avs.utils.Textures;
 import avs.utils.CollisionChecker;
+import avs.ui.MainFrame;
 
 import java.awt.image.*;
 import java.awt.*;
-
 import javax.swing.*;
+
+import java.util.Iterator;
 
 public class EggWaffle extends Entity{
 	private BufferedImage waffleImg;
@@ -23,14 +25,18 @@ public class EggWaffle extends Entity{
 	public void tick(){
 		setX(getX()+5);
 
-        for(int i = 0; i < Game.getInstance().getZombieList().size(); i++){
-        	this.z = Game.getInstance().getZombieList().get(i);
+        Iterator<Zombie> iter = Game.getInstance().getZombieList().iterator();
+        while (iter.hasNext()) {
+        	this.z = iter.next();
 
 			if(CollisionChecker.isColliding(z,this)){
 				this.alive = false;
 				z.damageRec(70);
+                return;
 			}
 		}
+
+        if (this.x > MainFrame.WIDTH) this.alive = false;
 	}
 
 	public void render(Graphics g){
