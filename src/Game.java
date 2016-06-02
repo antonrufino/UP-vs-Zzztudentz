@@ -294,7 +294,10 @@ public class Game{
                 if (grid.hasPlant(i, j)) {
                     Plant p = grid.getPlant(i, j);
                     if (p.isAlive()) p.tick();
-                    else grid.setPlant(i, j, null);
+                    else {
+                        grid.getPlant(i, j).kill();
+                        grid.setPlant(i, j, null);
+                    }
                 }
             }
         }
@@ -303,10 +306,14 @@ public class Game{
         while (zIter.hasNext()) {
             Zombie z = zIter.next();
 
-            if (!z.isAlive()) removeZombie(z);
+            if (!z.isAlive()) {
+                z.kill();
+                removeZombie(z);
+            }
             else {
                 if(z.getX() <= 0 -z.getWidth()){
                     this.hasLost = true;
+                    z.kill();
                     removeZombie(z);
                 }
                 else z.tick();
