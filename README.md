@@ -1,4 +1,6 @@
 # UP vs. Zzztudentz
+[![Build Status](https://travis-ci.org/antonrufino/UP-vs-Zzztudentz.svg?branch=master)](https://travis-ci.org/antonrufino/UP-vs-Zzztudentz)
+
 As if Plants vs. Zombies wasn't crazy enough already.
 
 ## Running the JAR file
